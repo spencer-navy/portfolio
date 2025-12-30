@@ -1,0 +1,102 @@
+/* Main navigation container */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(17, 94, 89, 0.1);
+  transition: all 0.3s ease;
+}
+
+/* Container to control max width and center content */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Your name/logo link */
+.logo {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: #0a3d3a;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.logo:hover {
+  color: #115e59;
+}
+
+/* List container for nav links */
+.navLinks {
+  display: flex;
+  gap: 2.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Individual navigation links */
+.link {
+  position: relative;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 1.03rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: #334155;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+/* Animated underline effect */
+.link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #115e59, #14b8a6);
+  transition: width 0.3s ease;
+}
+
+.link:hover {
+  color: #115e59;
+}
+
+.link:hover::after {
+  width: 100%;
+}
+
+/* Tablet and smaller */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem 1.5rem;
+  }
+  
+  .navLinks {
+    gap: 1.5rem;
+  }
+  
+  .link {
+    font-size: 0.9rem;
+  }
+}
+
+/* Mobile phones */
+@media (max-width: 480px) {
+  .navLinks {
+    gap: 1rem;
+  }
+  
+  .logo {
+    font-size: 1.1rem;
+  }
+}
