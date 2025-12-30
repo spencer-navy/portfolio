@@ -15,7 +15,7 @@ export default function Home() {
           Data Analyst | Data Scientist | Python Developer
         </p>
         
-        <div className="space-y-4">
+        {/* <div className="space-y-4">
           <a 
             href="/resume.pdf" 
             target="_blank"
@@ -35,7 +35,7 @@ export default function Home() {
               Download PDF
             </a>
           </div>
-        </div>
+        </div> */}
       </div>
     </main>
   );
