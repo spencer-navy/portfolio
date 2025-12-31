@@ -1,40 +1,45 @@
 'use client'
 
+import Image from 'next/image';
 import Navigation from '../../components/Navigation';
 import styles from './About.module.css';
 
 export default function About() {
     // Book data with ISBNs for covers and purchase links
     const books = [
-        {
-            id: 1,
-            title: 'Introduction to Statistical Learning',
-            author: 'James, Witten, Hastie, Tibshirani',
-            isbn: '9781461471370',
-            purchaseUrl: 'https://www.amazon.com/dp/1461471370'
-        },
-        {
-            id: 2,
-            title: 'Designing Data-Intensive Applications',
-            author: 'Martin Kleppmann',
-            isbn: '9781449373320',
-            purchaseUrl: 'https://www.amazon.com/dp/1449373321'
-        },
-        {
-            id: 3,
-            title: 'The Complete Developer',
-            author: 'Martin Krause',
-            isbn: '9781718503281',
-            purchaseUrl: 'https://www.amazon.com/dp/1718503288'
-        },
-        {
-            id: 4,
-            title: 'Deep Learning',
-            author: 'Goodfellow, Bengio, Courville',
-            isbn: '9780262035613',
-            purchaseUrl: 'https://www.amazon.com/dp/0262035618'
-        }
-    ];
+    {
+        id: 1,
+        title: 'Introduction to Statistical Learning',
+        author: 'James, Witten, Hastie, Tibshirani',
+        isbn: '9781461471370',
+        purchaseUrl: 'https://www.amazon.com/dp/1461471370',
+        coverUrl: 'https://m.media-amazon.com/images/I/61Lvnv9+CML._SL1246_.jpg'
+    },
+    {
+        id: 2,
+        title: 'Designing Data-Intensive Applications',
+        author: 'Martin Kleppmann',
+        isbn: '9781449373320',
+        purchaseUrl: 'https://www.amazon.com/dp/1449373321',
+        coverUrl: 'https://m.media-amazon.com/images/I/51ZSpMl1-LL.jpg'
+    },
+    {
+        id: 3,
+        title: 'The Complete Developer',
+        author: 'Martin Krause',
+        isbn: '9781718503281',
+        purchaseUrl: 'https://www.amazon.com/dp/1718503288',
+        coverUrl: 'https://m.media-amazon.com/images/I/7163IqH4nkL._SL1500_.jpg'
+    },
+    {
+        id: 4,
+        title: 'Deep Learning',
+        author: 'Goodfellow, Bengio, Courville',
+        isbn: '9780262035613',
+        purchaseUrl: 'https://www.amazon.com/dp/0262035618',
+        coverUrl: 'https://m.media-amazon.com/images/I/61fim5QqaqL.jpg'
+    }
+];
 
     return (
         <>
@@ -50,24 +55,38 @@ export default function About() {
                     {/* Bio Section */}
                     <section className={styles.bioSection}>
                         <div className={styles.bioContent}>
-                            <p className={styles.paragraph}>
-                                I'm currently the Data Lead at the National Geospatial-Intelligence Agency 
-                                for an overhead satellite computer vision program. With extensive experience 
-                                in Python, SQL, geospatial application and services, and project management, 
-                                I specialize in transforming complex datasets into actionable insights through
-                                cross-functional collaboration and innovative solutions. I lead multiple teams in 
-                                developing data pipelines, dashboards, and machine learning training data to support
-                                national security objectives through geospatial intelligence.
-                            </p>
+                            <div className={styles.profileImageWrapper}>
+                                <Image 
+                                    src="/professional-photo.jpg"
+                                    alt="Abigail Spencer"
+                                    width={220}
+                                    height={280}
+                                    quality={95}
+                                    priority
+                                    className={styles.profileImage}
+                                />
+                            </div>
+                            
+                            <div className={styles.bioText}>
+                                <p className={styles.paragraph}>
+                                    I'm currently the Data Lead at the National Geospatial-Intelligence Agency 
+                                    for an overhead satellite computer vision program. With extensive experience 
+                                    in Python, SQL, geospatial application and services, and project management, 
+                                    I specialize in transforming complex datasets into actionable insights through
+                                    cross-functional collaboration and innovative solutions. I lead multiple teams in 
+                                    developing data pipelines, dashboards, and machine learning training data to support
+                                    national security objectives through geospatial intelligence.
+                                </p>
 
-                            <p className={styles.paragraph}>
-                                Education is a passion of mine, whether for myself or teaching others. 
-                                I'm finishing my second bachelor's degree in data science (graduating December 2026)
-                                where I have focused on machine learning, statistical analysis, and data visualization.
-                                I have experience in database management and full-stack development. In fact, this website 
-                                was built from scratch by me using Next.js on top of React (JS) and Tailwind CSS. 
-                                After graduation, I plan to pursue graduate studies to further deepen my expertise in engineering and analysis.
-                            </p>
+                                <p className={styles.paragraph}>
+                                    Education is a passion of mine, whether for myself or teaching others. 
+                                    I'm finishing my second bachelor's degree in data science (graduating December 2026)
+                                    where I have focused on machine learning, statistical analysis, and data visualization.
+                                    I have experience in database management and full-stack development. In fact, this website 
+                                    was built from scratch by me using Next.js on top of React (JS) and Tailwind CSS. 
+                                    After graduation, I plan to pursue graduate studies to further deepen my expertise in engineering and analysis.
+                                </p>
+                            </div>
                         </div>
                     </section>
 
@@ -87,7 +106,7 @@ export default function About() {
                                 >
                                     <div className={styles.bookCover}>
                                         <img 
-                                            src={`https://covers.openlibrary.org/b/isbn/${book.isbn}-L.jpg`}
+                                            src={book.coverUrl}
                                             alt={`${book.title} by ${book.author}`}
                                             className={styles.bookImage}
                                         />
