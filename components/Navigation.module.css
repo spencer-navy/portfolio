@@ -5,17 +5,17 @@
   z-index: 100;
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(17, 94, 89, 0.1);
+  border-bottom: 1px solid rgba(135, 159, 133, 0.3);
   transition: all 0.3s ease;
 }
 
 /* Container to control max width and center content */
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
+  width: 100%;           /* Full width instead of max-width */
+  margin: 0;             /* Remove auto centering */
   padding: 1.5rem 2rem;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between;  /* Name left, links right */
   align-items: center;
 }
 
@@ -25,13 +25,13 @@
   font-size: 1.25rem;
   font-weight: 600;
   letter-spacing: -0.02em;
-  color: #0a3d3a;
+  color: #5a6b58;
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
 .logo:hover {
-  color: #115e59;
+  color: #879f85;
 }
 
 /* List container for nav links */
@@ -63,12 +63,12 @@
   left: 0;
   width: 0;
   height: 2px;
-  background: linear-gradient(90deg, #115e59, #14b8a6);
+  background: linear-gradient(90deg, #879f85, #a8bfa6);
   transition: width 0.3s ease;
 }
 
 .link:hover {
-  color: #115e59;
+  color: #879f85;
 }
 
 .link:hover::after {

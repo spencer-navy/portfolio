@@ -1,0 +1,206 @@
+/* Main container */
+.main {
+    min-height: 100vh;
+    background: linear-gradient(to bottom, #ffffff, #879f85);
+    padding-top: 2rem;
+}
+
+/* Content wrapper */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* Hero section */
+.hero {
+  padding: 5rem 0 4rem;
+}
+
+.heroTitle {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: 4rem !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.03em;
+  color: #5a6b58 !important;
+  margin: 0 !important;
+  line-height: 1.1 !important;
+  text-align: left !important;
+  transform: translateX(0);  /* Reset - no longer need the shift */
+}
+
+/* Bio Section */
+.bioSection {
+  padding: 2rem 0 4rem;
+  animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+.bioContent {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.paragraph {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: #334155;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.paragraph:last-child {
+  margin-bottom: 0;
+}
+
+/* Reading Section */
+.readingSection {
+    padding: 4rem 0 6rem;
+}
+
+.sectionTitle {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-size: 2.5rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: #5a6b58 !important;  /* Add !important */
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+/* Book Grid */
+.bookGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 2.5rem;
+    margin-top: 3rem;
+}
+
+.bookCard {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    animation: fadeInUp 0.6s ease-out both;
+    transition: transform 0.3s ease;
+    text-decoration: none;  /* Add this - removes underline */
+    cursor: pointer;        /* Add this - shows it's clickable */
+}
+
+.bookCard:hover {
+    transform: translateY(-8px);
+}
+
+.bookCover {
+    position: relative;
+    aspect-ratio: 2/3;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 
+        0 4px 6px rgba(0, 0, 0, 0.07),
+        0 10px 20px rgba(0, 0, 0, 0.05);
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+    transition: box-shadow 0.3s ease;
+}
+
+.bookCard:hover .bookCover {
+    box-shadow: 
+        0 8px 12px rgba(0, 0, 0, 0.1),
+        0 20px 30px rgba(0, 0, 0, 0.08);
+}
+
+.bookImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.bookCard:hover .bookImage {
+    transform: scale(1.05);
+}
+
+.bookOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0) 0%,
+        rgba(0, 0, 0, 0.1) 60%,
+        rgba(0, 0, 0, 0.3) 100%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    display: flex;
+    align-items: flex-end;
+    padding: 1rem;
+}
+
+.bookCard:hover .bookOverlay {
+    opacity: 1;
+}
+
+.bookStatus {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: white;
+    background: rgba(90, 107, 88, 0.9);
+    padding: 0.375rem 0.75rem;
+    border-radius: 4px;
+}
+
+.bookInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+}
+
+.bookTitle {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.4;
+    color: #424f41 !important;  /* Add !important */
+    margin: 0;
+}
+
+.bookAuthor {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 0.875rem;
+    line-height: 1.4;
+    color: #535a61 !important;  /* Add !important */
+    margin: 0;
+}
+
+/* Animation for entrance */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .bookGrid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .bookGrid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.25rem;
+    }
+}
