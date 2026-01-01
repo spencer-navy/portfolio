@@ -202,6 +202,12 @@
     margin: 0;
 }
 
+.bookImagePlaceholder {
+    width: 100%;
+    height: 100%;
+    background-color: white;
+}
+
 /* Animation for entrance */
 @keyframes fadeInUp {
     from {

@@ -9,19 +9,19 @@ export default function About() {
     const books = [
     {
         id: 1,
-        title: 'Introduction to Statistical Learning',
-        author: 'James, Witten, Hastie, Tibshirani',
-        isbn: '9781461471370',
-        purchaseUrl: 'https://www.amazon.com/dp/1461471370',
-        coverUrl: 'https://m.media-amazon.com/images/I/61Lvnv9+CML._SL1246_.jpg'
+        title: 'Mining Social Media: Finding Stories in Internet Data',
+        author: 'Lam Thuy Vo ',
+        isbn: '1593279167',
+        purchaseUrl: 'https://www.amazon.com/dp/1593279167',
+        coverUrl: 'https://m.media-amazon.com/images/I/81utS+d6wGL._SL1500_.jpg'
     },
     {
         id: 2,
-        title: 'Designing Data-Intensive Applications',
-        author: 'Martin Kleppmann',
-        isbn: '9781449373320',
-        purchaseUrl: 'https://www.amazon.com/dp/1449373321',
-        coverUrl: 'https://m.media-amazon.com/images/I/51ZSpMl1-LL.jpg'
+        title: 'The Design of Web APIs, Second Edition',
+        author: 'Arnaud Lauret',
+        isbn: '1633438147',
+        purchaseUrl: 'https://www.amazon.com/dp/1633438147',
+        coverUrl: 'https://m.media-amazon.com/images/I/61eyHP2izrL._SL1500_.jpg'
     },
     {
         id: 3,
@@ -38,6 +38,158 @@ export default function About() {
         isbn: '9780262035613',
         purchaseUrl: 'https://www.amazon.com/dp/0262035618',
         coverUrl: 'https://m.media-amazon.com/images/I/61fim5QqaqL.jpg'
+    },
+    {
+        id: 5,
+        title: 'Designing Machine Learning Systems: An Iterative Process for Production-Ready Applications',
+        author: 'Chip Huyen',
+        isbn: '1098107969',
+        purchaseUrl: 'https://www.amazon.com/dp/1098107969',
+        coverUrl: 'https://m.media-amazon.com/images/I/81aSHEzSB1L._SL1500_.jpg'
+    },
+    {
+        id: 6,
+        title: 'Storytelling with Data: A Data Visualization Guide for Business Professionals',
+        author: 'Cole Nussbaumer Knaflic',
+        isbn: '1119002257',
+        purchaseUrl: 'https://www.amazon.com/dp/1119002257',
+        coverUrl: 'https://m.media-amazon.com/images/I/71EN1l+uQKL._SL1500_.jpg'
+    },
+    {
+        id: 7,
+        title: "Midnight in Chernobyl: The Untold Story of the World's Greatest Nuclear Disaster",
+        author: 'Adam Higginbotham',
+        isbn: '9781501134630',
+        purchaseUrl: 'https://www.barnesandnoble.com/w/midnight-in-chernobyl-adam-higginbotham/1129511685',
+        coverUrl: 'https://prodimage.images-bn.com/pimages/9781501134630_p0_v6_s600x595.jpg'
+    },
+    {
+        id: 8,
+        title: "The Nuclear Age: An Epic Race for Arms, Power, and Survival",
+        author: 'Serhii Plokhy',
+        isbn: '9781324051176',
+        purchaseUrl: 'https://www.barnesandnoble.com/w/the-nuclear-age-serhii-plokhy/1146855293',
+        coverUrl: 'https://prodimage.images-bn.com/pimages/9781324051176_p0_v2_s600x595.jpg'
+    },
+    {
+        id: 9,
+        title: "In Order to Live: A North Korean Girl's Journey to Freedom",
+        author: 'Yeonmi Park, Maryanne Vollers',
+        isbn: '9780143109747',
+        purchaseUrl: 'https://www.barnesandnoble.com/w/in-order-to-live-yeonmi-park/1121236211',
+        coverUrl: 'https://prodimage.images-bn.com/pimages/9780143109747_p0_v2_s600x595.jpg'
+    },
+    {
+        id: 10,
+        title: 'Deep Learning: Foundations and Concepts',
+        author: 'Christopher M. Bishop, Hugh Bishop',
+        isbn: '9783031454677',
+        purchaseUrl: 'https://www.amazon.com/dp/3031454677',
+        coverUrl: 'https://m.media-amazon.com/images/I/61ex1w3dnCL._SL1175_.jpg'
+    },
+    {
+        id: 11,
+        title: 'Why Machines Learn: The Elegant Math Behind Modern AI',
+        author: 'Anil Ananthaswamy',
+        isbn: '9780593185742',
+        purchaseUrl: 'https://www.amazon.com/dp/0593185749',
+        coverUrl: 'https://m.media-amazon.com/images/I/81ZtMfYNTeL._SL1500_.jpg'
+    },
+    {
+        id: 12,
+        title: 'Foundations of Computer Vision',
+        author: 'Antonio Torralba, Phillip Isola',
+        isbn: '9780262048972',
+        purchaseUrl: 'https://www.amazon.com/dp/0262048973',
+        coverUrl: 'https://m.media-amazon.com/images/I/81ILyrEEyyL._SL1500_.jpg'
+    },
+    {
+        id: 13,
+        title: 'Theory of Spatial Statistics: A Concise Introduction',
+        author: 'M.N.M. van Lieshout',
+        isbn: '9780367146399',
+        purchaseUrl: 'https://www.amazon.com/dp/0367146398',
+        coverUrl: 'https://m.media-amazon.com/images/I/61nc5jQj1qL._SL1360_.jpg'
+    },
+    {
+        id: 14,
+        title: 'Statistical Rethinking: A Bayesian Course with Examples in R and STAN',
+        author: 'Richard McElreath',
+        isbn: '9780367139919',
+        purchaseUrl: 'https://www.amazon.com/dp/036713991X',
+        coverUrl: 'https://m.media-amazon.com/images/I/81cEpsiTCFL._SL1500_.jpg'
+    },
+    {
+        id: 15,
+        title: 'Real-World Machine Learning',
+        author: 'Henrik Brink, Joseph Richards, Mark Fetherolf',
+        isbn: '9781617291920',
+        purchaseUrl: 'https://www.amazon.com/dp/1617291927',
+        coverUrl: 'https://m.media-amazon.com/images/I/71qPOljCDNL._SL1500_.jpg'
+    },
+    {
+        id: 16,
+        title: 'Deep Learning for Vision Systems',
+        author: 'Mohamed Elgendy',
+        isbn: '9781617296192',
+        purchaseUrl: 'https://www.amazon.com/dp/1617296198',
+        coverUrl: 'https://m.media-amazon.com/images/I/71MgK4MhOjL._SL1500_.jpg'
+    },
+    {
+        id: 17,
+        title: 'The Art of Statistics: How to Learn from Data',
+        author: 'David Spiegelhalter',
+        isbn: '9781541618510',
+        purchaseUrl: 'https://www.amazon.com/dp/1541618513',
+        coverUrl: 'https://m.media-amazon.com/images/I/91fposOm+OL._SL1500_.jpg'
+    },
+    {
+        id: 18,
+        title: 'How to Lie with Statistics',
+        author: 'Darrell Huff',
+        isbn: '9780393310726',
+        purchaseUrl: 'https://www.amazon.com/dp/0393310728',
+        coverUrl: 'https://m.media-amazon.com/images/I/71ASFP9sBXL._SL1200_.jpg'
+    },
+    {
+        id: 19,
+        title: 'Naked Statistics: Stripping the Dread from the Data',
+        author: 'Charles Wheelan',
+        isbn: '9780393347777',
+        purchaseUrl: 'https://www.amazon.com/dp/039334777X',
+        coverUrl: 'https://m.media-amazon.com/images/I/51rHcg145LL._SL1200_.jpg'
+    },
+    {
+        id: 20,
+        title: 'Fundamentals of Data Engineering: Plan and Build Robust Data Systems',
+        author: 'Joe Reis, Matt Housley',
+        isbn: '9781098108304',
+        purchaseUrl: 'https://www.amazon.com/dp/1098108302',
+        coverUrl: 'https://m.media-amazon.com/images/I/81+oMD7Lm7L._SL1500_.jpg'
+    },
+    {
+        id: 21,
+        title: 'Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow',
+        author: 'Aurélien Géron',
+        isbn: '9781492032649',
+        purchaseUrl: 'https://www.amazon.com/dp/1492032646',
+        coverUrl: 'https://m.media-amazon.com/images/I/81R5BmGtv-L._SL1500_.jpg'
+    },
+    {
+        id: 22,
+        title: 'How Not to Be Wrong: The Power of Mathematical Thinking',
+        author: 'Jordan Ellenberg',
+        isbn: '9781594205224',
+        purchaseUrl: 'https://www.amazon.com/dp/1594205221',
+        coverUrl: 'https://m.media-amazon.com/images/I/51D1tuz3XmL._SL1200_.jpg'
+    },
+    {
+        id: 23,
+        title: 'Weapons of Math Destruction: How Big Data Increases Inequality and Threatens Democracy',
+        author: 'Cathy O\'Neil',
+        isbn: '9780553418835',
+        purchaseUrl: 'https://www.amazon.com/dp/0553418831',
+        coverUrl: 'https://m.media-amazon.com/images/I/71UCr1GIFrL._SL1500_.jpg'
     }
 ];
 
@@ -105,11 +257,15 @@ export default function About() {
                                     style={{ animationDelay: `${index * 0.1}s` }}
                                 >
                                     <div className={styles.bookCover}>
-                                        <img 
-                                            src={book.coverUrl}
-                                            alt={`${book.title} by ${book.author}`}
-                                            className={styles.bookImage}
-                                        />
+                                        {book.coverUrl ? (
+                                            <img 
+                                                src={book.coverUrl}
+                                                alt={`${book.title} by ${book.author}`}
+                                                className={styles.bookImage}
+                                            />
+                                        ) : (
+                                            <div className={styles.bookImagePlaceholder} />
+                                        )}
                                         <div className={styles.bookOverlay}>
                                             <span className={styles.bookStatus}>View on Amazon</span>
                                         </div>
