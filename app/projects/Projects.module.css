@@ -1,0 +1,232 @@
+.main {
+    min-height: 100vh;
+    padding-top: 80px;
+    background: linear-gradient(135deg, #f5f7fa 0%, #879f85 100%);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    padding: 2rem 0 1rem;
+}
+
+.heroTitle {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-size: 4rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.05em;  /* Changed from -0.03em to add spacing */
+    color: #2c352b !important;
+    margin: 0 0 1rem !important;
+    line-height: 1.1 !important;
+    text-align: center !important;
+}
+
+.heroSubtitle {
+    font-size: 1.125rem;
+    color: #4a5568;
+    margin: 0;
+}
+
+/* Filter Buttons */
+.filterContainer {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    padding: 1.5rem 0 1rem;
+}
+
+.filterButton {
+    padding: 0.5rem 1.5rem;
+    border: 1px solid #cbd5e0;
+    background: white;
+    color: #4a5568;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.filterButton:hover {
+    border-color: #879f85;
+    color: #5a6b58;
+    background: #f7fafc;
+}
+
+.filterButtonActive {
+    background: #5a6b58;
+    color: white;
+    border-color: #5a6b58;
+}
+
+.filterButtonActive:hover {
+    background: #4a5548;
+    border-color: #4a5548;
+}
+
+/* Projects Section */
+.projectsSection {
+    padding: 1rem 0 1.5rem;
+}
+
+.projectGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.projectCard {
+    background: white;
+    border-radius: 8px;
+    padding: 2rem;
+    transition: all 0.3s ease;
+    border: 1px solid #e2e8f0;
+}
+
+.projectCard:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+    border-color: #879f85;
+}
+
+.projectContent {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.projectTitle {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1a202c;
+    margin: 0 0 0.75rem;
+}
+
+.projectDescription {
+    font-size: 0.95rem;
+    color: #4a5568;
+    line-height: 1.6;
+    margin: 0 0 1.5rem;
+    flex-grow: 1;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tag {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.75rem;
+    background: #e8f0e7;
+    color: #5a6b58;
+    border-radius: 12px;
+    font-weight: 500;
+}
+
+/* Data Visualizations Section */
+.visualizationsSection {
+    padding: 1.5rem 0 5rem;
+    border-top: 1px solid #e2e8f0;
+    margin-top: 0.5rem;
+}
+
+.sectionTitle {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #1a202c;
+    margin: 0 0 1.5rem;
+    text-align: center;
+}
+
+.vizGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2rem;
+}
+
+.vizCard {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border: 1px solid #e2e8f0;
+    cursor: pointer;
+}
+
+.vizCard:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+    border-color: #879f85;
+}
+
+.vizImagePlaceholder {
+    width: 100%;
+    height: 250px;
+    background: linear-gradient(135deg, #e8f0e7 0%, #cbd5c9 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.placeholderText {
+    color: #5a6b58;
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+
+.vizInfo {
+    padding: 1.5rem;
+}
+
+.vizTitle {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #1a202c;
+    margin: 0 0 0.5rem;
+}
+
+.vizDescription {
+    font-size: 0.875rem;
+    color: #718096;
+    margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .heroTitle {
+        font-size: 2rem;
+    }
+
+    .heroSubtitle {
+        font-size: 1rem;
+    }
+
+    .hero {
+        padding: 1.5rem 0 0.75rem;
+    }
+
+    .filterContainer {
+        padding: 1rem 0 0.75rem;
+    }
+
+    .projectGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .vizGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .container {
+        padding: 0 1.5rem;
+    }
+}

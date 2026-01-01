@@ -1,0 +1,374 @@
+.main {
+    min-height: 100vh;
+    background: linear-gradient(to bottom, #ffffff, #e8f0e7);
+    position: relative;
+}
+
+/* Decorative vine background */
+.vineBackground {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0.05;
+    pointer-events: none;
+}
+
+.heroSection {
+    position: relative;
+    padding: 6rem 2rem 4rem;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.heroGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+}
+
+/* Photo section */
+.photoWrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.profileImageWrapper {
+    width: 400px;
+    height: 500px;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 4px solid #879f85;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    flex-shrink: 0;
+}
+
+.profileImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Content section */
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.title {
+    font-size: 3.75rem;
+    font-weight: 700;
+    color: #5a6b58;
+    margin: 0 0 1rem;
+    line-height: 1.1;
+}
+
+.subtitle {
+    font-size: 1.25rem;
+    color: #4a5568;
+    margin: 0 0 0.5rem;
+}
+
+.location {
+    font-size: 1.125rem;
+    color: #718096;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.locationIcon {
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+.tagline {
+    font-size: 1.125rem;
+    color: #334155;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.buttonGroup {
+    display: flex;
+    gap: 1rem;
+    padding-top: 1rem;
+}
+
+.buttonPrimary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: #5a6b58;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.buttonPrimary:hover {
+    background: #4a5548;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.buttonSecondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: white;
+    color: #5a6b58;
+    border: 2px solid #5a6b58;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.buttonSecondary:hover {
+    background: #e8f0e7;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.buttonIcon {
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+/* Workflow Section */
+.workflowSection {
+    position: relative;
+    padding: 5rem 2rem;
+    background: white;
+}
+
+.workflowContainer {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.workflowGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4rem;
+}
+
+.workflowCard {
+    text-align: left;
+}
+
+.workflowIconWrapper {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 1.5rem;
+}
+
+.workflowIcon {
+    width: 100%;
+    height: 100%;
+}
+
+.workflowTitle {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1a202c;
+    margin: 0 0 1rem;
+}
+
+.workflowDescription {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #4a5568;
+    margin: 0;
+}
+
+/* Areas of Interest Section */
+.areasSection {
+    position: relative;
+    padding: 5rem 2rem;
+    background: #f9fafb;
+}
+
+.areasContainer {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.areasTitle {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1a202c;
+    margin: 0 0 0.75rem;
+    text-align: center;
+}
+
+.areasSubtitle {
+    font-size: 1.125rem;
+    color: #4a5568;
+    margin: 0 0 3.5rem;
+    text-align: center;
+}
+
+.areasGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4rem;
+}
+
+.areaCard {
+    text-align: center;
+}
+
+.areaIcon {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.areaIcon svg {
+    width: 100%;
+    height: 100%;
+    color: #5a6b58;
+}
+
+.areaTitle {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1a202c;
+    margin: 0 0 0.75rem;
+}
+
+.areaDescription {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #4a5568;
+    margin: 0;
+}
+
+/* CTA Section */
+.ctaSection {
+    position: relative;
+    padding: 5rem 2rem;
+    background: linear-gradient(135deg, #5a6b58 0%, #879f85 100%);
+    text-align: center;
+}
+
+.ctaContainer {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.ctaTitle {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: white;
+    margin: 0 0 1rem;
+    line-height: 1.2;
+}
+
+.ctaText {
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0 0 2rem;
+}
+
+.ctaButton {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    background: white;
+    color: #5a6b58;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.125rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.ctaButton:hover {
+    background: #e8f0e7;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .heroGrid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .profileImageWrapper {
+        width: 300px;
+        height: 375px;
+    }
+
+    .title {
+        font-size: 2.5rem;
+    }
+
+    .subtitle {
+        font-size: 1.125rem;
+    }
+
+    .buttonGroup {
+        flex-direction: column;
+    }
+
+    .workflowGrid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+
+    .areasGrid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+
+    .heroSection {
+        padding: 4rem 1.5rem 3rem;
+    }
+
+    .workflowSection {
+        padding: 3rem 1.5rem;
+    }
+
+    .areasSection {
+        padding: 3rem 1.5rem;
+    }
+
+    .areasTitle {
+        font-size: 2rem;
+    }
+
+    .ctaSection {
+        padding: 3rem 1.5rem;
+    }
+
+    .ctaTitle {
+        font-size: 2rem;
+    }
+
+    .ctaText {
+        font-size: 1.125rem;
+    }
+}
