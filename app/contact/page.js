@@ -14,7 +14,7 @@ export default function Contact() {
             <main className={styles.main}>
                 <div className={styles.container}>
                     <section className={styles.hero}>
-                        <h1 className={styles.heroTitle}>Get in Touch</h1>
+                        <h1 className={styles.heroTitle}>Let's Connect</h1>
                     </section>
 
                     <section className={styles.contactSection}>
