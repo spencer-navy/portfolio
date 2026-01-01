@@ -10,13 +10,14 @@ export default function Home() {
 
   return (
     <>
-      <Navigation />  {/* Add navigation at the very top */}
+      <Navigation />
       
       <main className="min-h-screen flex flex-col items-center justify-center p-8">
         <div className="max-w-2xl text-center">
           <h1 className="text-4xl font-bold mb-4">Abigail Spencer</h1>
           <p className="text-xl text-gray-600 mb-8">
-            Data Analyst | Data Scientist | Python Developer
+            Data Analyst | Data Scientist |{' '}
+            <span className="inline-block">Python Developer</span>
           </p>
           
           {/* <div className="space-y-4">
