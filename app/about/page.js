@@ -285,7 +285,7 @@ export default function About() {
         },
     ];
 
-        // Add this helper function before renderBookGrid
+    // Add this helper function before renderBookGrid
     const getRetailerName = (url) => {
         if (url.includes('amazon.com')) return 'Amazon';
         if (url.includes('barnesandnoble.com') || url.includes('bn.com')) return 'Barnes & Noble';
@@ -426,7 +426,9 @@ export default function About() {
                                                 <div className={styles.bookImagePlaceholder} />
                                             )}
                                             <div className={styles.bookOverlay}>
-                                                <span className={styles.bookStatus}>View on Amazon</span>
+                                                <span className={styles.bookStatus}>
+                                                    View on {getRetailerName(book.purchaseUrl)}
+                                                </span>
                                             </div>
                                         </div>
                                         <div className={styles.bookInfo}>
