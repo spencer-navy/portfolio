@@ -122,6 +122,45 @@ export default function About() {
             isbn: '9781541618510',
             purchaseUrl: 'https://www.amazon.com/dp/1541618513',
             coverUrl: 'https://m.media-amazon.com/images/I/91fposOm+OL._SL1500_.jpg'
+        },
+        {id: 35,
+            title: 'Practical Deep Learning, 2nd Edition',
+            author: 'Ronald T. Kneusel',
+            isbn: '9781718504202',
+            purchaseUrl: 'https://nostarch.com/practical-deep-learning-python-2E',
+            coverUrl: 'https://prodimage.images-bn.com/pimages/9781718504202_p0_v2_s600x595.jpg'
+        },
+        {
+            id: 36,
+            title: 'Data Structures the Fun Way: An Amusing Adventure with Coffee-Filled Examples',
+            author: 'Jeremy Kubica',
+            isbn: '9781718502604',
+            purchaseUrl: 'https://nostarch.com/data-structures-fun-way',
+            coverUrl: 'https://prodimage.images-bn.com/pimages/9781718502604_p0_v2_s600x595.jpg'
+        },
+        {
+            id: 37,
+            title: 'Math for Deep Learning: What You Need to Know to Understand Neural Networks',
+            author: 'Jeremy Kubica',
+            isbn: '9781718501904',
+            purchaseUrl: 'https://nostarch.com/math-deep-learning',
+            coverUrl: 'https://prodimage.images-bn.com/pimages/9781718501904_p0_v1_s600x595.jpg'
+        },
+        {
+            id: 39,
+            title: 'Dive Into Algorithms: A Pythonic Adventure for the Intrepid Beginner',
+            author: 'Bradford Tuckfield',
+            isbn: '9781718500686',
+            purchaseUrl: 'https://nostarch.com/Dive-Into-Algorithms',
+            coverUrl: 'https://prodimage.images-bn.com/pimages/9781718500686_p0_v4_s600x595.jpg'
+        },
+        {
+            id: 40,
+            title: 'Bayesian Statistics the Fun Way',
+            author: 'Will Kurt',
+            isbn: '9781593279561',
+            purchaseUrl: 'https://nostarch.com/learnbayes',
+            coverUrl: 'https://prodimage.images-bn.com/pimages/9781593279561_p0_v2_s600x595.jpg'
         }
     ];
 
@@ -283,13 +322,21 @@ export default function About() {
             purchaseUrl: 'https://www.barnesandnoble.com/w/python-for-data-analysis-wes-mckinney/1141119355',
             coverUrl: 'https://prodimage.images-bn.com/pimages/9781098104030_p0_v5_s600x595.jpg'
         },
+        {
+            id: 38,
+            title: 'How AI Works: From Sorcery to Science',
+            author: 'Ronald T. Kneusel',
+            isbn: '9781718503724',
+            purchaseUrl: 'https://nostarch.com/how-ai-works',
+            coverUrl: 'https://prodimage.images-bn.com/pimages/9781718503724_p0_v1_s600x595.jpg'
+        }
     ];
 
     // Add this helper function before renderBookGrid
     const getRetailerName = (url) => {
         if (url.includes('amazon.com')) return 'Amazon';
         if (url.includes('barnesandnoble.com') || url.includes('bn.com')) return 'Barnes & Noble';
-        if (url.includes('bookshop.org')) return 'Bookshop';
+        if (url.includes('nostarch.com')) return 'No Starch Press';
         // Add more retailers as needed
         return 'Retailer'; // fallback
     };
@@ -349,8 +396,8 @@ export default function About() {
                                 <Image 
                                     src="/professional-photo.jpg"
                                     alt="Abigail Spencer"
-                                    width={220}
-                                    height={280}
+                                    width={400}
+                                    height={500}
                                     quality={95}
                                     priority
                                     className={styles.profileImage}
@@ -359,13 +406,28 @@ export default function About() {
                             
                             <div className={styles.bioText}>
                                 <p className={styles.paragraph}>
-                                    I'm currently the Data Lead at the National Geospatial-Intelligence Agency 
-                                    for an overhead satellite computer vision program. With extensive experience 
-                                    in Python, SQL, geospatial application and services, and project management, 
+                                    Welcome! I currently work at the National Geospatial-Intelligence Agency (NGA) 
+                                    as the Data Lead for the overhead satellite component of a large computer vision program. 
                                     I specialize in transforming complex datasets into actionable insights through
-                                    cross-functional collaboration and innovative solutions. I lead multiple teams in 
-                                    developing data pipelines, dashboards, and machine learning training data to support
-                                    national security objectives through geospatial intelligence.
+                                    cross-functional collaboration and innovative solutions. With extensive experience in data strategy,
+                                    management, analysis, and science, I'm passionate about leveraging data to drive informed decision-making                                   SQL, geospatial application and services, and project management, I'm comfortable diving into 
+                                    and leading technical discussions across various domains and applications. 
+                                </p>
+
+                                <p className={styles.paragraph}>
+                                    I find joy in breaking down complex problems and building solutions that have immediate actionable insights
+                                    and recommendations. My day-to-day consists of leading multiple cross-functional technincal teams 
+                                    in managing the training data for model development. This includes developing complex data pipelines, 
+                                    setting priortization and strategy, and developing state-of-the art data priorities in support of deep learning
+                                    model development to support national security objectives through geospatial intelligence.
+                                </p>
+
+                                <p className={styles.paragraph}>
+                                    I served in the United States Navy for 8 years, with three overseas deployments as an intelligence analyst.
+                                    This invaluable experience instilled a strong work ethic, attention to detail, and the ability to thrive in 
+                                    high-pressure environments. It's also where I got my start in data, working with complex datasets to provide actionable 
+                                    intelligence to commanders in the field. This is where I honed my analytical skills and learned the important of clear,
+                                    succint, timely, and most importantly, accurate communication of complex information to diverse audiences.
                                 </p>
 
                                 <p className={styles.paragraph}>
@@ -374,7 +436,8 @@ export default function About() {
                                     where I have focused on machine learning, statistical analysis, and data visualization.
                                     I have experience in database management and full-stack development. In fact, this website 
                                     was built from scratch by me using Next.js on top of React (JS) and Tailwind CSS. 
-                                    After graduation, I plan to pursue graduate studies to further deepen my expertise in engineering and analysis.
+                                    After graduation, I plan to pursue a Master's of Science in Data Analytics Engineering to further 
+                                    deepen my expertise in engineering and analysis.
                                 </p>
                             </div>
                         </div>
