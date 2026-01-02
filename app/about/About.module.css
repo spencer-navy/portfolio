@@ -7,7 +7,7 @@
 
 /* Content wrapper */
 .container {
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
     padding: 0 2rem;
 }
@@ -22,8 +22,8 @@
     font-family: 'Georgia', 'Times New Roman', serif;
     font-size: 4rem !important;
     font-weight: 600 !important;
-    letter-spacing: -0.03em;
-    color: #5a6b58 !important;
+    letter-spacing: 0.05em;
+    color: #2c352b !important;
     margin: 0 !important;
     line-height: 1.1 !important;
     text-align: center !important;
@@ -37,15 +37,15 @@
 .bioContent {
     display: flex;
     gap: 3rem;
-    align-items: center;  /* Changed from flex-start to center */
+    align-items: center;
     max-width: 1000px;
     margin: 0 auto;
 }
 
 /* Profile image */
 .profileImageWrapper {
-    width: 270px;
-    height: 400px;
+    width: 350px;
+    height: 480px;
     border-radius: 50% / 50%;
     overflow: hidden;
     border: 4px solid #879f85;
@@ -70,34 +70,49 @@
     line-height: 1.8;
     color: #334155 !important;
     margin-bottom: 1.5rem;
-    text-align: center;  /* Changed from left to center */
+    text-align: center;
 }
 
 .paragraph:last-child {
     margin-bottom: 0;
 }
 
-/* Reading Section */
+/* THREE COLUMNS SIDE BY SIDE */
+.readingSectionsContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 4rem;
+    padding-bottom: 4rem;
+    padding-top: 4rem;
+    align-items: flex-start;
+}
+
+/* Individual Reading Section - Each takes 1/3 width */
 .readingSection {
-    padding: 4rem 0 6rem;
+    flex: 1;
+    min-width: 0;
 }
 
 .sectionTitle {
     font-family: 'Georgia', 'Times New Roman', serif;
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: 600;
     letter-spacing: -0.02em;
     color: #5a6b58 !important;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
     text-align: center;
+    min-height: 6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-/* Book Grid */
+/* Book Grid - 2 books per row */
 .bookGrid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 2.5rem;
-    margin-top: 3rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem 1.5rem;
+    margin-top: 2rem;
 }
 
 .bookCard {
@@ -118,11 +133,11 @@
 .bookCover {
     position: relative;
     aspect-ratio: 2/3;
-    border-radius: 8px;
+    border-radius: 6px;
     overflow: hidden;
     box-shadow: 
-        0 4px 6px rgba(0, 0, 0, 0.07),
-        0 10px 20px rgba(0, 0, 0, 0.05);
+        0 2px 4px rgba(0, 0, 0, 0.07),
+        0 6px 12px rgba(0, 0, 0, 0.05);
     background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
     transition: box-shadow 0.3s ease;
 }
@@ -187,19 +202,26 @@
 
 .bookTitle {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-size: 1rem;
+    font-size: 0.8rem;
     font-weight: 600;
-    line-height: 1.4;
+    line-height: 1.3;
     color: #475345 !important;
     margin: 0;
+    min-height: 3.2rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    line-clamp: 3;
+    overflow: hidden;
 }
 
 .bookAuthor {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-size: 0.875rem;
-    line-height: 1.4;
+    font-size: 0.7rem;
+    line-height: 1.3;
     color: #464c54 !important;
     margin: 0;
+    min-height: 1.8rem;
 }
 
 .bookImagePlaceholder {
@@ -220,7 +242,46 @@
     }
 }
 
-/* Responsive */
+/* Books I've Finished Section - Full Width */
+.finishedBooksSection {
+    width: 100%;
+    padding: 4rem 0;
+    margin-top: 2rem;
+}
+
+.finishedSectionTitle {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-size: 2.5rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: #5a6b58 !important;
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+.finishedBookGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+/* Responsive - Stack vertically on smaller screens */
+@media (max-width: 1024px) {
+    .readingSectionsContainer {
+        flex-direction: column;
+        gap: 4rem;
+    }
+    
+    .readingSection {
+        width: 100%;
+    }
+    
+    .bookGrid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+}
+
 @media (max-width: 768px) {
     .bioContent {
         flex-direction: column;
@@ -240,6 +301,10 @@
     .heroTitle {
         font-size: 2.5rem !important;
     }
+
+    .sectionTitle {
+        font-size: 1.75rem;
+    }
     
     .bookGrid {
         grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -256,6 +321,10 @@
     .heroTitle {
         font-size: 2rem !important;
     }
+
+    .sectionTitle {
+        font-size: 1.5rem;
+    }
     
     .bookGrid {
         grid-template-columns: repeat(2, 1fr);
@@ -271,5 +340,9 @@
     
     .heroTitle {
         font-size: 1.75rem !important;
+    }
+
+    .sectionTitle {
+        font-size: 1.25rem;
     }
 }
