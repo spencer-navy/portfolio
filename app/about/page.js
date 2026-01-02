@@ -8,46 +8,6 @@ export default function About() {
     // Currently Reading - lighter, more practical books
     const currentlyReading = [
         {
-            id: 5,
-            title: 'Designing Machine Learning Systems: An Iterative Process for Production-Ready Applications',
-            author: 'Chip Huyen',
-            isbn: '1098107969',
-            purchaseUrl: 'https://www.amazon.com/dp/1098107969',
-            coverUrl: 'https://m.media-amazon.com/images/I/81aSHEzSB1L._SL1500_.jpg'
-        },
-        {
-            id: 9,
-            title: "In Order to Live: A North Korean Girl's Journey to Freedom",
-            author: 'Yeonmi Park, Maryanne Vollers',
-            isbn: '9780143109747',
-            purchaseUrl: 'https://www.barnesandnoble.com/w/in-order-to-live-yeonmi-park/1121236211',
-            coverUrl: 'https://prodimage.images-bn.com/pimages/9780143109747_p0_v2_s600x595.jpg'
-        },
-        {
-            id: 1,
-            title: 'Mining Social Media: Finding Stories in Internet Data',
-            author: 'Lam Thuy Vo',
-            isbn: '1593279167',
-            purchaseUrl: 'https://www.amazon.com/dp/1593279167',
-            coverUrl: 'https://m.media-amazon.com/images/I/81utS+d6wGL._SL1500_.jpg'
-        },
-        {
-            id: 2,
-            title: 'The Design of Web APIs, Second Edition',
-            author: 'Arnaud Lauret',
-            isbn: '1633438147',
-            purchaseUrl: 'https://www.amazon.com/dp/1633438147',
-            coverUrl: 'https://m.media-amazon.com/images/I/61eyHP2izrL._SL1500_.jpg'
-        },
-        {
-            id: 3,
-            title: 'The Complete Developer',
-            author: 'Martin Krause',
-            isbn: '9781718503281',
-            purchaseUrl: 'https://www.amazon.com/dp/1718503288',
-            coverUrl: 'https://m.media-amazon.com/images/I/7163IqH4nkL._SL1500_.jpg'
-        },
-        {
             id: 6,
             title: 'Storytelling with Data: A Data Visualization Guide for Business Professionals',
             author: 'Cole Nussbaumer Knaflic',
@@ -62,14 +22,6 @@ export default function About() {
             isbn: '9781501134630',
             purchaseUrl: 'https://www.barnesandnoble.com/w/midnight-in-chernobyl-adam-higginbotham/1129511685',
             coverUrl: 'https://prodimage.images-bn.com/pimages/9781501134630_p0_v6_s600x595.jpg'
-        },
-        {
-            id: 18,
-            title: 'How to Lie with Statistics',
-            author: 'Darrell Huff',
-            isbn: '9780393310726',
-            purchaseUrl: 'https://www.amazon.com/dp/0393310728',
-            coverUrl: 'https://m.media-amazon.com/images/I/71ASFP9sBXL._SL1200_.jpg'
         },
         {
             id: 19,
@@ -87,25 +39,17 @@ export default function About() {
             purchaseUrl: 'https://www.amazon.com/dp/0593185749',
             coverUrl: 'https://m.media-amazon.com/images/I/81ZtMfYNTeL._SL1500_.jpg'
         },
-        {
-            id: 17,
-            title: 'The Art of Statistics: How to Learn from Data',
-            author: 'David Spiegelhalter',
-            isbn: '9781541618510',
-            purchaseUrl: 'https://www.amazon.com/dp/1541618513',
-            coverUrl: 'https://m.media-amazon.com/images/I/91fposOm+OL._SL1500_.jpg'
-        }
     ];
 
     // Up Next - mix of technical and lighter reading
     const upNext = [
         {
-            id: 8,
-            title: "The Nuclear Age: An Epic Race for Arms, Power, and Survival",
-            author: 'Serhii Plokhy',
-            isbn: '9781324051176',
-            purchaseUrl: 'https://www.barnesandnoble.com/w/the-nuclear-age-serhii-plokhy/1146855293',
-            coverUrl: 'https://prodimage.images-bn.com/pimages/9781324051176_p0_v2_s600x595.jpg'
+            id: 2,
+            title: 'The Design of Web APIs, Second Edition',
+            author: 'Arnaud Lauret',
+            isbn: '1633438147',
+            purchaseUrl: 'https://www.amazon.com/dp/1633438147',
+            coverUrl: 'https://m.media-amazon.com/images/I/61eyHP2izrL._SL1500_.jpg'
         },
         {
             id: 24,
@@ -114,6 +58,14 @@ export default function About() {
             isbn: '9780226845555',
             purchaseUrl: 'https://www.barnesandnoble.com/w/probably-overthinking-it-allen-b-downey/1143199878',
             coverUrl: 'https://prodimage.images-bn.com/pimages/9780226845555_p0_v3_s600x595.jpg'
+        },
+        {
+            id: 8,
+            title: "The Nuclear Age: An Epic Race for Arms, Power, and Survival",
+            author: 'Serhii Plokhy',
+            isbn: '9781324051176',
+            purchaseUrl: 'https://www.barnesandnoble.com/w/the-nuclear-age-serhii-plokhy/1146855293',
+            coverUrl: 'https://prodimage.images-bn.com/pimages/9781324051176_p0_v2_s600x595.jpg'
         },
         {
             id: 15,
@@ -154,6 +106,22 @@ export default function About() {
             isbn: '9780262539029',
             purchaseUrl: 'https://www.barnesandnoble.com/w/algorithms-panos-louridas/1136401277',
             coverUrl: 'https://prodimage.images-bn.com/pimages/9780262539029_p0_v3_s600x595.jpg'
+        },
+        {
+            id: 31,
+            title: 'How Charts Lie: Getting Smarter about Visual Information',
+            author: "Alberto Cairo",
+            isbn: '9780393358421',
+            purchaseUrl: 'https://www.barnesandnoble.com/w/how-charts-lie-alberto-cairo/1130420282',
+            coverUrl: 'https://prodimage.images-bn.com/pimages/9780393358421_p0_v4_s600x595.jpg'
+        },
+        {
+            id: 17,
+            title: 'The Art of Statistics: How to Learn from Data',
+            author: 'David Spiegelhalter',
+            isbn: '9781541618510',
+            purchaseUrl: 'https://www.amazon.com/dp/1541618513',
+            coverUrl: 'https://m.media-amazon.com/images/I/91fposOm+OL._SL1500_.jpg'
         }
     ];
 
@@ -220,6 +188,30 @@ export default function About() {
     // Books I've Finished - add books here when ready
     const finishedBooks = [
         {
+            id: 5,
+            title: 'Designing Machine Learning Systems: An Iterative Process for Production-Ready Applications',
+            author: 'Chip Huyen',
+            isbn: '1098107969',
+            purchaseUrl: 'https://www.amazon.com/dp/1098107969',
+            coverUrl: 'https://m.media-amazon.com/images/I/81aSHEzSB1L._SL1500_.jpg'
+        },
+        {
+            id: 9,
+            title: "In Order to Live: A North Korean Girl's Journey to Freedom",
+            author: 'Yeonmi Park, Maryanne Vollers',
+            isbn: '9780143109747',
+            purchaseUrl: 'https://www.barnesandnoble.com/w/in-order-to-live-yeonmi-park/1121236211',
+            coverUrl: 'https://prodimage.images-bn.com/pimages/9780143109747_p0_v2_s600x595.jpg'
+        },
+        {
+            id: 1,
+            title: 'Mining Social Media: Finding Stories in Internet Data',
+            author: 'Lam Thuy Vo',
+            isbn: '1593279167',
+            purchaseUrl: 'https://www.amazon.com/dp/1593279167',
+            coverUrl: 'https://m.media-amazon.com/images/I/81utS+d6wGL._SL1500_.jpg'
+        },
+        {
             id: 23,
             title: 'Weapons of Math Destruction: How Big Data Increases Inequality and Threatens Democracy',
             author: "Cathy O'Neil",
@@ -234,7 +226,63 @@ export default function About() {
             isbn: '9781594205224',
             purchaseUrl: 'https://www.amazon.com/dp/1594205221',
             coverUrl: 'https://m.media-amazon.com/images/I/51D1tuz3XmL._SL1200_.jpg'
-        }
+        },
+        {
+            id: 3,
+            title: 'The Complete Developer',
+            author: 'Martin Krause',
+            isbn: '9781718503281',
+            purchaseUrl: 'https://www.amazon.com/dp/1718503288',
+            coverUrl: 'https://m.media-amazon.com/images/I/7163IqH4nkL._SL1500_.jpg'
+        },
+        {
+            id: 28,
+            title: 'Red Scarf Girl: A Memoir of the Cultural Revolution',
+            author: 'Ji-li Jiang',
+            isbn: '9780064462082',
+            purchaseUrl: 'https://www.barnesandnoble.com/w/red-scarf-girl-ji-li-jiang/1102123609',
+            coverUrl: 'https://prodimage.images-bn.com/pimages/9780064462082_p0_v5_s600x595.jpg'
+        },
+        {
+            id: 29,
+            title: 'Doing Data Science: Straight Talk from the Frontline',
+            author: "Cathy O'Neil, Rachel Schutt",
+            isbn: '9781449358655',
+            purchaseUrl: 'https://www.barnesandnoble.com/w/doing-data-science-cathy-oneil/1117555191',
+            coverUrl: 'https://prodimage.images-bn.com/pimages/9781449358655_p0_v11_s600x595.jpg'
+        },
+        {
+            id: 30,
+            title: 'Things Fall Apart',
+            author: "Chinua Achebe",
+            isbn: '9780385474542',
+            purchaseUrl: 'https://www.barnesandnoble.com/w/things-fall-apart-chinua-achebe/1116754130',
+            coverUrl: 'https://prodimage.images-bn.com/pimages/9780385474542_p0_v6_s600x595.jpg'
+        },
+        {
+            id: 32,
+            title: 'Educated: A Memoir',
+            author: "Tara Westover",
+            isbn: '9780399590528',
+            purchaseUrl: 'https://www.barnesandnoble.com/w/educated-tara-westover/1126358348',
+            coverUrl: 'https://prodimage.images-bn.com/pimages/9780399590528_p0_v7_s600x595.jpg'
+        },
+        {
+            id: 18,
+            title: 'How to Lie with Statistics',
+            author: 'Darrell Huff',
+            isbn: '9780393310726',
+            purchaseUrl: 'https://www.amazon.com/dp/0393310728',
+            coverUrl: 'https://m.media-amazon.com/images/I/71ASFP9sBXL._SL1200_.jpg'
+        },
+        {
+            id: 33,
+            title: 'Python for Data Analysis: Data Wrangling with pandas, NumPy, and Jupyter',
+            author: 'Wes McKinney',
+            isbn: '9781098104030',
+            purchaseUrl: 'https://www.barnesandnoble.com/w/python-for-data-analysis-wes-mckinney/1141119355',
+            coverUrl: 'https://prodimage.images-bn.com/pimages/9781098104030_p0_v5_s600x595.jpg'
+        },
     ];
 
         // Add this helper function before renderBookGrid
@@ -342,13 +390,13 @@ export default function About() {
 
                         {/* What's Up Next */}
                         <section className={styles.readingSection}>
-                            <h2 className={styles.sectionTitle}>What's Up Next</h2>
+                            <h2 className={styles.sectionTitle}>Up Next</h2>
                             {renderBookGrid(upNext)}
                         </section>
 
                         {/* 10 Year Reading */}
                         <section className={styles.readingSection}>
-                            <h2 className={styles.sectionTitle}>What I'll Read Over the Course of 10 Years</h2>
+                            <h2 className={styles.sectionTitle}>Deeper Knowledge</h2>
                             {renderBookGrid(tenYearReading)}
                         </section>
                     </div>
@@ -356,7 +404,7 @@ export default function About() {
                     {/* Books I've Finished - Full Width Section */}
                     {finishedBooks.length > 0 && (
                         <section className={styles.finishedBooksSection}>
-                            <h2 className={styles.finishedSectionTitle}>Books I've Finished</h2>
+                            <h2 className={styles.finishedSectionTitle}>Recently Read</h2>
                             <div className={styles.finishedBookGrid}>
                                 {finishedBooks.map((book, index) => (
                                     <a 
