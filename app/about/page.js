@@ -415,7 +415,7 @@ export default function About() {
                                 </p>
 
                                 <p className={styles.paragraph}>
-                                    I find joy in breaking down complex problems and building solutions that have immediate actionable insights
+                                    I excel in breaking down complex problems and building solutions that have immediate actionable insights
                                     and recommendations. My day-to-day consists of leading multiple cross-functional technincal teams 
                                     in the acquisition, pre-processing, curation, and labeling of petabytes of high-quality training data for model development. 
                                     This includes managing complex data pipelines, setting data priortizations, developing data team strategies, and conducting 
@@ -427,16 +427,16 @@ export default function About() {
                                     I served in the United States Navy for 8 years, with three overseas deployments as an intelligence analyst.
                                     This invaluable experience instilled a strong work ethic, attention to detail, and the ability to thrive in 
                                     high-pressure environments. It's also where I got my start in data, working with complex datasets to provide actionable 
-                                    intelligence to commanders in the field. This is where I honed my analytical skills and learned the important of clear,
+                                    intelligence to commanders in the field. This is where I honed my analytical skills and learned the importance of clear,
                                     succint, timely, and most importantly, accurate communication of complex information to diverse audiences.
                                 </p>
 
                                 <p className={styles.paragraph}>
                                     Education is a passion of mine, whether for myself or teaching others. 
                                     I'm finishing my second Bachelor of Science degree in data science (graduating December 2026)
-                                    where I have focused on machine learning, statistical analysis, and data visualization.
+                                    with focus on machine learning, statistical analysis, and data visualization.
                                     I have experience in database management and full-stack development. In fact, this website 
-                                    was built from scratch by me using Next.js on top of React (JS) and Tailwind CSS. 
+                                    was built from scratch using Next.js (React), Tailwind CSS, and a postgeSQL database. 
                                     After graduation, I plan to pursue a Master's of Science in Data Analytics Engineering to further 
                                     deepen my expertise in engineering and analysis.
                                 </p>
