@@ -232,7 +232,7 @@ export default function About() {
 
                                 <p className={styles.paragraph}>
                                     Education is a passion of mine, whether for myself or teaching others. 
-                                    I'm finishing my second Bachelor of Science degree in data science (graduating December 2026)
+                                    I'm finishing my second bachelor's degree in data science (graduating December 2026)
                                     where I have focused on machine learning, statistical analysis, and data visualization.
                                     I have experience in database management and full-stack development. In fact, this website 
                                     was built from scratch by me using Next.js on top of React (JS) and Tailwind CSS. 
