@@ -417,9 +417,10 @@ export default function About() {
                                 <p className={styles.paragraph}>
                                     I find joy in breaking down complex problems and building solutions that have immediate actionable insights
                                     and recommendations. My day-to-day consists of leading multiple cross-functional technincal teams 
-                                    in managing the training data for model development. This includes developing complex data pipelines, 
-                                    setting priortization and strategy, and developing state-of-the art data priorities in support of deep learning
-                                    model development to support national security objectives through geospatial intelligence.
+                                    in the acquisition, pre-processing, curation, and labeling of petabytes of high-qualitytraining data for model development. 
+                                    This includes developing complex data pipelines, setting priortization and strategy, and developing 
+                                    data priorities in support of state-of-the art deep learning model development to support national 
+                                    security objectives through geospatial intelligence.
                                 </p>
 
                                 <p className={styles.paragraph}>
