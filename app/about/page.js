@@ -410,16 +410,16 @@ export default function About() {
                                     as the Data Lead for the overhead satellite component of a large computer vision program. 
                                     I specialize in transforming complex datasets into actionable insights through
                                     cross-functional collaboration and innovative solutions. With extensive experience in data strategy,
-                                    management, analysis, and science, I'm passionate about leveraging data to drive informed decision-making                                   SQL, geospatial application and services, and project management, I'm comfortable diving into 
+                                    management, analysis, and science, I'm passionate about leveraging data to drive informed decision-making
                                     and leading technical discussions across various domains and applications. 
                                 </p>
 
                                 <p className={styles.paragraph}>
                                     I find joy in breaking down complex problems and building solutions that have immediate actionable insights
                                     and recommendations. My day-to-day consists of leading multiple cross-functional technincal teams 
-                                    in the acquisition, pre-processing, curation, and labeling of petabytes of high-qualitytraining data for model development. 
-                                    This includes developing complex data pipelines, setting priortization and strategy, and developing 
-                                    data priorities in support of state-of-the art deep learning model development to support national 
+                                    in the acquisition, pre-processing, curation, and labeling of petabytes of high-quality training data for model development. 
+                                    This includes managing complex data pipelines, setting data priortizations, developing data team strategies, and conducting 
+                                    in-depth data analysis to ensure the highest quality data in support of state-of-the art deep learning model development for national 
                                     security objectives through geospatial intelligence.
                                 </p>
 
