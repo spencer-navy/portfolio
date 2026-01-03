@@ -68,6 +68,14 @@ export default function About() {
             coverUrl: 'https://prodimage.images-bn.com/pimages/9781324051176_p0_v2_s600x595.jpg'
         },
         {
+            id: 34,
+            title: "The Signal and the Noise: Why So Many Predictions Fail--but Some Don't",
+            author: 'Nate Silver',
+            isbn: '9780143125082',
+            purchaseUrl: 'https://www.barnesandnoble.com/w/the-signal-and-the-noise-nate-silver/1114055243',
+            coverUrl: 'https://prodimage.images-bn.com/pimages/9780143125082_p0_v3_s600x595.jpg'
+        },
+        {
             id: 15,
             title: 'Real-World Machine Learning',
             author: 'Henrik Brink, Joseph Richards, Mark Fetherolf',
@@ -139,12 +147,20 @@ export default function About() {
             coverUrl: 'https://prodimage.images-bn.com/pimages/9781718502604_p0_v2_s600x595.jpg'
         },
         {
+            id: 42,
+            title: 'Chernobyl Roulette: War in the Nuclear Disaster Zone',
+            author: 'Serhii Plokhy',
+            isbn:   '9781324079415',
+            purchaseUrl: 'https://www.barnesandnoble.com/w/chernobyl-roulette-serhii-plokhy/1144659202',
+            coverUrl: 'https://prodimage.images-bn.com/pimages/9781324079415_p0_v2_s600x595.jpg'
+        },
+        {
             id: 37,
             title: 'Math for Deep Learning: What You Need to Know to Understand Neural Networks',
             author: 'Jeremy Kubica',
             isbn: '9781718501904',
             purchaseUrl: 'https://nostarch.com/math-deep-learning',
-            coverUrl: 'https://prodimage.images-bn.com/pimages/9781718501904_p0_v1_s600x595.jpg'
+            coverUrl: 'https://prodimage.images-bn.com/pimages/9781324079415_p0_v2_s600x595.jpg'
         },
         {
             id: 39,
@@ -161,6 +177,14 @@ export default function About() {
             isbn: '9781593279561',
             purchaseUrl: 'https://nostarch.com/learnbayes',
             coverUrl: 'https://prodimage.images-bn.com/pimages/9781593279561_p0_v2_s600x595.jpg'
+        },
+        {
+            id: 42,
+            title: "The Great Heist: China's Epic Campaign to Steal America's Secrets",
+            author: 'David R. Shedd, Andrew Badger',
+            isbn: '9780063451834',
+            purchaseUrl: 'https://www.barnesandnoble.com/w/the-great-heist-david-r-shedd/1147333812',
+            coverUrl: 'https://prodimage.images-bn.com/pimages/9780063451834_p0_v4_s600x595.jpg'
         }
     ];
 
@@ -419,12 +443,12 @@ export default function About() {
                                     and recommendations. My day-to-day consists of leading multiple cross-functional technincal teams 
                                     in the acquisition, pre-processing, curation, and labeling of petabytes of high-quality training data for model development. 
                                     This includes managing complex data pipelines, setting data priortizations, developing data team strategies, and conducting 
-                                    in-depth data analysis to ensure the highest quality data in support of state-of-the art deep learning model development for national 
+                                    in-depth data analysis to ensure the highest quality data in support of state-of-the-art deep learning model development for national 
                                     security objectives through geospatial intelligence.
                                 </p>
 
                                 <p className={styles.paragraph}>
-                                    I served in the United States Navy for 8 years, with three overseas deployments as an intelligence analyst.
+                                    I served in the United States Navy for eight years, with three overseas deployments as an intelligence analyst.
                                     This invaluable experience instilled a strong work ethic, attention to detail, and the ability to thrive in 
                                     high-pressure environments. It's also where I got my start in data, working with complex datasets to provide actionable 
                                     intelligence to commanders in the field. This is where I honed my analytical skills and learned the importance of clear,
@@ -434,9 +458,9 @@ export default function About() {
                                 <p className={styles.paragraph}>
                                     Education is a passion of mine, whether for myself or teaching others. 
                                     I'm finishing my second Bachelor of Science degree in data science (graduating December 2026)
-                                    with focus on machine learning, statistical analysis, and data visualization.
-                                    I have experience in database management and full-stack development. In fact, this website 
-                                    was built from scratch using Next.js (React), Tailwind CSS, and a postgeSQL database. 
+                                    with focuses on machine learning, statistical analysis, and data visualization.
+                                    My personal projects includes full-stack and data application development; in fact, this website 
+                                    was built from scratch using Next.js (React), Tailwind CSS, and a postgreSQL database. 
                                     After graduation, I plan to pursue a Master's of Science in Data Analytics Engineering to further 
                                     deepen my expertise in engineering and analysis.
                                 </p>
