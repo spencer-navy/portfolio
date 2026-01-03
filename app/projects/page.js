@@ -3,11 +3,16 @@
 import { useState } from 'react';
 import Navigation from '../../components/Navigation';
 import styles from './Projects.module.css';
-import { event } from '@/lib/gtag'; // Import the Google Analytics event tracking function
+import { event } from '@/lib/gtag'; // Keep Google Analytics
+import { trackEvent } from '@/lib/trackEvent'; // Add MongoDB tracking
 
 export default function Projects() {
+    // State to track which filter button is currently active
+    // Starts with 'all' to show everything by default
     const [activeFilter, setActiveFilter] = useState('all');
 
+    // Array of all available filter options
+    // 'id' is used programmatically, 'label' is what users see
     const filters = [
         { id: 'all', label: 'All' },
         { id: 'python', label: 'Python' },
@@ -17,31 +22,178 @@ export default function Projects() {
         { id: 'gis', label: 'GIS' }
     ];
 
-    // Track when user clicks a filter button
+    // Define all projects with their metadata
+    // Each project has:
+    // - id: unique identifier for tracking
+    // - title: project name
+    // - description: what the project does
+    // - tags: lowercase filter IDs this project matches (used for filtering)
+    // - displayTags: formatted tags shown to users (can be different from filter names)
+    const allProjects = [
+        {
+            id: 'proj_001',
+            title: 'Marketing Analytics Dashboard',
+            description: 'Interactive dashboard analyzing customer behavior and campaign performance using Python and Tableau.',
+            tags: ['python', 'tableau', 'sql'],  // Matches 'python', 'tableau', 'sql' filters
+            displayTags: ['Python', 'Tableau', 'SQL']  // What user sees as tags
+        },
+        {
+            id: 'proj_002',
+            title: 'Geospatial ML Pipeline',
+            description: 'Automated pipeline for satellite imagery classification supporting national security objectives.',
+            tags: ['python', 'ml', 'gis'],  // Matches 'python', 'ml', 'gis' filters
+            displayTags: ['Python', 'TensorFlow', 'GIS']
+        },
+        {
+            id: 'proj_003',
+            title: 'Statistical Learning Models',
+            description: 'Applied GAMs, SVMs, and tree-based methods for predictive modeling and analysis.',
+            tags: ['ml'],  // Only matches 'ml' filter
+            displayTags: ['R', 'Statistical Modeling']
+        },
+        {
+            id: 'proj_004',
+            title: 'Data Engineering Pipeline',
+            description: 'Scalable ETL pipeline processing geospatial data with OGC standards and OpenShift deployment.',
+            tags: ['python', 'sql', 'gis'],  // Matches 'python', 'sql', 'gis' filters
+            displayTags: ['Python', 'SQL', 'GeoServer']
+        }
+    ];
+
+    // Define all visualizations with their metadata
+    // Structure is similar to projects but simpler (fewer fields)
+    const allVisualizations = [
+        {
+            id: 'viz_001',
+            title: 'Sales Performance Dashboard',
+            description: 'Interactive Tableau dashboard tracking KPIs',
+            tags: ['tableau']  // Only matches 'tableau' filter
+        },
+        {
+            id: 'viz_002',
+            title: 'Customer Segmentation Analysis',
+            description: 'Python-based clustering visualization',
+            tags: ['python', 'ml']  // Matches 'python' and 'ml' filters
+        },
+        {
+            id: 'viz_003',
+            title: 'Geospatial Heatmap',
+            description: 'Geographic data distribution analysis',
+            tags: ['python', 'gis']  // Matches 'python' and 'gis' filters
+        },
+        {
+            id: 'viz_004',
+            title: 'Time Series Forecasting',
+            description: 'Predictive analytics dashboard',
+            tags: ['python', 'ml']  // Matches 'python' and 'ml' filters
+        },
+        {
+            id: 'viz_005',
+            title: 'Network Graph Analysis',
+            description: 'Relationship mapping visualization',
+            tags: ['python']  // Only matches 'python' filter
+        },
+        {
+            id: 'viz_006',
+            title: 'Statistical Model Results',
+            description: 'R-based statistical visualization',
+            tags: ['ml']  // Only matches 'ml' filter
+        }
+    ];
+
+    // Filter projects based on which filter button is active
+    // If activeFilter is 'all', show everything
+    // Otherwise, only show projects where the tags array includes the activeFilter
+    // Example: if activeFilter is 'python', only show projects with 'python' in their tags array
+    const filteredProjects = activeFilter === 'all' 
+        ? allProjects  // Show all projects
+        : allProjects.filter(project => project.tags.includes(activeFilter));  // Show only matching projects
+
+    // Filter visualizations using the same logic as projects
+    const filteredVisualizations = activeFilter === 'all'
+        ? allVisualizations  // Show all visualizations
+        : allVisualizations.filter(viz => viz.tags.includes(activeFilter));  // Show only matching visualizations
+
+    // Handle when user clicks a filter button
     const handleFilterClick = (filterId, filterLabel) => {
+        // Update which filter is active (this triggers re-render with new filtered results)
         setActiveFilter(filterId);
+        
+        // Calculate how many items match this filter for tracking purposes
+        // This tells us how useful each filter is (filters with 0 results might need attention)
+        
+        // Count projects that match this filter
+        // If filter is 'all', count all projects
+        // Otherwise, count only projects that have this filterId in their tags
+        const projectCount = filterId === 'all' 
+            ? allProjects.length 
+            : allProjects.filter(p => p.tags.includes(filterId)).length;
+        
+        // Count visualizations that match this filter (same logic)
+        const vizCount = filterId === 'all'
+            ? allVisualizations.length
+            : allVisualizations.filter(v => v.tags.includes(filterId)).length;
+        
+        // Total items matching this filter
+        const totalCount = projectCount + vizCount;
+        
+        // Track in Google Analytics (keep existing tracking)
         event({
-            action: 'filter_click',              // Action: filter button clicked
-            category: 'Projects',                 // Category: Projects page interactions
-            label: `Filter: ${filterLabel}`,     // Label: which filter was clicked
+            action: 'filter_click',
+            category: 'Projects',
+            label: `Filter: ${filterLabel}`,
+        });
+        
+        // Track in MongoDB (new) - captures much more detail
+        // This data lets us analyze:
+        // - Which filters are most popular
+        // - Which filters return the most/least results
+        // - Whether users find what they're looking for after filtering
+        trackEvent('filter_click', {
+            filterType: 'technology',
+            filterValue: filterLabel,
+            filterId: filterId,
+            resultCount: totalCount,      // Total items shown
+            projectCount: projectCount,   // How many projects matched
+            vizCount: vizCount            // How many visualizations matched
         });
     };
 
-    // Track when user clicks on a project card
-    const handleProjectClick = (projectTitle) => {
+    // Handle when user clicks on a project card
+    const handleProjectClick = (projectTitle, projectId) => {
+        // Track in Google Analytics (keep existing)
         event({
-            action: 'project_click',             // Action: project card clicked
-            category: 'Projects',                 // Category: Projects page interactions
-            label: projectTitle,                  // Label: which project was clicked
+            action: 'project_click',
+            category: 'Projects',
+            label: projectTitle,
+        });
+        
+        // Track in MongoDB (new)
+        // By tracking activeFilter, we can see:
+        // - Do users click projects after filtering, or with 'all' view?
+        // - Which filters lead to the most project clicks?
+        trackEvent('project_click', {
+            projectTitle: projectTitle,
+            projectId: projectId,
+            activeFilter: activeFilter  // Track what filter was active when they clicked
         });
     };
 
-    // Track when user clicks on a visualization card
-    const handleVizClick = (vizTitle) => {
+    // Handle when user clicks on a visualization card
+    const handleVizClick = (vizTitle, vizId) => {
+        // Track in Google Analytics (keep existing)
         event({
-            action: 'visualization_click',       // Action: visualization card clicked
-            category: 'Projects',                 // Category: Projects page interactions
-            label: vizTitle,                      // Label: which visualization was clicked
+            action: 'visualization_click',
+            category: 'Projects',
+            label: vizTitle,
+        });
+        
+        // Track in MongoDB (new)
+        // Same logic as project clicks - track which filter was active
+        trackEvent('visualization_click', {
+            vizTitle: vizTitle,
+            vizId: vizId,
+            activeFilter: activeFilter  // Track what filter was active when they clicked
         });
     };
 
@@ -58,12 +210,15 @@ export default function Projects() {
                         </p>
                     </section>
 
-                    {/* Filter Buttons - Each tracks when clicked */}
+                    {/* Filter Buttons Section */}
+                    {/* Maps over the filters array to create a button for each filter */}
                     <div className={styles.filterContainer}>
                         {filters.map(filter => (
                             <button
-                                key={filter.id}
-                                onClick={() => handleFilterClick(filter.id, filter.label)} // Tracks filter click
+                                key={filter.id}  // React needs unique keys for list items
+                                onClick={() => handleFilterClick(filter.id, filter.label)}  // Triggers filtering and tracking
+                                // Apply active styling if this filter is currently selected
+                                // Uses template literal to combine base class with conditional active class
                                 className={`${styles.filterButton} ${activeFilter === filter.id ? styles.filterButtonActive : ''}`}
                             >
                                 {filter.label}
@@ -71,78 +226,33 @@ export default function Projects() {
                         ))}
                     </div>
 
+                    {/* Projects Section */}
                     <section className={styles.projectsSection}>
                         <div className={styles.projectGrid}>
-                            {/* Project Card 1 - Tracks when clicked */}
-                            <div 
-                                className={styles.projectCard}
-                                onClick={() => handleProjectClick('Marketing Analytics Dashboard')} // Tracks project click
-                            >
-                                <div className={styles.projectContent}>
-                                    <h3 className={styles.projectTitle}>Marketing Analytics Dashboard</h3>
-                                    <p className={styles.projectDescription}>
-                                        Interactive dashboard analyzing customer behavior and campaign performance using Python and Tableau.
-                                    </p>
-                                    <div className={styles.tags}>
-                                        <span className={styles.tag}>Python</span>
-                                        <span className={styles.tag}>Tableau</span>
-                                        <span className={styles.tag}>SQL</span>
+                            {/* Render filtered projects (NOT all projects) */}
+                            {/* This array changes when activeFilter changes, causing automatic re-render */}
+                            {/* .map() creates a project card for each item in filteredProjects */}
+                            {filteredProjects.map(project => (
+                                <div 
+                                    key={project.id}  // Unique key for React
+                                    className={styles.projectCard}
+                                    onClick={() => handleProjectClick(project.title, project.id)}  // Track clicks
+                                >
+                                    <div className={styles.projectContent}>
+                                        <h3 className={styles.projectTitle}>{project.title}</h3>
+                                        <p className={styles.projectDescription}>
+                                            {project.description}
+                                        </p>
+                                        {/* Display tags for this project */}
+                                        <div className={styles.tags}>
+                                            {/* Map over displayTags to create a span for each tag */}
+                                            {project.displayTags.map(tag => (
+                                                <span key={tag} className={styles.tag}>{tag}</span>
+                                            ))}
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-
-                            {/* Project Card 2 - Tracks when clicked */}
-                            <div 
-                                className={styles.projectCard}
-                                onClick={() => handleProjectClick('Geospatial ML Pipeline')} // Tracks project click
-                            >
-                                <div className={styles.projectContent}>
-                                    <h3 className={styles.projectTitle}>Geospatial ML Pipeline</h3>
-                                    <p className={styles.projectDescription}>
-                                        Automated pipeline for satellite imagery classification supporting national security objectives.
-                                    </p>
-                                    <div className={styles.tags}>
-                                        <span className={styles.tag}>Python</span>
-                                        <span className={styles.tag}>TensorFlow</span>
-                                        <span className={styles.tag}>GIS</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Project Card 3 - Tracks when clicked */}
-                            <div 
-                                className={styles.projectCard}
-                                onClick={() => handleProjectClick('Statistical Learning Models')} // Tracks project click
-                            >
-                                <div className={styles.projectContent}>
-                                    <h3 className={styles.projectTitle}>Statistical Learning Models</h3>
-                                    <p className={styles.projectDescription}>
-                                        Applied GAMs, SVMs, and tree-based methods for predictive modeling and analysis.
-                                    </p>
-                                    <div className={styles.tags}>
-                                        <span className={styles.tag}>R</span>
-                                        <span className={styles.tag}>Statistical Modeling</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Project Card 4 - Tracks when clicked */}
-                            <div 
-                                className={styles.projectCard}
-                                onClick={() => handleProjectClick('Data Engineering Pipeline')} // Tracks project click
-                            >
-                                <div className={styles.projectContent}>
-                                    <h3 className={styles.projectTitle}>Data Engineering Pipeline</h3>
-                                    <p className={styles.projectDescription}>
-                                        Scalable ETL pipeline processing geospatial data with OGC standards and OpenShift deployment.
-                                    </p>
-                                    <div className={styles.tags}>
-                                        <span className={styles.tag}>Python</span>
-                                        <span className={styles.tag}>SQL</span>
-                                        <span className={styles.tag}>GeoServer</span>
-                                    </div>
-                                </div>
-                            </div>
+                            ))}
                         </div>
                     </section>
 
@@ -151,89 +261,24 @@ export default function Projects() {
                         <h2 className={styles.sectionTitle}>Data Visualizations & Dashboards</h2>
                         
                         <div className={styles.vizGrid}>
-                            {/* Visualization Card 1 - Tracks when clicked */}
-                            <div 
-                                className={styles.vizCard}
-                                onClick={() => handleVizClick('Sales Performance Dashboard')} // Tracks viz click
-                            >
-                                <div className={styles.vizImagePlaceholder}>
-                                    <span className={styles.placeholderText}>Visualization 1</span>
+                            {/* Render filtered visualizations (NOT all visualizations) */}
+                            {/* Same filtering logic as projects */}
+                            {filteredVisualizations.map(viz => (
+                                <div 
+                                    key={viz.id}  // Unique key for React
+                                    className={styles.vizCard}
+                                    onClick={() => handleVizClick(viz.title, viz.id)}  // Track clicks
+                                >
+                                    <div className={styles.vizImagePlaceholder}>
+                                        {/* Show viz ID as placeholder text until you add real images */}
+                                        <span className={styles.placeholderText}>{viz.id}</span>
+                                    </div>
+                                    <div className={styles.vizInfo}>
+                                        <h3 className={styles.vizTitle}>{viz.title}</h3>
+                                        <p className={styles.vizDescription}>{viz.description}</p>
+                                    </div>
                                 </div>
-                                <div className={styles.vizInfo}>
-                                    <h3 className={styles.vizTitle}>Sales Performance Dashboard</h3>
-                                    <p className={styles.vizDescription}>Interactive Tableau dashboard tracking KPIs</p>
-                                </div>
-                            </div>
-
-                            {/* Visualization Card 2 - Tracks when clicked */}
-                            <div 
-                                className={styles.vizCard}
-                                onClick={() => handleVizClick('Customer Segmentation Analysis')} // Tracks viz click
-                            >
-                                <div className={styles.vizImagePlaceholder}>
-                                    <span className={styles.placeholderText}>Visualization 2</span>
-                                </div>
-                                <div className={styles.vizInfo}>
-                                    <h3 className={styles.vizTitle}>Customer Segmentation Analysis</h3>
-                                    <p className={styles.vizDescription}>Python-based clustering visualization</p>
-                                </div>
-                            </div>
-
-                            {/* Visualization Card 3 - Tracks when clicked */}
-                            <div 
-                                className={styles.vizCard}
-                                onClick={() => handleVizClick('Geospatial Heatmap')} // Tracks viz click
-                            >
-                                <div className={styles.vizImagePlaceholder}>
-                                    <span className={styles.placeholderText}>Visualization 3</span>
-                                </div>
-                                <div className={styles.vizInfo}>
-                                    <h3 className={styles.vizTitle}>Geospatial Heatmap</h3>
-                                    <p className={styles.vizDescription}>Geographic data distribution analysis</p>
-                                </div>
-                            </div>
-
-                            {/* Visualization Card 4 - Tracks when clicked */}
-                            <div 
-                                className={styles.vizCard}
-                                onClick={() => handleVizClick('Time Series Forecasting')} // Tracks viz click
-                            >
-                                <div className={styles.vizImagePlaceholder}>
-                                    <span className={styles.placeholderText}>Visualization 4</span>
-                                </div>
-                                <div className={styles.vizInfo}>
-                                    <h3 className={styles.vizTitle}>Time Series Forecasting</h3>
-                                    <p className={styles.vizDescription}>Predictive analytics dashboard</p>
-                                </div>
-                            </div>
-
-                            {/* Visualization Card 5 - Tracks when clicked */}
-                            <div 
-                                className={styles.vizCard}
-                                onClick={() => handleVizClick('Network Graph Analysis')} // Tracks viz click
-                            >
-                                <div className={styles.vizImagePlaceholder}>
-                                    <span className={styles.placeholderText}>Visualization 5</span>
-                                </div>
-                                <div className={styles.vizInfo}>
-                                    <h3 className={styles.vizTitle}>Network Graph Analysis</h3>
-                                    <p className={styles.vizDescription}>Relationship mapping visualization</p>
-                                </div>
-                            </div>
-
-                            {/* Visualization Card 6 - Tracks when clicked */}
-                            <div 
-                                className={styles.vizCard}
-                                onClick={() => handleVizClick('Statistical Model Results')} // Tracks viz click
-                            >
-                                <div className={styles.vizImagePlaceholder}>
-                                    <span className={styles.placeholderText}>Visualization 6</span>
-                                </div>
-                                <div className={styles.vizInfo}>
-                                    <h3 className={styles.vizTitle}>Statistical Model Results</h3>
-                                    <p className={styles.vizDescription}>R-based statistical visualization</p>
-                                </div>
-                            </div>
+                            ))}
                         </div>
                     </section>
                 </div>
