@@ -380,10 +380,6 @@
     .sectionTitle {
         font-size: 1.5rem; /* Smaller section titles for mobile */
     }
-
-    .sectionTitle {
-        font-size: 1.5rem;
-    }
     
     .bookGrid {
         grid-template-columns: repeat(2, 1fr); /* Forces exactly 2 columns on mobile (overrides auto-fill) */
@@ -404,9 +400,5 @@
 
     .sectionTitle {
         font-size: 1.25rem; /* Smallest section title size */
-    }
-
-    .sectionTitle {
-        font-size: 1.25rem;
     }
 }
