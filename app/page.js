@@ -1,8 +1,38 @@
+'use client'; // Required directive for components that use interactive features like onClick
+
 import Link from 'next/link';
 import Navigation from '../components/Navigation';
 import styles from './Home.module.css';
+import { event } from '@/lib/gtag'; // Import the Google Analytics event tracking function
 
 export default function Home() {
+  // Track when user clicks "View Resume" button
+  const handleViewResume = () => {
+    event({
+      action: 'view_resume',           // Action: viewing the resume
+      category: 'Resume',               // Category: Resume interactions
+      label: 'View Resume - Homepage',  // Label: identifies this is from homepage
+    });
+  };
+
+  // Track when user clicks "Download Resume" button
+  const handleDownloadResume = () => {
+    event({
+      action: 'download_resume',           // Action: downloading the resume
+      category: 'Resume',                   // Category: Resume interactions
+      label: 'Download Resume - Homepage',  // Label: identifies this is from homepage
+    });
+  };
+
+  // Track when user clicks "Contact Me" CTA button
+  const handleContactCTA = () => {
+    event({
+      action: 'cta_click',              // Action: CTA button clicked
+      category: 'CTA',                  // Category: Call-to-Action interactions
+      label: 'Contact Me - Homepage',   // Label: identifies this is from homepage
+    });
+  };
+
   return (
     <>
       <Navigation />
@@ -57,11 +87,13 @@ export default function Home() {
                 </p>
 
                 <div className={styles.buttonGroup}>
+                  {/* View Resume Button - Tracks when clicked */}
                   <a 
                     href="/resume.pdf" 
                     target="_blank"
                     rel="noopener noreferrer"
                     className={styles.buttonPrimary}
+                    onClick={handleViewResume} // Tracks the view resume event
                   >
                     <svg className={styles.buttonIcon} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -69,10 +101,12 @@ export default function Home() {
                     </svg>
                     View Resume
                   </a>
+                  {/* Download Resume Button - Tracks when clicked */}
                   <a 
                     href="/resume.pdf" 
                     download
                     className={styles.buttonSecondary}
+                    onClick={handleDownloadResume} // Tracks the download resume event
                   >
                     <svg className={styles.buttonIcon} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
@@ -179,7 +213,7 @@ export default function Home() {
                 </div>
                 <h3 className={styles.areaTitle}>Full-Stack Development</h3>
                 <p className={styles.areaDescription}>
-                  I have experience creating interactive tools and dashboards online and on-premises using modern frameworks.
+                  I have experience creating interactive tools and dashboards online using modern frameworks.
                 </p>
               </div>
             </div>
@@ -193,7 +227,12 @@ export default function Home() {
             <p className={styles.ctaText}>
               Interested in collaborating? Get in touch with me.
             </p>
-            <Link href="/contact" className={styles.ctaButton}>
+            {/* Contact Me CTA Button - Tracks when clicked */}
+            <Link 
+              href="/contact" 
+              className={styles.ctaButton}
+              onClick={handleContactCTA} // Tracks the CTA button click
+            >
               Contact Me
             </Link>
           </div>

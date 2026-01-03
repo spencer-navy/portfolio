@@ -3,8 +3,18 @@
 import Image from 'next/image';
 import Navigation from '../../components/Navigation';
 import styles from './About.module.css';
+import { event } from '@/lib/gtag'; // Import the Google Analytics event tracking function
 
 export default function About() {
+    // Track when user clicks on a book link
+    const handleBookClick = (bookTitle, section) => {
+        event({
+            action: 'book_click',               // Action: book link clicked
+            category: 'About',                   // Category: About page interactions
+            label: `${section}: ${bookTitle}`,  // Label: section and book title
+        });
+    };
+
     // Currently Reading - lighter, more practical books
     const currentlyReading = [
         {
@@ -66,6 +76,14 @@ export default function About() {
             isbn: '9781324051176',
             purchaseUrl: 'https://www.barnesandnoble.com/w/the-nuclear-age-serhii-plokhy/1146855293',
             coverUrl: 'https://prodimage.images-bn.com/pimages/9781324051176_p0_v2_s600x595.jpg'
+        },
+        {
+            id: 34,
+            title: "The Signal and the Noise: Why So Many Predictions Fail--but Some Don't",
+            author: 'Nate Silver',
+            isbn: '9780143125082',
+            purchaseUrl: 'https://www.barnesandnoble.com/w/the-signal-and-the-noise-nate-silver/1114055243',
+            coverUrl: 'https://prodimage.images-bn.com/pimages/9780143125082_p0_v3_s600x595.jpg'
         },
         {
             id: 15,
@@ -139,6 +157,14 @@ export default function About() {
             coverUrl: 'https://prodimage.images-bn.com/pimages/9781718502604_p0_v2_s600x595.jpg'
         },
         {
+            id: 42,
+            title: 'Chernobyl Roulette: War in the Nuclear Disaster Zone',
+            author: 'Serhii Plokhy',
+            isbn:   '9781324079415',
+            purchaseUrl: 'https://www.barnesandnoble.com/w/chernobyl-roulette-serhii-plokhy/1144659202',
+            coverUrl: 'https://prodimage.images-bn.com/pimages/9781324079415_p0_v2_s600x595.jpg'
+        },
+        {
             id: 37,
             title: 'Math for Deep Learning: What You Need to Know to Understand Neural Networks',
             author: 'Jeremy Kubica',
@@ -161,6 +187,14 @@ export default function About() {
             isbn: '9781593279561',
             purchaseUrl: 'https://nostarch.com/learnbayes',
             coverUrl: 'https://prodimage.images-bn.com/pimages/9781593279561_p0_v2_s600x595.jpg'
+        },
+        {
+            id: 43,
+            title: "The Great Heist: China's Epic Campaign to Steal America's Secrets",
+            author: 'David R. Shedd, Andrew Badger',
+            isbn: '9780063451834',
+            purchaseUrl: 'https://www.barnesandnoble.com/w/the-great-heist-david-r-shedd/1147333812',
+            coverUrl: 'https://prodimage.images-bn.com/pimages/9780063451834_p0_v4_s600x595.jpg'
         }
     ];
 
@@ -332,17 +366,16 @@ export default function About() {
         }
     ];
 
-    // Add this helper function before renderBookGrid
+    // Helper function to get retailer name from URL
     const getRetailerName = (url) => {
         if (url.includes('amazon.com')) return 'Amazon';
         if (url.includes('barnesandnoble.com') || url.includes('bn.com')) return 'Barnes & Noble';
         if (url.includes('nostarch.com')) return 'No Starch Press';
-        // Add more retailers as needed
         return 'Retailer'; // fallback
     };
 
-
-    const renderBookGrid = (books) => (
+    // Render book grid with tracking - accepts section name for analytics
+    const renderBookGrid = (books, sectionName) => (
         <div className={styles.bookGrid}>
             {books.map((book, index) => (
                 <a 
@@ -352,6 +385,7 @@ export default function About() {
                     key={book.id} 
                     className={styles.bookCard}
                     style={{ animationDelay: `${index * 0.1}s` }}
+                    onClick={() => handleBookClick(book.title, sectionName)} // Tracks book click with section name
                 >
                     <div className={styles.bookCover}>
                         {book.coverUrl ? (
@@ -410,32 +444,33 @@ export default function About() {
                                     as the Data Lead for the overhead satellite component of a large computer vision program. 
                                     I specialize in transforming complex datasets into actionable insights through
                                     cross-functional collaboration and innovative solutions. With extensive experience in data strategy,
-                                    management, analysis, and science, I'm passionate about leveraging data to drive informed decision-making                                   SQL, geospatial application and services, and project management, I'm comfortable diving into 
+                                    management, analysis, and science, I'm passionate about leveraging data to drive informed decision-making
                                     and leading technical discussions across various domains and applications. 
                                 </p>
 
                                 <p className={styles.paragraph}>
-                                    I find joy in breaking down complex problems and building solutions that have immediate actionable insights
+                                    I excel in breaking down complex problems and building solutions that have immediate actionable insights
                                     and recommendations. My day-to-day consists of leading multiple cross-functional technincal teams 
-                                    in managing the training data for model development. This includes developing complex data pipelines, 
-                                    setting priortization and strategy, and developing state-of-the art data priorities in support of deep learning
-                                    model development to support national security objectives through geospatial intelligence.
+                                    in the acquisition, pre-processing, curation, and labeling of petabytes of high-quality training data for model development. 
+                                    This includes managing complex data pipelines, setting data priortizations, developing data team strategies, and conducting 
+                                    in-depth data analysis to ensure the highest quality data in support of state-of-the-art deep learning model development for national 
+                                    security objectives through geospatial intelligence.
                                 </p>
 
                                 <p className={styles.paragraph}>
-                                    I served in the United States Navy for 8 years, with three overseas deployments as an intelligence analyst.
+                                    I served in the United States Navy for eight years, with three overseas deployments as an intelligence analyst.
                                     This invaluable experience instilled a strong work ethic, attention to detail, and the ability to thrive in 
                                     high-pressure environments. It's also where I got my start in data, working with complex datasets to provide actionable 
-                                    intelligence to commanders in the field. This is where I honed my analytical skills and learned the important of clear,
+                                    intelligence to commanders in the field. This is where I honed my analytical skills and learned the importance of clear,
                                     succint, timely, and most importantly, accurate communication of complex information to diverse audiences.
                                 </p>
 
                                 <p className={styles.paragraph}>
                                     Education is a passion of mine, whether for myself or teaching others. 
                                     I'm finishing my second Bachelor of Science degree in data science (graduating December 2026)
-                                    where I have focused on machine learning, statistical analysis, and data visualization.
-                                    I have experience in database management and full-stack development. In fact, this website 
-                                    was built from scratch by me using Next.js on top of React (JS) and Tailwind CSS. 
+                                    with focuses on machine learning, statistical analysis, and data visualization.
+                                    My personal projects includes full-stack and data application development; in fact, this website 
+                                    was built from scratch using Next.js (React), Tailwind CSS, and a postgreSQL database. 
                                     After graduation, I plan to pursue a Master's of Science in Data Analytics Engineering to further 
                                     deepen my expertise in engineering and analysis.
                                 </p>
@@ -448,19 +483,19 @@ export default function About() {
                         {/* What I'm Reading */}
                         <section className={styles.readingSection}>
                             <h2 className={styles.sectionTitle}>What I'm Reading</h2>
-                            {renderBookGrid(currentlyReading)}
+                            {renderBookGrid(currentlyReading, 'Currently Reading')}
                         </section>
 
                         {/* What's Up Next */}
                         <section className={styles.readingSection}>
                             <h2 className={styles.sectionTitle}>Up Next</h2>
-                            {renderBookGrid(upNext)}
+                            {renderBookGrid(upNext, 'Up Next')}
                         </section>
 
                         {/* 10 Year Reading */}
                         <section className={styles.readingSection}>
                             <h2 className={styles.sectionTitle}>Deeper Knowledge</h2>
-                            {renderBookGrid(tenYearReading)}
+                            {renderBookGrid(tenYearReading, 'Deeper Knowledge')}
                         </section>
                     </div>
 
@@ -477,6 +512,7 @@ export default function About() {
                                         key={book.id} 
                                         className={styles.bookCard}
                                         style={{ animationDelay: `${index * 0.05}s` }}
+                                        onClick={() => handleBookClick(book.title, 'Recently Read')} // Tracks book click
                                     >
                                         <div className={styles.bookCover}>
                                             {book.coverUrl ? (

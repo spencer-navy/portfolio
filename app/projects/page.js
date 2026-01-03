@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Navigation from '../../components/Navigation';
 import styles from './Projects.module.css';
+import { event } from '@/lib/gtag'; // Import the Google Analytics event tracking function
 
 export default function Projects() {
     const [activeFilter, setActiveFilter] = useState('all');
@@ -15,6 +16,34 @@ export default function Projects() {
         { id: 'ml', label: 'Machine Learning' },
         { id: 'gis', label: 'GIS' }
     ];
+
+    // Track when user clicks a filter button
+    const handleFilterClick = (filterId, filterLabel) => {
+        setActiveFilter(filterId);
+        event({
+            action: 'filter_click',              // Action: filter button clicked
+            category: 'Projects',                 // Category: Projects page interactions
+            label: `Filter: ${filterLabel}`,     // Label: which filter was clicked
+        });
+    };
+
+    // Track when user clicks on a project card
+    const handleProjectClick = (projectTitle) => {
+        event({
+            action: 'project_click',             // Action: project card clicked
+            category: 'Projects',                 // Category: Projects page interactions
+            label: projectTitle,                  // Label: which project was clicked
+        });
+    };
+
+    // Track when user clicks on a visualization card
+    const handleVizClick = (vizTitle) => {
+        event({
+            action: 'visualization_click',       // Action: visualization card clicked
+            category: 'Projects',                 // Category: Projects page interactions
+            label: vizTitle,                      // Label: which visualization was clicked
+        });
+    };
 
     return (
         <>
@@ -29,12 +58,12 @@ export default function Projects() {
                         </p>
                     </section>
 
-                    {/* Filter Buttons */}
+                    {/* Filter Buttons - Each tracks when clicked */}
                     <div className={styles.filterContainer}>
                         {filters.map(filter => (
                             <button
                                 key={filter.id}
-                                onClick={() => setActiveFilter(filter.id)}
+                                onClick={() => handleFilterClick(filter.id, filter.label)} // Tracks filter click
                                 className={`${styles.filterButton} ${activeFilter === filter.id ? styles.filterButtonActive : ''}`}
                             >
                                 {filter.label}
@@ -44,7 +73,11 @@ export default function Projects() {
 
                     <section className={styles.projectsSection}>
                         <div className={styles.projectGrid}>
-                            <div className={styles.projectCard}>
+                            {/* Project Card 1 - Tracks when clicked */}
+                            <div 
+                                className={styles.projectCard}
+                                onClick={() => handleProjectClick('Marketing Analytics Dashboard')} // Tracks project click
+                            >
                                 <div className={styles.projectContent}>
                                     <h3 className={styles.projectTitle}>Marketing Analytics Dashboard</h3>
                                     <p className={styles.projectDescription}>
@@ -58,7 +91,11 @@ export default function Projects() {
                                 </div>
                             </div>
 
-                            <div className={styles.projectCard}>
+                            {/* Project Card 2 - Tracks when clicked */}
+                            <div 
+                                className={styles.projectCard}
+                                onClick={() => handleProjectClick('Geospatial ML Pipeline')} // Tracks project click
+                            >
                                 <div className={styles.projectContent}>
                                     <h3 className={styles.projectTitle}>Geospatial ML Pipeline</h3>
                                     <p className={styles.projectDescription}>
@@ -72,7 +109,11 @@ export default function Projects() {
                                 </div>
                             </div>
 
-                            <div className={styles.projectCard}>
+                            {/* Project Card 3 - Tracks when clicked */}
+                            <div 
+                                className={styles.projectCard}
+                                onClick={() => handleProjectClick('Statistical Learning Models')} // Tracks project click
+                            >
                                 <div className={styles.projectContent}>
                                     <h3 className={styles.projectTitle}>Statistical Learning Models</h3>
                                     <p className={styles.projectDescription}>
@@ -85,7 +126,11 @@ export default function Projects() {
                                 </div>
                             </div>
 
-                            <div className={styles.projectCard}>
+                            {/* Project Card 4 - Tracks when clicked */}
+                            <div 
+                                className={styles.projectCard}
+                                onClick={() => handleProjectClick('Data Engineering Pipeline')} // Tracks project click
+                            >
                                 <div className={styles.projectContent}>
                                     <h3 className={styles.projectTitle}>Data Engineering Pipeline</h3>
                                     <p className={styles.projectDescription}>
@@ -106,7 +151,11 @@ export default function Projects() {
                         <h2 className={styles.sectionTitle}>Data Visualizations & Dashboards</h2>
                         
                         <div className={styles.vizGrid}>
-                            <div className={styles.vizCard}>
+                            {/* Visualization Card 1 - Tracks when clicked */}
+                            <div 
+                                className={styles.vizCard}
+                                onClick={() => handleVizClick('Sales Performance Dashboard')} // Tracks viz click
+                            >
                                 <div className={styles.vizImagePlaceholder}>
                                     <span className={styles.placeholderText}>Visualization 1</span>
                                 </div>
@@ -116,7 +165,11 @@ export default function Projects() {
                                 </div>
                             </div>
 
-                            <div className={styles.vizCard}>
+                            {/* Visualization Card 2 - Tracks when clicked */}
+                            <div 
+                                className={styles.vizCard}
+                                onClick={() => handleVizClick('Customer Segmentation Analysis')} // Tracks viz click
+                            >
                                 <div className={styles.vizImagePlaceholder}>
                                     <span className={styles.placeholderText}>Visualization 2</span>
                                 </div>
@@ -126,7 +179,11 @@ export default function Projects() {
                                 </div>
                             </div>
 
-                            <div className={styles.vizCard}>
+                            {/* Visualization Card 3 - Tracks when clicked */}
+                            <div 
+                                className={styles.vizCard}
+                                onClick={() => handleVizClick('Geospatial Heatmap')} // Tracks viz click
+                            >
                                 <div className={styles.vizImagePlaceholder}>
                                     <span className={styles.placeholderText}>Visualization 3</span>
                                 </div>
@@ -136,7 +193,11 @@ export default function Projects() {
                                 </div>
                             </div>
 
-                            <div className={styles.vizCard}>
+                            {/* Visualization Card 4 - Tracks when clicked */}
+                            <div 
+                                className={styles.vizCard}
+                                onClick={() => handleVizClick('Time Series Forecasting')} // Tracks viz click
+                            >
                                 <div className={styles.vizImagePlaceholder}>
                                     <span className={styles.placeholderText}>Visualization 4</span>
                                 </div>
@@ -146,7 +207,11 @@ export default function Projects() {
                                 </div>
                             </div>
 
-                            <div className={styles.vizCard}>
+                            {/* Visualization Card 5 - Tracks when clicked */}
+                            <div 
+                                className={styles.vizCard}
+                                onClick={() => handleVizClick('Network Graph Analysis')} // Tracks viz click
+                            >
                                 <div className={styles.vizImagePlaceholder}>
                                     <span className={styles.placeholderText}>Visualization 5</span>
                                 </div>
@@ -156,7 +221,11 @@ export default function Projects() {
                                 </div>
                             </div>
 
-                            <div className={styles.vizCard}>
+                            {/* Visualization Card 6 - Tracks when clicked */}
+                            <div 
+                                className={styles.vizCard}
+                                onClick={() => handleVizClick('Statistical Model Results')} // Tracks viz click
+                            >
                                 <div className={styles.vizImagePlaceholder}>
                                     <span className={styles.placeholderText}>Visualization 6</span>
                                 </div>
