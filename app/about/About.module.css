@@ -114,6 +114,24 @@
     display: flex; /* Enables centering within the min-height */
     align-items: center; /* Vertically centers text within min-height */
     justify-content: center; /* Horizontally centers text */
+    position: relative; /* Enables positioning for the divider line */
+}
+
+/* Vertical divider between columns - appears after each title except the last */
+.sectionTitle:not(:last-child)::after {
+    content: ''; /* Creates pseudo-element */
+    position: absolute; /* Positions relative to .sectionTitle */
+    right: -3rem; /* Places at midpoint of gap (6rem gap / 2 = 3rem) */
+    top: 0; /* Starts at top of title */
+    height: 200vh; /* Very tall to extend down through books */
+    width: 1px; /* Very thin line */
+    background: linear-gradient(
+        to bottom,
+        rgba(90, 107, 88, 0) 0%,      /* Transparent at top (fade in) */
+        rgba(90, 107, 88, 0.3) 10%,   /* Fades to 30% opacity */
+        rgba(90, 107, 88, 0.3) 90%,   /* Stays at 30% opacity through middle */
+        rgba(90, 107, 88, 0) 100%     /* Fades back to transparent at bottom */
+    );
 }
 
 /* Book Grid - Grid layout for book cards within each section */
