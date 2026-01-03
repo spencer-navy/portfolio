@@ -84,9 +84,9 @@
 .readingSectionsContainer {
     display: flex;
     flex-direction: row;
-    gap: 4rem;
-    padding-bottom: 4rem;
-    padding-top: 4rem;
+    gap: 2rem;
+    padding-bottom: 1rem;
+    padding-top: 2rem;
     align-items: flex-start;
 }
 
@@ -248,8 +248,8 @@
 /* Books I've Finished Section - Full Width */
 .finishedBooksSection {
     width: 100%;
-    padding: 4rem 0;
-    margin-top: 2rem;
+    padding: 1 rem 0;
+    margin-top: 1rem;
 }
 
 .finishedSectionTitle {
@@ -266,7 +266,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
     gap: 2rem;
-    margin-top: 2rem;
+    margin-top: 1rem;
 }
 
 /* Responsive - Stack vertically on smaller screens */
@@ -293,7 +293,7 @@
 @media (max-width: 1024px) {
     .readingSectionsContainer {
         flex-direction: column;
-        gap: 4rem;
+        gap: 1rem;
     }
     
     .readingSection {
@@ -321,7 +321,7 @@
     
     .bookGrid {
         grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-        gap: 1.5rem;
+        gap: 1.2rem;
     }
 }
 
