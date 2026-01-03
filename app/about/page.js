@@ -179,7 +179,7 @@ export default function About() {
             coverUrl: 'https://prodimage.images-bn.com/pimages/9781593279561_p0_v2_s600x595.jpg'
         },
         {
-            id: 42,
+            id: 43,
             title: "The Great Heist: China's Epic Campaign to Steal America's Secrets",
             author: 'David R. Shedd, Andrew Badger',
             isbn: '9780063451834',
