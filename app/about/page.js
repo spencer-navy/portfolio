@@ -160,7 +160,7 @@ export default function About() {
             author: 'Jeremy Kubica',
             isbn: '9781718501904',
             purchaseUrl: 'https://nostarch.com/math-deep-learning',
-            coverUrl: 'https://prodimage.images-bn.com/pimages/9781324079415_p0_v2_s600x595.jpg'
+            coverUrl: 'https://prodimage.images-bn.com/pimages/9781718501904_p0_v1_s600x595.jpg'
         },
         {
             id: 39,
