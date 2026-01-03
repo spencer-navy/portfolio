@@ -1,12 +1,37 @@
+'use client'; // Required directive for components that use interactive features like onClick
+
 import Navigation from '../../components/Navigation';
 import styles from './Contact.module.css';
-
-export const metadata = {
-    title: 'Contact - Abigail Spencer',
-    description: 'Get in touch with Abigail Spencer'
-};
+import { event } from '@/lib/gtag'; // Import the Google Analytics event tracking function
 
 export default function Contact() {
+    // Track when user clicks on Email card
+    const handleEmailClick = () => {
+        event({
+            action: 'contact_click',          // Action: contact method clicked
+            category: 'Contact',               // Category: Contact page interactions
+            label: 'Email',                    // Label: Email contact method
+        });
+    };
+
+    // Track when user clicks on LinkedIn card
+    const handleLinkedInClick = () => {
+        event({
+            action: 'contact_click',          // Action: contact method clicked
+            category: 'Contact',               // Category: Contact page interactions
+            label: 'LinkedIn',                 // Label: LinkedIn contact method
+        });
+    };
+
+    // Track when user clicks on GitHub card
+    const handleGitHubClick = () => {
+        event({
+            action: 'contact_click',          // Action: contact method clicked
+            category: 'Contact',               // Category: Contact page interactions
+            label: 'GitHub',                   // Label: GitHub contact method
+        });
+    };
+
     return (
         <>
             <Navigation />
@@ -19,10 +44,11 @@ export default function Contact() {
 
                     <section className={styles.contactSection}>
                         <div className={styles.contactGrid}>
-                            {/* Email Card */}
+                            {/* Email Card - Tracks when clicked */}
                             <a 
                                 href="mailto:abigailspencer.dev@gmail.com"
                                 className={styles.contactCard}
+                                onClick={handleEmailClick} // Tracks email click
                             >
                                 <div className={styles.iconWrapper}>
                                     <svg className={styles.icon} fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -33,12 +59,13 @@ export default function Contact() {
                                 <p className={styles.contactDetail}>abigailspencer.dev@gmail.com</p>
                             </a>
 
-                            {/* LinkedIn Card */}
+                            {/* LinkedIn Card - Tracks when clicked */}
                             <a 
                                 href="https://www.linkedin.com/in/abigailspencer90"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className={styles.contactCard}
+                                onClick={handleLinkedInClick} // Tracks LinkedIn click
                             >
                                 <div className={styles.iconWrapper}>
                                     <svg className={styles.icon} fill="currentColor" viewBox="0 0 24 24">
@@ -49,12 +76,13 @@ export default function Contact() {
                                 <p className={styles.contactDetail}>Connect with me</p>
                             </a>
 
-                            {/* GitHub Card */}
+                            {/* GitHub Card - Tracks when clicked */}
                             <a 
                                 href="https://github.com/spencer-navy"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className={styles.contactCard}
+                                onClick={handleGitHubClick} // Tracks GitHub click
                             >
                                 <div className={styles.iconWrapper}>
                                     <svg className={styles.icon} fill="currentColor" viewBox="0 0 24 24">

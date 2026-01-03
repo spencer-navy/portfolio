@@ -3,8 +3,18 @@
 import Image from 'next/image';
 import Navigation from '../../components/Navigation';
 import styles from './About.module.css';
+import { event } from '@/lib/gtag'; // Import the Google Analytics event tracking function
 
 export default function About() {
+    // Track when user clicks on a book link
+    const handleBookClick = (bookTitle, section) => {
+        event({
+            action: 'book_click',               // Action: book link clicked
+            category: 'About',                   // Category: About page interactions
+            label: `${section}: ${bookTitle}`,  // Label: section and book title
+        });
+    };
+
     // Currently Reading - lighter, more practical books
     const currentlyReading = [
         {
@@ -356,17 +366,16 @@ export default function About() {
         }
     ];
 
-    // Add this helper function before renderBookGrid
+    // Helper function to get retailer name from URL
     const getRetailerName = (url) => {
         if (url.includes('amazon.com')) return 'Amazon';
         if (url.includes('barnesandnoble.com') || url.includes('bn.com')) return 'Barnes & Noble';
         if (url.includes('nostarch.com')) return 'No Starch Press';
-        // Add more retailers as needed
         return 'Retailer'; // fallback
     };
 
-
-    const renderBookGrid = (books) => (
+    // Render book grid with tracking - accepts section name for analytics
+    const renderBookGrid = (books, sectionName) => (
         <div className={styles.bookGrid}>
             {books.map((book, index) => (
                 <a 
@@ -376,6 +385,7 @@ export default function About() {
                     key={book.id} 
                     className={styles.bookCard}
                     style={{ animationDelay: `${index * 0.1}s` }}
+                    onClick={() => handleBookClick(book.title, sectionName)} // Tracks book click with section name
                 >
                     <div className={styles.bookCover}>
                         {book.coverUrl ? (
@@ -473,19 +483,19 @@ export default function About() {
                         {/* What I'm Reading */}
                         <section className={styles.readingSection}>
                             <h2 className={styles.sectionTitle}>What I'm Reading</h2>
-                            {renderBookGrid(currentlyReading)}
+                            {renderBookGrid(currentlyReading, 'Currently Reading')}
                         </section>
 
                         {/* What's Up Next */}
                         <section className={styles.readingSection}>
                             <h2 className={styles.sectionTitle}>Up Next</h2>
-                            {renderBookGrid(upNext)}
+                            {renderBookGrid(upNext, 'Up Next')}
                         </section>
 
                         {/* 10 Year Reading */}
                         <section className={styles.readingSection}>
                             <h2 className={styles.sectionTitle}>Deeper Knowledge</h2>
-                            {renderBookGrid(tenYearReading)}
+                            {renderBookGrid(tenYearReading, 'Deeper Knowledge')}
                         </section>
                     </div>
 
@@ -502,6 +512,7 @@ export default function About() {
                                         key={book.id} 
                                         className={styles.bookCard}
                                         style={{ animationDelay: `${index * 0.05}s` }}
+                                        onClick={() => handleBookClick(book.title, 'Recently Read')} // Tracks book click
                                     >
                                         <div className={styles.bookCover}>
                                             {book.coverUrl ? (
