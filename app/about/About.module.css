@@ -1,312 +1,319 @@
 /* Main container - Wraps the entire page content */
 .main {
-    min-height: 100vh; /* Ensures page is at least full viewport height */
-    background: linear-gradient(to bottom, #ffffff, #879f85); /* White to sage green gradient */
-    padding-top: 2rem; /* Space at top of page */
+    min-height: 100vh;
+    background: linear-gradient(to bottom, #ffffff, #879f85);
+    padding-top: 2rem;
+    overflow-x: hidden; /* ADDED: Prevents horizontal scroll on mobile */
 }
 
 /* Content wrapper - Centers and constrains all page content */
 .container {
-    max-width: 1700px; /* Maximum width before content stops growing */
-    margin: 0 auto; /* Centers the container horizontally */
-    padding: 0 2rem; /* Horizontal padding on left and right sides */
+    max-width: 1700px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    overflow-x: hidden; /* ADDED: Prevents horizontal scroll on mobile */
 }
 
 /* Hero section - Top area containing the page title */
 .hero {
-    padding: 5rem 0 3rem; /* Vertical padding: 5rem top, 3rem bottom */
-    text-align: center; /* Centers all text within hero section */
+    padding: 5rem 0 3rem;
+    text-align: center;
 }
 
 /* Hero title - Main page heading "What I'm Reading" */
 .heroTitle {
-    font-family: 'Georgia', 'Times New Roman', serif; /* Classic serif font for elegance */
-    font-size: 4rem !important; /* Large size for prominence, !important overrides other styles */
-    font-weight: 600 !important; /* Semi-bold weight */
-    letter-spacing: 0.05em; /* Slight spacing between letters for readability */
-    color: #2c352b !important; /* Dark green color matching theme */
-    margin: 0 !important; /* Removes default margins */
-    line-height: 1.1 !important; /* Tight line spacing for large text */
-    text-align: center !important; /* Ensures centering even if inherited styles conflict */
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-size: 4rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.05em;
+    color: #2c352b !important;
+    margin: 0 !important;
+    line-height: 1.1 !important;
+    text-align: center !important;
 }
 
 
 
 /* Bio Section - Contains profile photo and bio text */
 .bioSection {
-    padding: 2rem 0 4rem; /* Vertical padding: 2rem top, 4rem bottom for spacing from hero */
+    padding: 2rem 0 4rem;
 }
 
 /* Bio content wrapper - Flexbox container for photo and text */
 .bioContent {
-    display: flex; /* Enables flexbox layout for side-by-side arrangement */
-    gap: 3rem; /* Space between profile image and bio text */
-    align-items: center; /* Vertically centers photo and text relative to each other */
-    max-width: none; /* Allows content to use full container width */
-    margin: 0 auto; /* Centers the bio content within its parent */
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+    max-width: none;
+    margin: 0 auto;
 }
 
 /* Profile image wrapper - Container for the profile photo */
 .profileImageWrapper {
-    width: 400px; /* Fixed width matches homepage design */
-    height: 500px; /* Fixed height matches homepage design */
-    border-radius: 16px; /* Rounded corners for modern look */
-    overflow: hidden; /* Clips image to rounded corners */
-    border: 4px solid #879f85; /* Sage green border matching page gradient */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); /* Soft shadow for depth */
-    flex-shrink: 0; /* Prevents image from shrinking when space is tight */
+    width: 400px;
+    height: 500px;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 4px solid #879f85;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    flex-shrink: 0;
 }
 
 /* Profile image - The actual photo element */
 .profileImage {
-    width: 100%; /* Fills wrapper width */
-    height: 100%; /* Fills wrapper height */
-    object-fit: cover; /* Crops image to fill space while maintaining aspect ratio */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 /* Bio text container - Holds the biography paragraphs */
 .bioText {
-    flex: 1; /* Takes up remaining space after image (grows to fill) */
-    max-width: none; /* No width restrictions, uses available flex space */
+    flex: 1;
+    max-width: none;
 }
 
 /* Paragraph styling - Individual bio text paragraphs */
 .paragraph {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; /* System fonts for readability */
-    font-size: 1.125rem; /* Slightly larger than default for comfortable reading */
-    line-height: 1.8; /* Generous line spacing for readability */
-    color: #334155 !important; /* Dark slate color for text */
-    margin-bottom: 1.5rem; /* Space between paragraphs */
-    text-align: center; /* Centers paragraph text */
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: #334155 !important;
+    margin-bottom: 1.5rem;
+    text-align: center;
 }
 
 /* Last paragraph - Removes bottom margin from final paragraph */
 .paragraph:last-child {
-    margin-bottom: 0; /* Prevents extra space after last paragraph */
+    margin-bottom: 0;
 }
 
 /* THREE COLUMNS SIDE BY SIDE - Main container for reading lists */
 .readingSectionsContainer {
-    display: flex; /* Enables flexbox for side-by-side columns */
-    flex-direction: row; /* Arranges children horizontally */
-    gap: 6rem; /* Large gap between the three reading list columns */
-    padding-bottom: 1rem; /* Bottom spacing */
-    padding-top: 2rem; /* Top spacing separates from bio section */
-    align-items: flex-start; /* Aligns columns to top (important when heights differ) */
+    display: flex;
+    flex-direction: row;
+    gap: 6rem;
+    padding-bottom: 1rem;
+    padding-top: 2rem;
+    align-items: flex-start;
 }
 
 /* Individual Reading Section - Each of the three reading list columns */
 .readingSection {
-    flex: 1; /* Each section takes equal width (1/3 of container) */
-    min-width: 0; /* Allows flex items to shrink below content size if needed */
+    flex: 1;
+    min-width: 0;
 }
 
 /* Section title - Headers like "Currently Reading", "Up Next", "Recently Finished" */
 .sectionTitle {
-    font-family: 'Georgia', 'Times New Roman', serif; /* Serif font matches hero title */
-    font-size: 2rem; /* Large but smaller than hero title */
-    font-weight: 600; /* Semi-bold weight */
-    letter-spacing: -0.02em; /* Slight negative spacing tightens large text */
-    color: #5a6b58 !important; /* Medium green color complements theme */
-    margin-bottom: 2rem; /* Space before book grid begins */
-    text-align: center; /* Centers section title */
-    min-height: 6rem; /* Ensures all titles take same vertical space for alignment */
-    display: flex; /* Enables centering within the min-height */
-    align-items: center; /* Vertically centers text within min-height */
-    justify-content: center; /* Horizontally centers text */
-    position: relative; /* Enables positioning for the divider line */
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-size: 2rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: #5a6b58 !important;
+    margin-bottom: 2rem;
+    text-align: center;
+    min-height: 6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
 }
 
 /* Vertical divider between columns - appears after each title except the last */
 .sectionTitle:not(:last-child)::after {
-    content: ''; /* Creates pseudo-element */
-    position: absolute; /* Positions relative to .sectionTitle */
-    right: -3rem; /* Places at midpoint of gap (6rem gap / 2 = 3rem) */
-    top: 0; /* Starts at top of title */
-    height: 200vh; /* Very tall to extend down through books */
-    width: 1px; /* Very thin line */
+    content: '';
+    position: absolute;
+    right: -3rem;
+    top: 0;
+    height: 200vh;
+    width: 1px;
     background: linear-gradient(
         to bottom,
-        rgba(90, 107, 88, 0) 0%,      /* Transparent at top (fade in) */
-        rgba(90, 107, 88, 0.3) 10%,   /* Fades to 30% opacity */
-        rgba(90, 107, 88, 0.3) 90%,   /* Stays at 30% opacity through middle */
-        rgba(90, 107, 88, 0) 100%     /* Fades back to transparent at bottom */
+        rgba(90, 107, 88, 0) 0%,
+        rgba(90, 107, 88, 0.3) 10%,
+        rgba(90, 107, 88, 0.3) 90%,
+        rgba(90, 107, 88, 0) 100%
     );
 }
 
 /* Book Grid - Grid layout for book cards within each section */
 .bookGrid {
-    display: grid; /* Enables CSS Grid layout */
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); /* Creates flexible columns: minimum 140px wide, fills available space, auto-fill creates as many columns as fit */
-    /* grid-template-columns: repeat(2, 1fr); */ /* Old design: forced 2 equal columns */
-    gap: 2.5rem 1.5rem; /* Vertical gap 2.5rem, horizontal gap 1.5rem between books */
-    margin-top: 2rem; /* Space between section title and books */
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 2.5rem 1.5rem;
+    margin-top: 2rem;
+    width: 100%; /* ADDED: Ensures grid doesn't overflow */
 }
 
 /* Book card - Individual book container with hover effects */
 .bookCard {
-    position: relative; /* Establishes positioning context for absolute children (overlay) */
-    display: flex; /* Flexbox for vertical stacking of cover and info */
-    flex-direction: column; /* Stacks cover above title/author */
-    gap: 1rem; /* Space between book cover and book info */
-    animation: fadeInUp 0.6s ease-out both; /* Entrance animation (defined below) */
-    transition: transform 0.3s ease; /* Smooth transition for hover lift effect */
-    text-decoration: none; /* Removes underline if card is a link */
-    cursor: pointer; /* Shows pointer cursor to indicate interactivity */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    animation: fadeInUp 0.6s ease-out both;
+    transition: transform 0.3s ease;
+    text-decoration: none;
+    cursor: pointer;
+    max-width: 100%; /* ADDED: Prevents card from overflowing */
 }
 
 /* Book card hover - Lifts card up when user hovers */
 .bookCard:hover {
-    transform: translateY(-8px); /* Moves card up 8px for lift effect */
+    transform: translateY(-8px);
 }
 
 /* Book cover - Container for book cover image */
 .bookCover {
-    position: relative; /* Positioning context for overlay element */
-    aspect-ratio: 2/3; /* Maintains standard book proportion (width:height) */
-    border-radius: 6px; /* Slightly rounded corners */
-    overflow: hidden; /* Clips image and overlay to rounded corners */
+    position: relative;
+    aspect-ratio: 2/3;
+    border-radius: 6px;
+    overflow: hidden;
     box-shadow: 
-        0 2px 4px rgba(0, 0, 0, 0.07),  /* Subtle close shadow */
-        0 6px 12px rgba(0, 0, 0, 0.05); /* Softer far shadow for depth */
-    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); /* Light blue gradient placeholder */
-    transition: box-shadow 0.3s ease; /* Smooth shadow transition on hover */
+        0 2px 4px rgba(0, 0, 0, 0.07),
+        0 6px 12px rgba(0, 0, 0, 0.05);
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+    transition: box-shadow 0.3s ease;
+    width: 100%; /* ADDED: Ensures cover respects container width */
 }
 
 /* Book cover hover - Enhances shadow when card is hovered */
 .bookCard:hover .bookCover {
     box-shadow: 
-        0 8px 12px rgba(0, 0, 0, 0.1),  /* Stronger close shadow */
-        0 20px 30px rgba(0, 0, 0, 0.08); /* Deeper far shadow for more depth */
+        0 8px 12px rgba(0, 0, 0, 0.1),
+        0 20px 30px rgba(0, 0, 0, 0.08);
 }
 
 /* Book image - The actual cover image element */
 .bookImage {
-    width: 100%; /* Fills cover container width */
-    height: 100%; /* Fills cover container height */
-    object-fit: cover; /* Crops to fill while maintaining aspect ratio */
-    transition: transform 0.3s ease; /* Smooth zoom transition */
+    width: 100%;
+    height: 100%;
+    max-width: 100%; /* ADDED: Critical fix - prevents image overflow */
+    object-fit: cover;
+    transition: transform 0.3s ease;
+    display: block; /* ADDED: Removes any inline spacing issues */
 }
 
 /* Book image hover - Slight zoom effect when card is hovered */
 .bookCard:hover .bookImage {
-    transform: scale(1.05); /* Enlarges image by 5% for subtle zoom */
+    transform: scale(1.05);
 }
 
 /* Book overlay - Dark gradient that appears on hover */
 .bookOverlay {
-    position: absolute; /* Positioned relative to .bookCover */
-    top: 0; /* Covers full height */
-    left: 0; /* Covers full width */
+    position: absolute;
+    top: 0;
+    left: 0;
     right: 0;
     bottom: 0;
     background: linear-gradient(
         to bottom,
-        rgba(0, 0, 0, 0) 0%,      /* Transparent at top */
-        rgba(0, 0, 0, 0.1) 60%,   /* Slight darkening in middle */
-        rgba(0, 0, 0, 0.3) 100%   /* Darker at bottom for text contrast */
+        rgba(0, 0, 0, 0) 0%,
+        rgba(0, 0, 0, 0.1) 60%,
+        rgba(0, 0, 0, 0.3) 100%
     );
-    opacity: 0; /* Hidden by default */
-    transition: opacity 0.3s ease; /* Smooth fade in/out */
-    display: flex; /* Enables positioning of status badge */
-    align-items: flex-end; /* Positions badge at bottom */
-    padding: 1rem; /* Inner spacing for badge */
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    display: flex;
+    align-items: flex-end;
+    padding: 1rem;
 }
 
 /* Book overlay hover - Shows overlay when card is hovered */
 .bookCard:hover .bookOverlay {
-    opacity: 1; /* Fades overlay to full visibility */
+    opacity: 1;
 }
 
 /* Book status - Badge showing reading status (e.g., "CURRENTLY READING") */
 .bookStatus {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; /* System font */
-    font-size: 0.75rem; /* Small text size */
-    font-weight: 600; /* Semi-bold for visibility */
-    text-transform: uppercase; /* All caps for badge style */
-    letter-spacing: 0.05em; /* Spacing for readability in uppercase */
-    color: white; /* White text for contrast on dark background */
-    background: rgba(90, 107, 88, 0.9); /* Semi-transparent sage green */
-    padding: 0.375rem 0.75rem; /* Compact padding around text */
-    border-radius: 4px; /* Rounded corners for badge */
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: white;
+    background: rgba(90, 107, 88, 0.9);
+    padding: 0.375rem 0.75rem;
+    border-radius: 4px;
 }
 
 /* Book info - Container for title and author below cover */
 .bookInfo {
-    display: flex; /* Flexbox for vertical stacking */
-    flex-direction: column; /* Stacks title above author */
-    gap: 0.375rem; /* Small gap between title and author */
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
 }
 
 /* Book title - Title text below cover */
 .bookTitle {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; /* System font */
-    font-size: 0.8rem; /* Small readable size */
-    font-weight: 600; /* Semi-bold for emphasis */
-    line-height: 1.3; /* Comfortable line spacing */
-    color: #475345 !important; /* Dark green color */
-    margin: 0; /* Removes default margins */
-    min-height: 3.2rem; /* Ensures consistent height across cards (room for ~3 lines) */
-    display: -webkit-box; /* Required for line clamping */
-    -webkit-line-clamp: 3; /* Limits to 3 lines max */
-    -webkit-box-orient: vertical; /* Required for line clamping */
-    line-clamp: 3; /* Standard property (for future browser support) */
-    overflow: hidden; /* Hides text beyond 3 lines */
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    line-height: 1.3;
+    color: #475345 !important;
+    margin: 0;
+    min-height: 3.2rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    line-clamp: 3;
+    overflow: hidden;
 }
 
 /* Book author - Author name below title */
 .bookAuthor {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; /* System font */
-    font-size: 0.7rem; /* Smaller than title */
-    line-height: 1.3; /* Comfortable line spacing */
-    color: #464c54 !important; /* Darker gray than title for hierarchy */
-    margin: 0; /* Removes default margins */
-    min-height: 1.8rem; /* Ensures consistent height (room for ~2 lines) */
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 0.7rem;
+    line-height: 1.3;
+    color: #464c54 !important;
+    margin: 0;
+    min-height: 1.8rem;
 }
 
 /* Book image placeholder - Fallback when image doesn't load */
 .bookImagePlaceholder {
-    width: 100%; /* Fills cover space */
-    height: 100%; /* Fills cover space */
-    background-color: white; /* Plain white background */
+    width: 100%;
+    height: 100%;
+    background-color: white;
 }
 
 /* Animation for entrance - Books fade in and slide up when page loads */
 @keyframes fadeInUp {
     from {
-        opacity: 0; /* Starts invisible */
-        transform: translateY(30px); /* Starts 30px lower */
+        opacity: 0;
+        transform: translateY(30px);
     }
     to {
-        opacity: 1; /* Ends fully visible */
-        transform: translateY(0); /* Ends at normal position */
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
 /* Books I've Finished Section - Full Width section at bottom of page */
 .finishedBooksSection {
-    width: 100%; /* Takes full width of container */
-    padding: 1 rem 0; /* Vertical padding (note: typo should be "1rem" not "1 rem") */
-    margin-top: 1rem; /* Space above section */
+    width: 100%;
+    padding: 1rem 0;
+    margin-top: 1rem;
 }
 
 /* Finished section title - Header for completed books section */
 .finishedSectionTitle {
-    font-family: 'Georgia', 'Times New Roman', serif; /* Serif font matches other titles */
-    font-size: 2.5rem; /* Larger than column section titles */
-    font-weight: 600; /* Semi-bold */
-    letter-spacing: -0.02em; /* Slight negative spacing */
-    color: #5a6b58 !important; /* Green color matches theme */
-    margin-bottom: 3rem; /* Large space before books */
-    text-align: center; /* Centered title */
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-size: 2.5rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: #5a6b58 !important;
+    margin-bottom: 3rem;
+    text-align: center;
 }
 
 /* Finished book grid - Grid for completed books */
 .finishedBookGrid {
-    display: grid; /* CSS Grid layout */
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Flexible columns: minimum 150px, auto-fill creates as many as fit */
-    gap: 2rem; /* Equal gap in all directions between books */
-    margin-top: 1rem; /* Space below title */
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 2rem;
+    margin-top: 1rem;
+    width: 100%; /* ADDED: Ensures grid doesn't overflow */
 }
 
 /* Responsive - Stack vertically on smaller screens */
@@ -314,91 +321,118 @@
 /* Photo/bio stacks at 1400px - When screen is narrower than 1400px */
 @media (max-width: 1400px) {
     .bioContent {
-        flex-direction: column; /* Changes from row to column layout, stacking photo above text */
-        align-items: center; /* Centers both photo and text horizontally */
+        flex-direction: column;
+        align-items: center;
     }
     
     .profileImageWrapper {
-        width: 350px; /* Smaller photo width for medium screens */
-        height: 438px; /* Proportionally adjusted height */
-        margin-bottom: 2rem; /* Adds space between photo and text when stacked */
+        width: 350px;
+        height: 438px;
+        margin-bottom: 2rem;
     }
     
     .paragraph {
-        text-align: center; /* Centers bio text */
+        text-align: center;
     }
 }
 
 /* Books stack at 1024px - When screen is narrower than 1024px */
 @media (max-width: 1024px) {
     .readingSectionsContainer {
-        flex-direction: column; /* Changes from 3 columns side-by-side to stacked vertically */
-        gap: 1rem; /* Reduces gap between sections when stacked */
+        flex-direction: column;
+        gap: 1rem;
     }
     
     .readingSection {
-        width: 100%; /* Each section takes full width when stacked */
+        width: 100%;
     }
     
     .bookGrid {
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Larger books when sections are full width */
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     }
 }
 
 /* Tablet breakpoint - When screen is narrower than 768px */
 @media (max-width: 768px) {
+    .container {
+        padding: 0 1rem; /* MODIFIED: Reduced padding on smaller screens */
+    }
+    
     .profileImageWrapper {
-        width: 300px; /* Further reduces photo size for tablets */
-        height: 375px; /* Proportionally adjusted height */
+        width: 300px;
+        height: 375px;
     }
     
     .heroTitle {
-        font-size: 2.5rem !important; /* Smaller hero title for tablet screens */
+        font-size: 2.5rem !important;
     }
 
     .sectionTitle {
-        font-size: 1.75rem; /* Smaller section titles for tablet screens */
+        font-size: 1.75rem;
     }
     
     .bookGrid {
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Adjusts book size for tablet */
-        gap: 1.2rem; /* Reduces gaps to fit more books on smaller screens */
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); /* MODIFIED: Flexible columns */
+        gap: 1.2rem;
     }
 }
 
 /* Mobile breakpoint - When screen is narrower than 480px */
 @media (max-width: 480px) {
+    .container {
+        padding: 0 1rem; /* ADDED: Further reduced padding */
+    }
+    
     .profileImageWrapper {
-        width: 240px; /* Smaller photo for mobile phones */
-        height: 300px; /* Proportionally adjusted height */
+        width: 240px;
+        height: 300px;
     }
     
     .heroTitle {
-        font-size: 2rem !important; /* Smaller hero title for mobile */
+        font-size: 2rem !important;
     }
 
     .sectionTitle {
-        font-size: 1.5rem; /* Smaller section titles for mobile */
+        font-size: 1.5rem;
     }
     
     .bookGrid {
-        grid-template-columns: repeat(2, 1fr); /* Forces exactly 2 columns on mobile (overrides auto-fill) */
-        gap: 1.25rem; /* Balanced gap for mobile screens */
+        grid-template-columns: repeat(2, 1fr); /* Forces 2 columns */
+        gap: 1rem; /* MODIFIED: Reduced gap */
+    }
+    
+    .finishedBookGrid {
+        grid-template-columns: repeat(2, 1fr); /* ADDED: Forces 2 columns on mobile */
+        gap: 1rem; /* ADDED: Reduced gap */
     }
 }
 
 /* Small mobile breakpoint - When screen is narrower than 360px */
 @media (max-width: 360px) {
+    .container {
+        padding: 0 0.75rem; /* ADDED: Minimal padding for very small screens */
+    }
+    
     .profileImageWrapper {
-        width: 200px; /* Smallest photo size for very small phones */
-        height: 250px; /* Proportionally adjusted height */
+        width: 200px;
+        height: 250px;
     }
     
     .heroTitle {
-        font-size: 1.75rem !important; /* Smallest hero title size */
+        font-size: 1.75rem !important;
     }
 
     .sectionTitle {
-        font-size: 1.25rem; /* Smallest section title size */
+        font-size: 1.25rem;
+    }
+    
+    .bookGrid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem; /* ADDED: Even smaller gap */
+    }
+    
+    .finishedBookGrid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem; /* ADDED: Even smaller gap */
     }
 }
