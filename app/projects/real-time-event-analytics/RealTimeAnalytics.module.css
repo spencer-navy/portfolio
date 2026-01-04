@@ -1,0 +1,504 @@
+/* Main container - sets the background gradient and minimum height */
+.main {
+    min-height: 100vh;
+    padding-top: 80px; /* Space for fixed navigation bar */
+    /* Sage green gradient matching the portfolio theme */
+    background: linear-gradient(135deg, #f5f7fa 0%, #879f85 100%);
+}
+
+/* Content container - wider than before for better readability on large screens */
+.container {
+    max-width: 1400px; /* Increased from typical 900px for more breathing room */
+    margin: 0 auto; /* Center the container */
+    padding: 0 3rem; /* Horizontal padding for edge spacing */
+}
+
+/* ===== HERO SECTION ===== */
+/* Top section with project title, breadcrumb, and tags */
+
+.hero {
+    padding: 3rem 0 2rem; /* Vertical spacing around hero content */
+    margin-bottom: 3rem; /* Space before next section */
+}
+
+/* Breadcrumb navigation (Projects / Current Page) */
+.breadcrumb {
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+    color: #4a5568; /* Muted gray for secondary text */
+}
+
+.breadcrumbLink {
+    color: #5a6b58; /* Sage green for clickable link */
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.breadcrumbLink:hover {
+    color: #879f85; /* Lighter sage on hover */
+    text-decoration: underline;
+}
+
+.breadcrumbSeparator {
+    margin: 0 0.5rem; /* Space around the "/" separator */
+    color: #cbd5e0; /* Light gray separator */
+}
+
+.breadcrumbCurrent {
+    color: #718096; /* Medium gray for current page (not clickable) */
+}
+
+/* Main page title */
+.title {
+    font-family: 'Georgia', 'Times New Roman', serif; /* Serif for elegance */
+    font-size: 3.5rem; /* Large, impactful title */
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: #2c352b; /* Dark sage/forest green */
+    line-height: 1.2; /* Tight line height for large text */
+    letter-spacing: -0.02em; /* Slight negative spacing for tighter look */
+}
+
+/* Subtitle below title */
+.subtitle {
+    font-size: 1.35rem; /* Increased for better readability */
+    color: #4a5568; /* Medium gray for subtitle */
+    line-height: 1.7; /* Generous line height for readability */
+    margin-bottom: 2rem;
+    max-width: 900px; /* Constrain width for optimal reading */
+}
+
+/* Technology tags displayed in hero */
+.tags {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping on small screens */
+    gap: 0.75rem; /* Space between tags */
+}
+
+.tag {
+    background: white; /* White background for tags */
+    border: 1px solid #cbd5e0; /* Light gray border */
+    padding: 0.6rem 1.25rem; /* Comfortable padding */
+    border-radius: 20px; /* Rounded pill shape */
+    font-size: 0.9rem;
+    color: #5a6b58; /* Sage green text */
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.tag:hover {
+    background: #e8f0e7; /* Light sage background on hover */
+    border-color: #879f85; /* Darker sage border */
+}
+
+/* ===== CONTENT SECTIONS ===== */
+/* Main content sections with headings and text */
+
+.section {
+    margin-bottom: 4rem; /* Large spacing between sections */
+}
+
+/* Section headings (h2) */
+.sectionTitle {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-size: 2.25rem; /* Large section headings */
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: #2c352b; /* Dark sage */
+    letter-spacing: -0.01em;
+}
+
+/* Subsection headings (h3) */
+.subsectionTitle {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-top: 2.5rem;
+    margin-bottom: 1.25rem;
+    color: #2c352b;
+}
+
+/* Body text paragraphs */
+.text {
+    font-size: 1.1rem; /* Increased for better readability */
+    line-height: 1.8; /* Generous line height */
+    color: #2d3748; /* Darker gray for better contrast on light backgrounds */
+    margin-bottom: 1.5rem;
+    max-width: 1100px; /* CHANGED: Lengthened from 900px for wider reading area */
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.2) 100%); /* ADDED: Very subtle gradient that blends with page gradient */
+    padding: 1.25rem 1.5rem; /* ADDED: Comfortable padding without being too boxy */
+    border-radius: 6px; /* ADDED: Gentle rounded corners - less noticeable than 8px */
+}
+
+/* Smaller text for captions/descriptions */
+.smallText {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #718096; /* Lighter gray for less important text */
+    margin: 0.5rem 0;
+}
+
+/* List items - styled for readability on darker gradient background */
+/* Used primarily in Key Takeaways section at bottom of page */
+.list {
+    margin: 1.5rem 0;
+    padding-left: 2rem; /* Indent for list items */
+    color: #2d3748; /* Dark gray for readability */
+    max-width: 1100px; /* Match text width for consistency */
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.35) 100%); /* ADDED: Slightly stronger white overlay for darker background */
+    padding: 1.5rem 2rem 1.5rem 3rem; /* ADDED: Extra left padding to accommodate bullet indentation */
+    border-radius: 8px; /* Rounded corners */
+    border-left: 3px solid #5a6b58; /* ADDED: Subtle sage green accent bar */
+}
+
+.list li {
+    margin-bottom: 1rem; /* Space between list items */
+    line-height: 1.7; /* Readable line height */
+    font-size: 1.05rem; /* Slightly larger for readability */
+}
+
+.list li strong {
+    color: #1a202c; /* Very dark for emphasis - stands out on white overlay */
+    font-weight: 600;
+}
+
+/* ===== GRID LAYOUTS ===== */
+/* Two-column grid for cards */
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); /* Responsive columns */
+    gap: 2rem; /* Space between grid items */
+    margin-top: 2rem;
+}
+
+/* Card component - used in grid layouts */
+.card {
+    background: white;
+    border: 1px solid #e2e8f0; /* Light gray border */
+    border-radius: 12px; /* Rounded corners */
+    padding: 2.5rem;
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    border-color: #879f85; /* Sage green border on hover */
+    box-shadow: 0 4px 12px rgba(90, 107, 88, 0.1); /* Subtle sage shadow */
+}
+
+.cardTitle {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1.25rem;
+    color: #2c352b; /* Dark sage */
+}
+
+/* ===== ARCHITECTURE FLOW DIAGRAM ===== */
+/* Horizontal step-by-step flow visualization */
+
+.architectureFlow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap; /* Allow wrapping on mobile */
+    gap: 1.5rem;
+    margin: 3rem 0;
+    padding: 3rem;
+    background: white;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+}
+
+/* Individual step in the flow */
+.flowStep {
+    flex: 1; /* Equal width for all steps */
+    min-width: 180px; /* Minimum width before wrapping */
+    text-align: center;
+}
+
+/* Numbered circle for each step */
+.flowNumber {
+    width: 50px;
+    height: 50px;
+    background: #5a6b58; /* Sage green background */
+    color: white;
+    border-radius: 50%; /* Perfect circle */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.25rem;
+    font-weight: 700;
+    font-size: 1.25rem;
+}
+
+.flowStep h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: #2c352b;
+}
+
+/* Arrow between steps */
+.flowArrow {
+    font-size: 2rem;
+    color: #5a6b58; /* Sage green arrow */
+    flex-shrink: 0; /* Don't shrink arrows */
+    font-weight: 300;
+}
+
+/* Inline code snippets (small code text) */
+.inlineCode {
+    background: #f7fafc; /* Very light gray background */
+    padding: 0.35rem 0.75rem;
+    border-radius: 6px;
+    font-family: 'Courier New', 'Monaco', monospace;
+    font-size: 0.85rem;
+    color: #5a6b58; /* Sage green code */
+    display: inline-block;
+    margin-top: 0.5rem;
+    border: 1px solid #e2e8f0;
+}
+
+/* ===== FEATURES GRID ===== */
+/* Grid layout for feature cards */
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.feature {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 2.5rem;
+    transition: all 0.3s ease;
+}
+
+.feature:hover {
+    border-color: #879f85;
+    box-shadow: 0 4px 12px rgba(90, 107, 88, 0.1);
+    transform: translateY(-2px); /* Slight lift on hover */
+}
+
+.featureTitle {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #2c352b;
+}
+
+/* ===== CODE BLOCKS ===== */
+/* Large code blocks with syntax */
+
+.codeBlock {
+    background: #f7fafc; /* Light gray background */
+    border: 1px solid #e2e8f0;
+    border-left: 4px solid #5a6b58; /* Sage green accent border */
+    border-radius: 8px;
+    padding: 2rem;
+    overflow-x: auto; /* Horizontal scroll for long code */
+    font-family: 'Courier New', 'Monaco', monospace;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: #2d3748; /* Dark gray for code text */
+    margin: 2rem 0;
+}
+
+/* ===== STATS CARDS ===== */
+/* Grid of statistic cards */
+
+.statsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin: 2.5rem 0;
+}
+
+.statCard {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 2.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.statCard:hover {
+    border-color: #879f85;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(90, 107, 88, 0.1);
+}
+
+/* Large number in stat card */
+.statNumber {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #5a6b58; /* Sage green for emphasis */
+    margin-bottom: 0.75rem;
+}
+
+/* Label below number */
+.statLabel {
+    font-size: 0.9rem;
+    color: #718096; /* Medium gray */
+    text-transform: uppercase;
+    letter-spacing: 0.05em; /* Slight letter spacing for labels */
+    font-weight: 500;
+}
+
+/* ===== ROADMAP/TIMELINE ===== */
+/* Vertical list of roadmap items */
+
+.roadmap {
+    margin-top: 2rem;
+}
+
+.roadmapItem {
+    background: white;
+    border-left: 4px solid #5a6b58; /* Sage green accent */
+    padding: 2rem 2rem 2rem 2.5rem; /* Extra left padding for accent line */
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    border-left-width: 4px; /* Override to keep thick left border */
+}
+
+.roadmapItem h4 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #2c352b;
+}
+
+/* ===== BUTTONS & LINKS ===== */
+/* Call-to-action button */
+
+.button {
+    display: inline-block;
+    background: #5a6b58; /* Sage green background */
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.05rem;
+    margin-top: 1.5rem;
+    transition: all 0.2s ease;
+    border: 2px solid #5a6b58;
+}
+
+.button:hover {
+    background: #4a5548; /* Darker sage on hover */
+    border-color: #4a5548;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(90, 107, 88, 0.2);
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+/* Adjustments for tablets and mobile devices */
+
+@media (max-width: 968px) {
+    .container {
+        padding: 0 2rem; /* Less horizontal padding on tablets */
+    }
+
+    .title {
+        font-size: 2.75rem; /* Smaller title on tablets */
+    }
+
+    .subtitle {
+        font-size: 1.15rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 0 1.5rem; /* Even less padding on mobile */
+    }
+
+    .title {
+        font-size: 2.25rem; /* Much smaller title on mobile */
+    }
+
+    .subtitle {
+        font-size: 1.05rem;
+    }
+
+    .sectionTitle {
+        font-size: 1.75rem; /* Smaller section headings */
+    }
+
+    .text {
+        font-size: 1rem; /* Slightly smaller body text */
+    }
+
+    /* Stack architecture flow vertically on mobile */
+    .architectureFlow {
+        flex-direction: column;
+        padding: 2rem;
+    }
+
+    /* Rotate arrows to point down on mobile */
+    .flowArrow {
+        transform: rotate(90deg);
+        margin: 1rem 0;
+    }
+
+    /* Single column grids on mobile */
+    .grid,
+    .features,
+    .statsGrid {
+        grid-template-columns: 1fr;
+    }
+
+    /* ===== LIVE BADGE ===== */
+    /* Badge shown on project cards to indicate live/active status */
+
+    .liveBadge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: linear-gradient(135deg, #10b981 0%, #059669 100%); /* Green gradient */
+        color: white;
+        padding: 0.4rem 1rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3); /* Subtle green glow */
+        animation: pulse 2s ease-in-out infinite; /* Gentle pulsing animation */
+    }
+
+    /* Pulsing dot before "Live" text */
+    .liveDot {
+        width: 8px;
+        height: 8px;
+        background: white;
+        border-radius: 50%;
+        animation: blink 1.5s ease-in-out infinite; /* Blinking animation */
+    }
+
+    /* Pulse animation for the badge - subtle scale effect */
+    @keyframes pulse {
+        0%, 100% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.03);
+        }
+    }
+
+    /* Blink animation for the dot - fades in and out */
+    @keyframes blink {
+        0%, 100% {
+            opacity: 1;
+        }
+        50% {
+            opacity: 0.4;
+        }
+    }
+}

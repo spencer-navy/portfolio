@@ -237,9 +237,11 @@ export default function Projects() {
             id: 'proj_005',
             title: 'Real-Time Event Analytics Pipeline',
             description: 'Event tracking system that captures user interactions across the portfolio site and stores behavioral data in MongoDB. Built with a flexible NoSQL schema designed to support future machine learning recommendation features.',
-            techIds: ['mongodb', 'data-engineering', 'nosql', 'nextjs', 'nodejs']
+            techIds: ['mongodb', 'data-engineering', 'nosql', 'nextjs', 'nodejs'],
             // Auto-computed: displayTags = ['MongoDB', 'Data Engineering', 'NoSQL']
             // Auto-computed: filterTags = ['sql', 'data-eng']
+            link: '/projects/real-time-event-analytics',
+            isLive: true  // ADD THIS LINE - marks this project as live
         }
     ];
 
@@ -447,9 +449,26 @@ export default function Projects() {
                                 <div 
                                     key={project.id}  // Unique key for React
                                     className={styles.projectCard}
-                                    onClick={() => handleProjectClick(project.title, project.id)}  // Track clicks
+                                    onClick={() => {
+                                        handleProjectClick(project.title, project.id);
+                                        // If project has a detail page, navigate to it
+                                        if (project.link) {
+                                            window.location.href = project.link;
+                                        }
+                                    }}
+                                    style={project.link ? { cursor: 'pointer' } : {}}  // Show clickable cursor if has link     
                                 >
                                     <div className={styles.projectContent}>
+                                        {/* Add Live badge at the top if project has isLive flag */}
+                                        {project.isLive && (
+                                            <div style={{marginBottom: '1rem'}}>
+                                                <span className={styles.liveBadge}>
+                                                    <span className={styles.liveDot}></span>
+                                                    Live Now
+                                                </span>
+                                            </div>
+                                        )}
+
                                         <h3 className={styles.projectTitle}>{project.title}</h3>
                                         <p className={styles.projectDescription}>
                                             {project.description}
