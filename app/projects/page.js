@@ -16,94 +16,305 @@ export default function Projects() {
     const filters = [
         { id: 'all', label: 'All' },
         { id: 'python', label: 'Python' },
+        { id: 'js', label: 'JavaScript' },
         { id: 'tableau', label: 'Tableau' },
-        { id: 'sql', label: 'SQL' },
+        { id: 'sql', label: 'SQL/NoSQL' },
         { id: 'ml', label: 'Machine Learning' },
-        { id: 'gis', label: 'GIS' }
+        { id: 'gis', label: 'Geospatial' },
+        { id: 'data-eng', label: 'Data Engineering' }
     ];
 
-    // Define all projects with their metadata
+    // SINGLE SOURCE OF TRUTH: Technology Registry
+    // Define each technology ONCE with:
+    // - display: what users see on the card (e.g., 'TensorFlow')
+    // - filters: which filter buttons should show projects with this tech
+    //
+    // When you add a new technology, add ONE entry here
+    // Then use lowercase IDs in your projects: techIds: ['mongodb', 'python']
+    const techRegistry = {
+        // Databases
+        'mongodb': {
+            display: 'MongoDB',
+            filters: ['sql', 'data-eng']
+        },
+        'sql': {
+            display: 'SQL',
+            filters: ['sql', 'data-eng']
+        },
+        'postgresql': {
+            display: 'PostgreSQL',
+            filters: ['sql', 'data-eng']
+        },
+        'mysql': {
+            display: 'MySQL',
+            filters: ['sql', 'data-eng']
+        },
+        'nosql': {
+            display: 'NoSQL',
+            filters: ['sql', 'data-eng']
+        },
+        
+        // Programming Languages
+        'python': {
+            display: 'Python',
+            filters: ['python']
+        },
+        'javascript': {
+            display: 'JavaScript',
+            filters: ['js']
+        },
+        'typescript': {
+            display: 'TypeScript',
+            filters: ['js']
+        },
+        'r': {
+            display: 'R',
+            filters: ['ml']
+        },
+        
+        // JavaScript Frameworks & Libraries
+        'nodejs': {
+            display: 'Node.js',
+            filters: ['js']
+        },
+        'nextjs': {
+            display: 'Next.js',
+            filters: ['js']
+        },
+        'react': {
+            display: 'React',
+            filters: ['js']
+        },
+        
+        // Visualization Tools
+        'tableau': {
+            display: 'Tableau',
+            filters: ['tableau']
+        },
+        'matplotlib': {
+            display: 'Matplotlib',
+            filters: ['python']
+        },
+        'seaborn': {
+            display: 'Seaborn',
+            filters: ['python']
+        },
+        'plotly': {
+            display: 'Plotly Dash',
+            filters: ['python']
+        },
+        
+        // ML Frameworks
+        'tensorflow': {
+            display: 'TensorFlow',
+            filters: ['ml', 'python']
+        },
+        'pytorch': {
+            display: 'PyTorch',
+            filters: ['ml', 'python']
+        },
+        'scikit-learn': {
+            display: 'scikit-learn',
+            filters: ['ml', 'python']
+        },
+        'statistical-modeling': {
+            display: 'Statistical Modeling',
+            filters: ['ml']
+        },
+        
+        // Geospatial
+        'gis': {
+            display: 'GIS',
+            filters: ['gis', 'data-eng']
+        },
+        'geoserver': {
+            display: 'GeoServer',
+            filters: ['gis', 'data-eng']
+        },
+        
+        // Data Engineering
+        'etl': {
+            display: 'ETL',
+            filters: ['data-eng']
+        },
+        'data-engineering': {
+            display: 'Data Engineering',
+            filters: ['data-eng']
+        },
+        'data-pipeline': {
+            display: 'Data Pipeline',
+            filters: ['data-eng']
+        }
+    };
+
+    // Helper function: Takes lowercase tech IDs and returns formatted display names
+    // Example: ['mongodb', 'python'] → ['MongoDB', 'Python']
+    //
+    // How it works:
+    // 1. Loop through each tech ID
+    // 2. Look it up in techRegistry to get the display name
+    // 3. The "?." is optional chaining - safely handles missing tech IDs
+    // 4. filter(Boolean) removes any undefined values (if a tech ID doesn't exist)
+    const computeDisplayTags = (techIds) => {
+        return techIds
+            .map(techId => techRegistry[techId]?.display)  // Look up display name
+            .filter(Boolean);  // Remove undefined values
+    };
+
+    // Helper function: Takes lowercase tech IDs and returns filter IDs
+    // Example: ['mongodb', 'python'] → ['sql', 'data-eng', 'python']
+    //
+    // How it works:
+    // 1. Create a Set to automatically avoid duplicate filter IDs
+    // 2. Loop through each tech ID
+    // 3. Look it up in techRegistry to get its filter IDs
+    // 4. Add all filter IDs to the Set
+    // 5. Convert Set back to array
+    const computeFilterTags = (techIds) => {
+        const filterTags = new Set();  // Use Set to automatically avoid duplicates
+        
+        techIds.forEach(techId => {
+            // Look up this tech in the registry
+            const tech = techRegistry[techId];
+            
+            // If tech exists and has filters defined
+            if (tech && tech.filters) {
+                // Add all its filter IDs to the set
+                // Example: If tech.filters is ['ml', 'python'], add both to set
+                tech.filters.forEach(filterId => filterTags.add(filterId));
+            }
+        });
+        
+        // Convert Set to array and return
+        // Set automatically removed any duplicates
+        return Array.from(filterTags);
+    };
+
+    // Define all projects using ONLY lowercase tech IDs
+    // displayTags and filterTags are computed automatically from techRegistry
+    //
     // Each project has:
     // - id: unique identifier for tracking
     // - title: project name
     // - description: what the project does
-    // - tags: lowercase filter IDs this project matches (used for filtering)
-    // - displayTags: formatted tags shown to users (can be different from filter names)
-    const allProjects = [
+    // - techIds: lowercase technology identifiers (e.g., ['mongodb', 'python'])
+    // - displayTags: (auto-computed) formatted names shown on card
+    // - tags: (auto-computed) filter IDs that determine which filters show this project
+    const rawProjects = [
         {
             id: 'proj_001',
             title: 'Marketing Analytics Dashboard',
             description: 'Interactive dashboard analyzing customer behavior and campaign performance using Python and Tableau.',
-            tags: ['python', 'tableau', 'sql'],  // Matches 'python', 'tableau', 'sql' filters
-            displayTags: ['Python', 'Tableau', 'SQL']  // What user sees as tags
+            techIds: ['python', 'tableau', 'sql', 'postgresql']
+            // Auto-computed: displayTags = ['Python', 'Tableau', 'SQL', 'PostgreSQL']
+            // Auto-computed: filterTags = ['python', 'tableau', 'sql', 'data-eng']
         },
         {
             id: 'proj_002',
             title: 'Geospatial ML Pipeline',
             description: 'Automated pipeline for satellite imagery classification supporting national security objectives.',
-            tags: ['python', 'ml', 'gis'],  // Matches 'python', 'ml', 'gis' filters
-            displayTags: ['Python', 'TensorFlow', 'GIS']
+            techIds: ['python', 'tensorflow', 'gis']
+            // Auto-computed: displayTags = ['Python', 'TensorFlow', 'GIS']
+            // Auto-computed: filterTags = ['python', 'ml', 'gis', 'data-eng']
         },
         {
             id: 'proj_003',
             title: 'Statistical Learning Models',
             description: 'Applied GAMs, SVMs, and tree-based methods for predictive modeling and analysis.',
-            tags: ['ml'],  // Only matches 'ml' filter
-            displayTags: ['R', 'Statistical Modeling']
+            techIds: ['statistical-modeling']
+            // Auto-computed: displayTags = ['Statistical Modeling']
+            // Auto-computed: filterTags = ['ml']
         },
         {
             id: 'proj_004',
             title: 'Data Engineering Pipeline',
             description: 'Scalable ETL pipeline processing geospatial data with OGC standards and OpenShift deployment.',
-            tags: ['python', 'sql', 'gis'],  // Matches 'python', 'sql', 'gis' filters
-            displayTags: ['Python', 'SQL', 'GeoServer']
+            techIds: ['python', 'sql']
+            // Auto-computed: displayTags = ['Python', 'SQL']
+            // Auto-computed: filterTags = ['python', 'sql', 'data-eng']
+        },
+        {
+            id: 'proj_005',
+            title: 'Real-Time Event Analytics Pipeline',
+            description: 'Event tracking system that captures user interactions across the portfolio site and stores behavioral data in MongoDB. Built with a flexible NoSQL schema designed to support future machine learning recommendation features.',
+            techIds: ['mongodb', 'data-engineering', 'nosql', 'nextjs', 'nodejs']
+            // Auto-computed: displayTags = ['MongoDB', 'Data Engineering', 'NoSQL']
+            // Auto-computed: filterTags = ['sql', 'data-eng']
         }
     ];
 
-    // Define all visualizations with their metadata
-    // Structure is similar to projects but simpler (fewer fields)
-    const allVisualizations = [
+    // Process raw projects: add computed displayTags and filterTags
+    // The spread operator (...) copies all existing fields
+    // Then we add two new computed fields based on techIds
+    //
+    // Example transformation:
+    // Input:  { id: 'proj_005', title: '...', techIds: ['mongodb', 'python'] }
+    // Output: { id: 'proj_005', title: '...', techIds: ['mongodb', 'python'], 
+    //           displayTags: ['MongoDB', 'Python'], tags: ['sql', 'data-eng', 'python'] }
+    const allProjects = rawProjects.map(project => ({
+        ...project,  // Copy all existing fields (id, title, description, techIds)
+        displayTags: computeDisplayTags(project.techIds),  // Add computed display tags
+        tags: computeFilterTags(project.techIds)  // Add computed filter tags
+    }));
+
+    // Define all visualizations using ONLY lowercase tech IDs
+    // Visualizations have techIds for filtering but DON'T display them as badges on cards
+    // They're still used to determine which filters show the visualization
+    const rawVisualizations = [
         {
             id: 'viz_001',
             title: 'Sales Performance Dashboard',
             description: 'Interactive Tableau dashboard tracking KPIs',
-            tags: ['tableau']  // Only matches 'tableau' filter
+            techIds: ['tableau']
+            // Auto-computed: filterTags = ['tableau']
         },
         {
             id: 'viz_002',
             title: 'Customer Segmentation Analysis',
             description: 'Python-based clustering visualization',
-            tags: ['python', 'ml']  // Matches 'python' and 'ml' filters
+            techIds: ['python', 'scikit-learn']
+            // Auto-computed: filterTags = ['python', 'ml']
         },
         {
             id: 'viz_003',
             title: 'Geospatial Heatmap',
             description: 'Geographic data distribution analysis',
-            tags: ['python', 'gis']  // Matches 'python' and 'gis' filters
+            techIds: ['python', 'gis']
+            // Auto-computed: filterTags = ['python', 'gis', 'data-eng']
         },
         {
             id: 'viz_004',
             title: 'Time Series Forecasting',
             description: 'Predictive analytics dashboard',
-            tags: ['python', 'ml']  // Matches 'python' and 'ml' filters
+            techIds: ['python', 'statistical-modeling']
+            // Auto-computed: filterTags = ['python', 'ml']
         },
         {
             id: 'viz_005',
             title: 'Network Graph Analysis',
             description: 'Relationship mapping visualization',
-            tags: ['python']  // Only matches 'python' filter
+            techIds: ['python']
+            // Auto-computed: filterTags = ['python']
         },
         {
             id: 'viz_006',
             title: 'Statistical Model Results',
-            description: 'R-based statistical visualization',
-            tags: ['ml']  // Only matches 'ml' filter
+            description: 'Python-based statistical visualization',
+            techIds: ['statistical-modeling', 'python']
+            // Auto-computed: filterTags = ['ml', 'python']
         }
     ];
 
+    // Process visualizations: add computed filterTags
+    // (displayTags also computed but not used in visualization rendering)
+    const allVisualizations = rawVisualizations.map(viz => ({
+        ...viz,  // Copy all existing fields
+        tags: computeFilterTags(viz.techIds)  // Add computed filter tags
+    }));
+
     // Filter projects based on which filter button is active
     // If activeFilter is 'all', show everything
-    // Otherwise, only show projects where the tags array includes the activeFilter
+    // Otherwise, only show projects where the computed tags array includes the activeFilter
     // Example: if activeFilter is 'python', only show projects with 'python' in their tags array
     const filteredProjects = activeFilter === 'all' 
         ? allProjects  // Show all projects
@@ -124,7 +335,7 @@ export default function Projects() {
         
         // Count projects that match this filter
         // If filter is 'all', count all projects
-        // Otherwise, count only projects that have this filterId in their tags
+        // Otherwise, count only projects that have this filterId in their computed tags
         const projectCount = filterId === 'all' 
             ? allProjects.length 
             : allProjects.filter(p => p.tags.includes(filterId)).length;
@@ -206,7 +417,7 @@ export default function Projects() {
                     <section className={styles.hero}>
                         <h1 className={styles.heroTitle}>Projects</h1>
                         <p className={styles.heroSubtitle}>
-                            Showcasing data science, machine learning, and analytics work
+                            Coming soon: In-depth case studies on data science, machine learning, and analytics projects
                         </p>
                     </section>
 
@@ -245,7 +456,8 @@ export default function Projects() {
                                         </p>
                                         {/* Display tags for this project */}
                                         <div className={styles.tags}>
-                                            {/* Map over displayTags to create a span for each tag */}
+                                            {/* Map over computed displayTags to create a span for each tag */}
+                                            {/* displayTags were auto-computed from techIds via techRegistry */}
                                             {project.displayTags.map(tag => (
                                                 <span key={tag} className={styles.tag}>{tag}</span>
                                             ))}
@@ -276,6 +488,7 @@ export default function Projects() {
                                     <div className={styles.vizInfo}>
                                         <h3 className={styles.vizTitle}>{viz.title}</h3>
                                         <p className={styles.vizDescription}>{viz.description}</p>
+                                        {/* Visualizations don't display tech badges - only used for filtering */}
                                     </div>
                                 </div>
                             ))}
