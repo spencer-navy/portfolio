@@ -1,20 +1,22 @@
-'use client'; // Required directive for components that use interactive features like onClick
+'use client';
 
 import { useEffect } from 'react';
 import Link from 'next/link';
 import Navigation from '../components/Navigation';
 import styles from './Home.module.css';
-import { event } from '@/lib/gtag'; // Import the Google Analytics event tracking function
-import { trackEvent } from '@/lib/trackEvent'; // Import MongoDB tracking
+import { event } from '@/lib/gtag';
+import { trackEvent } from '@/lib/trackEvent';
+
+// ADD THIS LINE - Forces dynamic rendering
+export const dynamic = 'force-dynamic';
 
 export default function Home() {
-  // Track page view when component mounts
   useEffect(() => {
     trackEvent('page_view', {
       page: 'homepage'
     });
   }, []);
-
+  
   // Track when user clicks "View Resume" button
   const handleViewResume = () => {
     event({

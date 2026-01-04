@@ -6,6 +6,9 @@ import styles from './Projects.module.css';
 import { event } from '@/lib/gtag'; // Keep Google Analytics
 import { trackEvent } from '@/lib/trackEvent'; // Add MongoDB tracking
 
+// ADD THIS LINE - Forces dynamic rendering
+export const dynamic = 'force-dynamic';
+
 export default function Projects() {
     // Track page view when component mounts
     useEffect(() => {

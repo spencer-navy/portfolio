@@ -5,6 +5,9 @@ import Navigation from '../../../components/Navigation';
 import styles from './RealTimeAnalytics.module.css';
 import { trackEvent } from '@/lib/trackEvent';
 
+// ADD THIS LINE - Forces dynamic rendering
+export const dynamic = 'force-dynamic';
+
 export default function RealTimeEventAnalytics() {
     // Track page entry time for "time on page" calculation
     const entryTime = useRef(Date.now());
