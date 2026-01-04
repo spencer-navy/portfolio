@@ -1,12 +1,19 @@
 'use client'
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Navigation from '../../components/Navigation';
 import styles from './Projects.module.css';
 import { event } from '@/lib/gtag'; // Keep Google Analytics
 import { trackEvent } from '@/lib/trackEvent'; // Add MongoDB tracking
 
 export default function Projects() {
+    // Track page view when component mounts
+    useEffect(() => {
+        trackEvent('page_view', {
+            page: 'projects'
+        });
+    }, []);
+
     // State to track which filter button is currently active
     // Starts with 'all' to show everything by default
     const [activeFilter, setActiveFilter] = useState('all');

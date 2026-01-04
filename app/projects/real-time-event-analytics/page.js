@@ -7,34 +7,30 @@ import { trackEvent } from '@/lib/trackEvent';
 
 export default function RealTimeEventAnalytics() {
     // Track page entry time for "time on page" calculation
-    // useRef persists across re-renders without triggering re-renders
     const entryTime = useRef(Date.now());
     
     // Track maximum scroll depth reached (0-100%)
     const [maxScrollDepth, setMaxScrollDepth] = useState(0);
     
     // Track which scroll milestones have been viewed (25%, 50%, 75%, 100%)
-    // useRef because we don't need to re-render when this changes
     const viewedSections = useRef(new Set());
 
     // Track page view when component mounts
-    // useEffect with empty dependency array [] runs once when component loads
-    // This captures that someone viewed this project detail page
     useEffect(() => {
         trackEvent('page_view', {
             projectId: 'proj_005',
-            projectTitle: 'Real-Time Event Analytics Pipeline'
+            projectTitle: 'Real-Time Event Analytics Pipeline',
+            page: 'project-detail'
         });
-    }, []); // Empty array means run once on mount
+    }, []);
 
     // Track scroll depth and section visibility
-    // This useEffect sets up a scroll listener that tracks how far users scroll
     useEffect(() => {
         const handleScroll = () => {
             // Calculate scroll depth as percentage (0-100)
-            const windowHeight = window.innerHeight; // Height of visible viewport
-            const documentHeight = document.documentElement.scrollHeight; // Total page height
-            const scrollTop = window.scrollY; // Current scroll position from top
+            const windowHeight = window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight;
+            const scrollTop = window.scrollY;
             const scrollDepth = Math.round((scrollTop / (documentHeight - windowHeight)) * 100);
             
             // Update max scroll depth if user scrolled further than before
@@ -43,12 +39,10 @@ export default function RealTimeEventAnalytics() {
             }
 
             // Track milestone scroll depths (25%, 50%, 75%, 100%)
-            // This tells us if users read the whole page or bounce early
             const milestones = [25, 50, 75, 100];
             milestones.forEach(milestone => {
-                // Only fire event once per milestone (check if not already viewed)
                 if (scrollDepth >= milestone && !viewedSections.current.has(milestone)) {
-                    viewedSections.current.add(milestone); // Mark as viewed
+                    viewedSections.current.add(milestone);
                     trackEvent('scroll_milestone', {
                         projectId: 'proj_005',
                         milestone: `${milestone}%`,
@@ -58,85 +52,70 @@ export default function RealTimeEventAnalytics() {
             });
         };
 
-        // Add scroll listener when component mounts
         window.addEventListener('scroll', handleScroll);
-        
-        // Cleanup: remove listener when component unmounts to prevent memory leaks
         return () => window.removeEventListener('scroll', handleScroll);
-    }, [maxScrollDepth]); // Re-run if maxScrollDepth changes
+    }, [maxScrollDepth]);
 
-    // Track time on page when user leaves
-    // This captures how long someone spent reading this project page
+    // Track time on page when user leaves - FIXED VERSION
     useEffect(() => {
         const handleBeforeUnload = () => {
-            // Calculate time spent on page in seconds
             const timeOnPage = Math.round((Date.now() - entryTime.current) / 1000);
             
-            // Use sendBeacon for reliable tracking on page exit
-            // sendBeacon ensures the request completes even if the page is closing
-            // Regular fetch() would be cancelled when the page unloads
+            // FIXED: Use Blob with correct content type for sendBeacon
             const eventData = {
                 eventType: 'page_exit',
                 page: window.location.pathname,
                 sessionId: sessionStorage.getItem('analytics_session_id'),
                 metadata: {
                     projectId: 'proj_005',
-                    timeOnPage: timeOnPage, // How many seconds they spent
-                    maxScrollDepth: maxScrollDepth // How far they scrolled
+                    timeOnPage: timeOnPage,
+                    maxScrollDepth: maxScrollDepth
                 }
             };
             
-            // sendBeacon sends data reliably even during page unload
-            navigator.sendBeacon('/api/events', JSON.stringify(eventData));
+            // Create Blob with application/json type - this is CRITICAL
+            const blob = new Blob([JSON.stringify(eventData)], {
+                type: 'application/json'
+            });
+            
+            navigator.sendBeacon('/api/events', blob);
         };
 
-        // Listen for page unload (user closing tab, navigating away, etc.)
         window.addEventListener('beforeunload', handleBeforeUnload);
-        
-        // Cleanup listener on component unmount
         return () => window.removeEventListener('beforeunload', handleBeforeUnload);
-    }, [maxScrollDepth]); // Include maxScrollDepth so we send the latest value
+    }, [maxScrollDepth]);
 
     // Handle CTA button clicks
-    // Tracks which call-to-action buttons users click and when
     const handleCTAClick = (ctaName, ctaUrl) => {
         trackEvent('cta_click', {
             projectId: 'proj_005',
-            ctaName: ctaName, // "View All Projects" or "View on GitHub"
-            ctaUrl: ctaUrl, // Where the button leads
-            timeBeforeClick: Math.round((Date.now() - entryTime.current) / 1000) // How long before they clicked
+            ctaName: ctaName,
+            ctaUrl: ctaUrl,
+            timeBeforeClick: Math.round((Date.now() - entryTime.current) / 1000)
         });
     };
 
     return (
         <>
-            {/* Navigation component - reused across all pages for consistency */}
             <Navigation />
             
-            {/* Main content wrapper - applies background gradient and spacing */}
             <main className={styles.main}>
-                {/* Container constrains content width and centers it */}
                 <div className={styles.container}>
                     
                     {/* ===== HERO SECTION ===== */}
-                    {/* Top section with breadcrumb, title, subtitle, and tech tags */}
                     <section className={styles.hero}>
-                        {/* Breadcrumb navigation shows user where they are in site hierarchy */}
                         <div className={styles.breadcrumb}>
                             <a href="/projects" className={styles.breadcrumbLink}>Projects</a>
                             <span className={styles.breadcrumbSeparator}>/</span>
                             <span className={styles.breadcrumbCurrent}>Real-Time Event Analytics Pipeline</span>
                         </div>
                         
-                        {/* Main page title - large, serif font for impact */}
                         <h1 className={styles.title}>Real-Time Event Analytics Pipeline</h1>
                         
-                        {/* Subtitle provides one-line project description */}
                         <p className={styles.subtitle}>
                             Production-ready event tracking infrastructure capturing user behavior for analytics and future ML-powered recommendations
                         </p>
                         
-                        {/* Technology tags - visual indicators of tech stack */}
                         <div className={styles.tags}>
                             <span className={styles.tag}>MongoDB</span>
                             <span className={styles.tag}>Node.js</span>
@@ -147,11 +126,9 @@ export default function RealTimeEventAnalytics() {
                     </section>
 
                     {/* ===== OVERVIEW SECTION ===== */}
-                    {/* High-level introduction to the project */}
                     <section className={styles.section}>
                         <h2 className={styles.sectionTitle}>Overview</h2>
                         
-                        {/* First paragraph explains what the system does */}
                         <p className={styles.text}>
                             This portfolio site includes a sophisticated event tracking system that captures every user 
                             interaction—from project filter clicks to scrolling down my book list — and stores them 
@@ -160,7 +137,6 @@ export default function RealTimeEventAnalytics() {
                             future machine learning applications.
                         </p>
                         
-                        {/* Second paragraph explains the value proposition */}
                         <p className={styles.text}>
                             Unlike basic analytics solutions, by building this website from scratch using Next.js (React), this end-to-end system 
                             gives me complete control over the data pipeline, enabling custom feature engineering and recommendation algorithms 
@@ -169,20 +145,16 @@ export default function RealTimeEventAnalytics() {
                     </section>
 
                     {/* ===== PROBLEM & SOLUTION SECTION ===== */}
-                    {/* Two-column grid showing the challenge and how it was solved */}
                     <section className={styles.section}>
                         <h2 className={styles.sectionTitle}>Problem & Solution</h2>
                         
-                        {/* Grid layout creates two equal columns on desktop, stacks on mobile */}
                         <div className={styles.grid}>
-                            {/* Left card: The Challenge */}
                             <div className={styles.card}>
                                 <h3 className={styles.cardTitle}>The Challenge</h3>
                                 <p className={styles.text}>
                                     Standard analytics tools like Google Analytics provide high-level metrics but lack the granular, 
                                     structured data needed for ML applications. I needed a system that could:
                                 </p>
-                                {/* Bulleted list of requirements */}
                                 <ul className={styles.list}>
                                     <li>Capture detailed interaction data (which filters users apply, which projects they view)</li>
                                     <li>Store data in a queryable format for feature engineering</li>
@@ -191,13 +163,11 @@ export default function RealTimeEventAnalytics() {
                                 </ul>
                             </div>
                             
-                            {/* Right card: The Solution */}
                             <div className={styles.card}>
                                 <h3 className={styles.cardTitle}>The Solution</h3>
                                 <p className={styles.text}>
                                     I built a custom event tracking pipeline using Next.js API routes and MongoDB that:
                                 </p>
-                                {/* Bulleted list of solution features */}
                                 <ul className={styles.list}>
                                     <li>Captures client-side events via lightweight JavaScript utility</li>
                                     <li>Enriches data server-side with IP geolocation, timestamps, and user agent info</li>
@@ -209,26 +179,19 @@ export default function RealTimeEventAnalytics() {
                     </section>
 
                     {/* ===== TECHNICAL ARCHITECTURE SECTION ===== */}
-                    {/* Visual flow diagram showing data journey from client to database */}
                     <section className={styles.section}>
                         <h2 className={styles.sectionTitle}>Technical Architecture</h2>
                         
-                        {/* Horizontal flow diagram with numbered steps and arrows */}
-                        {/* Each flowStep represents one stage in the data pipeline */}
                         <div className={styles.architectureFlow}>
-                            {/* Step 1: Client captures event */}
                             <div className={styles.flowStep}>
                                 <div className={styles.flowNumber}>1</div>
                                 <h4>Client-Side Capture</h4>
                                 <p className={styles.smallText}>User interacts with site (clicks filter, views project)</p>
-                                {/* Inline code shows the actual function call */}
                                 <code className={styles.inlineCode}>trackEvent(&apos;filter_click&apos;, metadata)</code>
                             </div>
                             
-                            {/* Arrow between steps - rotates to vertical on mobile */}
                             <div className={styles.flowArrow}>→</div>
                             
-                            {/* Step 2: API route receives and processes */}
                             <div className={styles.flowStep}>
                                 <div className={styles.flowNumber}>2</div>
                                 <h4>API Route</h4>
@@ -238,7 +201,6 @@ export default function RealTimeEventAnalytics() {
                             
                             <div className={styles.flowArrow}>→</div>
                             
-                            {/* Step 3: Data stored in MongoDB */}
                             <div className={styles.flowStep}>
                                 <div className={styles.flowNumber}>3</div>
                                 <h4>MongoDB Atlas</h4>
@@ -248,7 +210,6 @@ export default function RealTimeEventAnalytics() {
                             
                             <div className={styles.flowArrow}>→</div>
                             
-                            {/* Step 4: Future ML application */}
                             <div className={styles.flowStep}>
                                 <div className={styles.flowNumber}>4</div>
                                 <h4>Future: ML Pipeline</h4>
@@ -259,17 +220,13 @@ export default function RealTimeEventAnalytics() {
                     </section>
 
                     {/* ===== COMPLETE TECH STACK SECTION ===== */}
-                    {/* Breaks down all technologies used in the entire site */}
                     <section className={styles.section}>
                         <h2 className={styles.sectionTitle}>Complete Technology Stack</h2>
                         <p className={styles.text}>
                             The event tracking system is built on top of a modern full-stack web application. Here&apos;s the complete technology stack powering this portfolio site:
                         </p>
                         
-                        {/* 2x2 grid showing different layers of the stack */}
-                        {/* Grid automatically adjusts to single column on mobile */}
                         <div className={styles.grid}>
-                            {/* Frontend technologies */}
                             <div className={styles.card}>
                                 <h3 className={styles.cardTitle}>Frontend Layer</h3>
                                 <ul className={styles.list}>
@@ -280,7 +237,6 @@ export default function RealTimeEventAnalytics() {
                                 </ul>
                             </div>
                             
-                            {/* Backend/server technologies */}
                             <div className={styles.card}>
                                 <h3 className={styles.cardTitle}>Backend Layer</h3>
                                 <ul className={styles.list}>
@@ -290,7 +246,6 @@ export default function RealTimeEventAnalytics() {
                                 </ul>
                             </div>
                             
-                            {/* Database and data storage */}
                             <div className={styles.card}>
                                 <h3 className={styles.cardTitle}>Data Layer</h3>
                                 <ul className={styles.list}>
@@ -301,7 +256,6 @@ export default function RealTimeEventAnalytics() {
                                 </ul>
                             </div>
                             
-                            {/* Deployment infrastructure */}
                             <div className={styles.card}>
                                 <h3 className={styles.cardTitle}>Deployment & Hosting</h3>
                                 <ul className={styles.list}>
@@ -314,21 +268,17 @@ export default function RealTimeEventAnalytics() {
                     </section>
 
                     {/* ===== DETAILED ARCHITECTURE SECTION ===== */}
-                    {/* Step-by-step breakdown of exactly what happens during an event */}
                     <section className={styles.section}>
                         <h2 className={styles.sectionTitle}>Detailed Architecture</h2>
                         <p className={styles.text}>
                             This diagram shows the complete data flow from user interaction to database storage, including all intermediate processing steps:
                         </p>
                         
-                        {/* Single card containing the detailed flow */}
-                        {/* Inline styles used here for one-off spacing adjustments */}
                         <div className={styles.card} style={{padding: '2.5rem', marginTop: '2rem'}}>
                             <h4 style={{marginBottom: '1.5rem', fontSize: '1.2rem', color: '#2c352b'}}>
                                 User Interaction → Data Storage Flow
                             </h4>
                             
-                            {/* Step 1: Client-side event capture */}
                             <div style={{marginBottom: '2rem'}}>
                                 <strong style={{color: '#5a6b58'}}>1. Client-Side Event Capture</strong>
                                 <ul className={styles.list} style={{marginTop: '0.5rem'}}>
@@ -339,7 +289,6 @@ export default function RealTimeEventAnalytics() {
                                 </ul>
                             </div>
                             
-                            {/* Step 2: HTTP request to API */}
                             <div style={{marginBottom: '2rem'}}>
                                 <strong style={{color: '#5a6b58'}}>2. HTTP Request to API</strong>
                                 <ul className={styles.list} style={{marginTop: '0.5rem'}}>
@@ -350,7 +299,6 @@ export default function RealTimeEventAnalytics() {
                                 </ul>
                             </div>
                             
-                            {/* Step 3: API route processing */}
                             <div style={{marginBottom: '2rem'}}>
                                 <strong style={{color: '#5a6b58'}}>3. Next.js API Route Processing</strong>
                                 <ul className={styles.list} style={{marginTop: '0.5rem'}}>
@@ -362,7 +310,6 @@ export default function RealTimeEventAnalytics() {
                                 </ul>
                             </div>
                             
-                            {/* Step 4: MongoDB connection */}
                             <div style={{marginBottom: '2rem'}}>
                                 <strong style={{color: '#5a6b58'}}>4. MongoDB Connection</strong>
                                 <ul className={styles.list} style={{marginTop: '0.5rem'}}>
@@ -373,7 +320,6 @@ export default function RealTimeEventAnalytics() {
                                 </ul>
                             </div>
                             
-                            {/* Step 5: Data persistence */}
                             <div>
                                 <strong style={{color: '#5a6b58'}}>5. Data Persistence</strong>
                                 <ul className={styles.list} style={{marginTop: '0.5rem'}}>
@@ -387,13 +333,10 @@ export default function RealTimeEventAnalytics() {
                     </section>
 
                     {/* ===== KEY FEATURES SECTION ===== */}
-                    {/* Grid of feature cards highlighting important design decisions */}
                     <section className={styles.section}>
                         <h2 className={styles.sectionTitle}>Key Features</h2>
                         
-                        {/* Features grid - automatically responsive */}
                         <div className={styles.features}>
-                            {/* Feature 1: Flexible schema */}
                             <div className={styles.feature}>
                                 <h3 className={styles.featureTitle}>🎯 Flexible NoSQL Schema</h3>
                                 <p className={styles.text}>
@@ -401,7 +344,6 @@ export default function RealTimeEventAnalytics() {
                                 </p>
                             </div>
                             
-                            {/* Feature 2: Server-side enrichment */}
                             <div className={styles.feature}>
                                 <h3 className={styles.featureTitle}>🔒 Server-Side Enrichment</h3>
                                 <p className={styles.text}>
@@ -409,7 +351,6 @@ export default function RealTimeEventAnalytics() {
                                 </p>
                             </div>
                             
-                            {/* Feature 3: Session tracking */}
                             <div className={styles.feature}>
                                 <h3 className={styles.featureTitle}>📊 Session Tracking</h3>
                                 <p className={styles.text}>
@@ -417,7 +358,6 @@ export default function RealTimeEventAnalytics() {
                                 </p>
                             </div>
                             
-                            {/* Feature 4: ML-ready design */}
                             <div className={styles.feature}>
                                 <h3 className={styles.featureTitle}>🤖 ML-Ready Design</h3>
                                 <p className={styles.text}>
@@ -428,14 +368,10 @@ export default function RealTimeEventAnalytics() {
                     </section>
 
                     {/* ===== IMPLEMENTATION HIGHLIGHTS SECTION ===== */}
-                    {/* Shows actual code snippets with explanations */}
                     <section className={styles.section}>
                         <h2 className={styles.sectionTitle}>Implementation Highlights</h2>
                         
-                        {/* Subsection 1: Client-side tracking utility */}
                         <h3 className={styles.subsectionTitle}>Event Tracking Utility</h3>
-                        {/* Code block showing the trackEvent function */}
-                        {/* Pre-formatted text preserves spacing and line breaks */}
                         <pre className={styles.codeBlock}>
 {`// lib/trackEvent.js - Client-side tracking utility
 export async function trackEvent(eventType, metadata = {}) {
@@ -456,9 +392,7 @@ export async function trackEvent(eventType, metadata = {}) {
 }`}
                         </pre>
 
-                        {/* Subsection 2: Server-side API route */}
                         <h3 className={styles.subsectionTitle}>Server-Side API Route</h3>
-                        {/* Code block showing the API route handler */}
                         <pre className={styles.codeBlock}>
 {`// app/api/events/route.js - Server enrichment & storage
 export async function POST(request) {
@@ -479,9 +413,7 @@ export async function POST(request) {
 }`}
                         </pre>
 
-                        {/* Subsection 3: MongoDB schema example */}
                         <h3 className={styles.subsectionTitle}>MongoDB Event Schema</h3>
-                        {/* Code block showing example event document structure */}
                         <pre className={styles.codeBlock}>
 {`{
   eventType: "filter_click",
@@ -501,15 +433,12 @@ export async function POST(request) {
                     </section>
 
                     {/* ===== LIVE DATA SECTION ===== */}
-                    {/* Shows that the system is actually running and collecting data */}
                     <section className={styles.section}>
                         <h2 className={styles.sectionTitle}>Live Data Collection</h2>
                         <p className={styles.text}>
                             The system is currently live on this portfolio site, collecting real user interaction data. Every click you make—including viewing this page—is being captured and stored in MongoDB Atlas.
                         </p>
                         
-                        {/* Stats grid showing key metrics */}
-                        {/* Each stat card displays a number and label */}
                         <div className={styles.statsGrid}>
                             <div className={styles.statCard}>
                                 <div className={styles.statNumber}>Real-time</div>
@@ -527,12 +456,9 @@ export async function POST(request) {
                     </section>
 
                     {/* ===== FUTURE ENHANCEMENTS SECTION ===== */}
-                    {/* Roadmap showing planned features */}
                     <section className={styles.section}>
                         <h2 className={styles.sectionTitle}>Future Enhancements</h2>
                         
-                        {/* Vertical list of roadmap items */}
-                        {/* Each item has colored left border for visual hierarchy */}
                         <div className={styles.roadmap}>
                             <div className={styles.roadmapItem}>
                                 <h4>Phase 1: Recommendation Engine</h4>
@@ -556,10 +482,8 @@ export async function POST(request) {
                     </section>
 
                     {/* ===== KEY TAKEAWAYS SECTION ===== */}
-                    {/* Lessons learned from building this system */}
                     <section className={styles.section}>
                         <h2 className={styles.sectionTitle}>Key Takeaways</h2>
-                        {/* Bulleted list of important learnings */}
                         <ul className={styles.list}>
                             <li><strong>Design for evolution:</strong> The flexible NoSQL schema allows adding new event types without breaking existing data</li>
                             <li><strong>Server-side validation matters:</strong> Client data can&apos;t be trusted—server enrichment ensures accuracy</li>
@@ -569,7 +493,6 @@ export async function POST(request) {
                     </section>
 
                     {/* ===== CLOSING CTA SECTION ===== */}
-                    {/* Encourages users to explore more projects - WITH TRACKING */}
                     <section className={styles.section} style={{textAlign: 'center', paddingTop: '3rem', paddingBottom: '4rem'}}>
                         <div style={{
                             background: 'white',
@@ -586,7 +509,6 @@ export async function POST(request) {
                                 This event tracking system is just one example of my work combining data engineering, full-stack development, and machine learning principles. Explore more projects showcasing Python, GIS, statistical modeling, and data visualization.
                             </p>
                             
-                            {/* Two call-to-action buttons - NOW WITH TRACKING */}
                             <div style={{display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap'}}>
                                 <a 
                                     href="/projects" 

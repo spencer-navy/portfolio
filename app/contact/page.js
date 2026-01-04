@@ -1,34 +1,67 @@
 'use client'; // Required directive for components that use interactive features like onClick
 
+import { useEffect } from 'react';
 import Navigation from '../../components/Navigation';
 import styles from './Contact.module.css';
 import { event } from '@/lib/gtag'; // Import the Google Analytics event tracking function
+import { trackEvent } from '@/lib/trackEvent'; // Import MongoDB tracking
 
 export default function Contact() {
+    // Track page view when component mounts
+    useEffect(() => {
+        trackEvent('page_view', {
+            page: 'contact'
+        });
+    }, []);
+
     // Track when user clicks on Email card
     const handleEmailClick = () => {
+        // Google Analytics tracking
         event({
             action: 'contact_click',          // Action: contact method clicked
             category: 'Contact',               // Category: Contact page interactions
             label: 'Email',                    // Label: Email contact method
         });
+        
+        // MongoDB tracking
+        trackEvent('contact_click', {
+            contactMethod: 'email',
+            contactValue: 'abigailspencer.dev@gmail.com',
+            page: 'contact'
+        });
     };
 
     // Track when user clicks on LinkedIn card
     const handleLinkedInClick = () => {
+        // Google Analytics tracking
         event({
             action: 'contact_click',          // Action: contact method clicked
             category: 'Contact',               // Category: Contact page interactions
             label: 'LinkedIn',                 // Label: LinkedIn contact method
         });
+        
+        // MongoDB tracking
+        trackEvent('contact_click', {
+            contactMethod: 'linkedin',
+            contactValue: 'https://www.linkedin.com/in/abigailspencer90',
+            page: 'contact'
+        });
     };
 
     // Track when user clicks on GitHub card
     const handleGitHubClick = () => {
+        // Google Analytics tracking
         event({
             action: 'contact_click',          // Action: contact method clicked
             category: 'Contact',               // Category: Contact page interactions
             label: 'GitHub',                   // Label: GitHub contact method
+        });
+        
+        // MongoDB tracking
+        trackEvent('contact_click', {
+            contactMethod: 'github',
+            contactValue: 'https://github.com/spencer-navy',
+            page: 'contact'
         });
     };
 

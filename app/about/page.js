@@ -1,17 +1,34 @@
 'use client'
 
+import { useEffect } from 'react';
 import Image from 'next/image';
 import Navigation from '../../components/Navigation';
 import styles from './About.module.css';
 import { event } from '@/lib/gtag'; // Import the Google Analytics event tracking function
+import { trackEvent } from '@/lib/trackEvent'; // Import MongoDB tracking
 
 export default function About() {
+    // Track page view when component mounts
+    useEffect(() => {
+        trackEvent('page_view', {
+            page: 'about'
+        });
+    }, []);
+
     // Track when user clicks on a book link
     const handleBookClick = (bookTitle, section) => {
+        // Google Analytics tracking
         event({
             action: 'book_click',               // Action: book link clicked
             category: 'About',                   // Category: About page interactions
             label: `${section}: ${bookTitle}`,  // Label: section and book title
+        });
+        
+        // MongoDB tracking
+        trackEvent('book_click', {
+            bookTitle: bookTitle,
+            section: section,
+            page: 'about'
         });
     };
 
