@@ -4,8 +4,8 @@ import { useEffect } from 'react';
 import Link from 'next/link';
 import Navigation from '../components/Navigation';
 import styles from './Home.module.css';
-import { event } from '@/lib/gtag';
-import { trackEvent } from '@/lib/trackEvent';
+import { event } from '@/lib/gtag'; // Keep Google Analytics
+import { trackEvent } from '@/lib/trackEvent'; // Add MongoDB tracking
 
 // ADD THIS LINE - Forces dynamic rendering
 export const dynamic = 'force-dynamic';
