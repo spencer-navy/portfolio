@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useEffect } from 'react';
@@ -7,14 +8,16 @@ import styles from './Home.module.css';
 import { event } from '@/lib/gtag'; // Keep Google Analytics
 import { trackEvent } from '@/lib/trackEvent'; // Add MongoDB tracking
 
-// ADD THIS LINE - Forces dynamic rendering
-export const dynamic = 'force-dynamic';
-
 export default function Home() {
   useEffect(() => {
-    trackEvent('page_view', {
-      page: 'homepage'
-    });
+    // Only track on the client side, not during build
+    // The trackEvent function already handles client-side checks,
+    // but we add this additional guard for safety
+    if (typeof window !== 'undefined') {
+      trackEvent('page_view', {
+        page: 'homepage'
+      });
+    }
   }, []);
   
   // Track when user clicks "View Resume" button
