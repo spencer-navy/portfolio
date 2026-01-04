@@ -1,23 +1,26 @@
-'use client'
+'use client';
 
 import { useEffect } from 'react';
-import Image from 'next/image';
-import Navigation from '../../components/Navigation';
-import styles from './About.module.css';
-import { event } from '@/lib/gtag'; // Import the Google Analytics event tracking function
-import { trackEvent } from '@/lib/trackEvent'; // Import MongoDB tracking
+import { usePathname } from 'next/navigation'; // ADD THIS
+import Link from 'next/link';
+import Navigation from '../components/Navigation';
+import styles from './Home.module.css';
+import { event } from '@/lib/gtag';
+import { trackEvent } from '@/lib/trackEvent';
 
-// ADD THIS LINE - Forces dynamic rendering
 export const dynamic = 'force-dynamic';
 
-export default function About() {
-    // Track page view when component mounts
-    useEffect(() => {
-        trackEvent('page_view', {
-            page: 'about'
-        });
-    }, []);
-
+export default function Home() {
+  const pathname = usePathname(); // ADD THIS - forces client-side rendering
+  
+  // Track page view when component mounts
+  useEffect(() => {
+    trackEvent('page_view', {
+      page: 'homepage'
+    });
+  }, [pathname]); // Changed dependency to pathname
+  
+  // ... rest of your code
     // Track when user clicks on a book link
     const handleBookClick = (bookTitle, section) => {
         // Google Analytics tracking
