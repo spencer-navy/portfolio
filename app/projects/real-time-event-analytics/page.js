@@ -1,11 +1,22 @@
 'use client'
 
-import { useEffect } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import Navigation from '../../../components/Navigation';
 import styles from './RealTimeAnalytics.module.css';
 import { trackEvent } from '@/lib/trackEvent';
 
 export default function RealTimeEventAnalytics() {
+    // Track page entry time for "time on page" calculation
+    // useRef persists across re-renders without triggering re-renders
+    const entryTime = useRef(Date.now());
+    
+    // Track maximum scroll depth reached (0-100%)
+    const [maxScrollDepth, setMaxScrollDepth] = useState(0);
+    
+    // Track which scroll milestones have been viewed (25%, 50%, 75%, 100%)
+    // useRef because we don't need to re-render when this changes
+    const viewedSections = useRef(new Set());
+
     // Track page view when component mounts
     // useEffect with empty dependency array [] runs once when component loads
     // This captures that someone viewed this project detail page
@@ -15,6 +26,87 @@ export default function RealTimeEventAnalytics() {
             projectTitle: 'Real-Time Event Analytics Pipeline'
         });
     }, []); // Empty array means run once on mount
+
+    // Track scroll depth and section visibility
+    // This useEffect sets up a scroll listener that tracks how far users scroll
+    useEffect(() => {
+        const handleScroll = () => {
+            // Calculate scroll depth as percentage (0-100)
+            const windowHeight = window.innerHeight; // Height of visible viewport
+            const documentHeight = document.documentElement.scrollHeight; // Total page height
+            const scrollTop = window.scrollY; // Current scroll position from top
+            const scrollDepth = Math.round((scrollTop / (documentHeight - windowHeight)) * 100);
+            
+            // Update max scroll depth if user scrolled further than before
+            if (scrollDepth > maxScrollDepth) {
+                setMaxScrollDepth(scrollDepth);
+            }
+
+            // Track milestone scroll depths (25%, 50%, 75%, 100%)
+            // This tells us if users read the whole page or bounce early
+            const milestones = [25, 50, 75, 100];
+            milestones.forEach(milestone => {
+                // Only fire event once per milestone (check if not already viewed)
+                if (scrollDepth >= milestone && !viewedSections.current.has(milestone)) {
+                    viewedSections.current.add(milestone); // Mark as viewed
+                    trackEvent('scroll_milestone', {
+                        projectId: 'proj_005',
+                        milestone: `${milestone}%`,
+                        scrollDepth: scrollDepth
+                    });
+                }
+            });
+        };
+
+        // Add scroll listener when component mounts
+        window.addEventListener('scroll', handleScroll);
+        
+        // Cleanup: remove listener when component unmounts to prevent memory leaks
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, [maxScrollDepth]); // Re-run if maxScrollDepth changes
+
+    // Track time on page when user leaves
+    // This captures how long someone spent reading this project page
+    useEffect(() => {
+        const handleBeforeUnload = () => {
+            // Calculate time spent on page in seconds
+            const timeOnPage = Math.round((Date.now() - entryTime.current) / 1000);
+            
+            // Use sendBeacon for reliable tracking on page exit
+            // sendBeacon ensures the request completes even if the page is closing
+            // Regular fetch() would be cancelled when the page unloads
+            const eventData = {
+                eventType: 'page_exit',
+                page: window.location.pathname,
+                sessionId: sessionStorage.getItem('analytics_session_id'),
+                metadata: {
+                    projectId: 'proj_005',
+                    timeOnPage: timeOnPage, // How many seconds they spent
+                    maxScrollDepth: maxScrollDepth // How far they scrolled
+                }
+            };
+            
+            // sendBeacon sends data reliably even during page unload
+            navigator.sendBeacon('/api/events', JSON.stringify(eventData));
+        };
+
+        // Listen for page unload (user closing tab, navigating away, etc.)
+        window.addEventListener('beforeunload', handleBeforeUnload);
+        
+        // Cleanup listener on component unmount
+        return () => window.removeEventListener('beforeunload', handleBeforeUnload);
+    }, [maxScrollDepth]); // Include maxScrollDepth so we send the latest value
+
+    // Handle CTA button clicks
+    // Tracks which call-to-action buttons users click and when
+    const handleCTAClick = (ctaName, ctaUrl) => {
+        trackEvent('cta_click', {
+            projectId: 'proj_005',
+            ctaName: ctaName, // "View All Projects" or "View on GitHub"
+            ctaUrl: ctaUrl, // Where the button leads
+            timeBeforeClick: Math.round((Date.now() - entryTime.current) / 1000) // How long before they clicked
+        });
+    };
 
     return (
         <>
@@ -167,7 +259,7 @@ export default function RealTimeEventAnalytics() {
                     </section>
 
                     {/* ===== COMPLETE TECH STACK SECTION ===== */}
-                    {/* NEW: Breaks down all technologies used in the entire site */}
+                    {/* Breaks down all technologies used in the entire site */}
                     <section className={styles.section}>
                         <h2 className={styles.sectionTitle}>Complete Technology Stack</h2>
                         <p className={styles.text}>
@@ -222,7 +314,7 @@ export default function RealTimeEventAnalytics() {
                     </section>
 
                     {/* ===== DETAILED ARCHITECTURE SECTION ===== */}
-                    {/* NEW: Step-by-step breakdown of exactly what happens during an event */}
+                    {/* Step-by-step breakdown of exactly what happens during an event */}
                     <section className={styles.section}>
                         <h2 className={styles.sectionTitle}>Detailed Architecture</h2>
                         <p className={styles.text}>
@@ -477,7 +569,7 @@ export async function POST(request) {
                     </section>
 
                     {/* ===== CLOSING CTA SECTION ===== */}
-                    {/* Encourages users to explore more projects */}
+                    {/* Encourages users to explore more projects - WITH TRACKING */}
                     <section className={styles.section} style={{textAlign: 'center', paddingTop: '3rem', paddingBottom: '4rem'}}>
                         <div style={{
                             background: 'white',
@@ -494,9 +586,13 @@ export async function POST(request) {
                                 This event tracking system is just one example of my work combining data engineering, full-stack development, and machine learning principles. Explore more projects showcasing Python, GIS, statistical modeling, and data visualization.
                             </p>
                             
-                            {/* Two call-to-action buttons */}
+                            {/* Two call-to-action buttons - NOW WITH TRACKING */}
                             <div style={{display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap'}}>
-                                <a href="/projects" className={styles.button}>
+                                <a 
+                                    href="/projects" 
+                                    className={styles.button}
+                                    onClick={() => handleCTAClick('View All Projects', '/projects')}
+                                >
                                     ← View All Projects
                                 </a>
                                 <a 
@@ -505,6 +601,7 @@ export async function POST(request) {
                                     style={{background: 'white', color: '#5a6b58', border: '2px solid #5a6b58'}}
                                     target="_blank"
                                     rel="noopener noreferrer"
+                                    onClick={() => handleCTAClick('View on GitHub', 'https://github.com/spencer-navy/portfolio')}
                                 >
                                     View on GitHub →
                                 </a>
