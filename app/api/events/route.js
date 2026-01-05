@@ -5,6 +5,9 @@ import { NextResponse } from 'next/server';
 import clientPromise from '@/lib/mongodb';
 import { geolocation } from '@vercel/functions';
 
+// POST /api/events
+// Receives event data from the client, enriches it with geolocation and request info, and stores it in MongoDB
+
 export async function POST(request) {
   console.log('[API /api/events] POST request received');
   
