@@ -3,6 +3,7 @@
 
 import { NextResponse } from 'next/server';
 import clientPromise from '@/lib/mongodb';
+import { geolocation } from '@vercel/functions';
 
 export async function POST(request) {
   console.log('[API /api/events] POST request received');
@@ -12,19 +13,34 @@ export async function POST(request) {
     const eventData = await request.json();
     console.log('[API /api/events] Event data:', eventData);
     
-    // Get server-side data (IP address, user agent, etc.)
+    // Get IP address
     const ipAddress = request.headers.get('x-forwarded-for') || 
                       request.headers.get('x-real-ip') || 
                       'unknown';
     const userAgent = request.headers.get('user-agent') || 'unknown';
     const referrer = request.headers.get('referer') || 'direct';
     
+    // Get geolocation data from Vercel headers
+    const geo = {
+      city: request.headers.get('x-vercel-ip-city') || 'unknown',
+      country: request.headers.get('x-vercel-ip-country') || 'unknown',
+      region: request.headers.get('x-vercel-ip-country-region') || 'unknown',
+      latitude: request.headers.get('x-vercel-ip-latitude') || null,
+      longitude: request.headers.get('x-vercel-ip-longitude') || null,
+    };
+    
+    // Decode city name (Vercel encodes it)
+    if (geo.city !== 'unknown') {
+      geo.city = decodeURIComponent(geo.city);
+    }
+    
+    console.log('[API /api/events] Geolocation:', geo);
     console.log('[API /api/events] Connecting to MongoDB...');
     
     // Connect to MongoDB
     const client = await clientPromise;
-    const db = client.db('analytics'); // Database name
-    const collection = db.collection('events'); // Collection name
+    const db = client.db('analytics');
+    const collection = db.collection('events');
     
     console.log('[API /api/events] MongoDB connected');
     
@@ -40,7 +56,17 @@ export async function POST(request) {
       ipAddress: ipAddress,
       userAgent: userAgent,
       referrer: referrer,
-      timestamp: new Date(), // Server timestamp (more reliable than client)
+      
+      // Geolocation data
+      location: {
+        city: geo.city,
+        country: geo.country,
+        region: geo.region,
+        latitude: geo.latitude,
+        longitude: geo.longitude,
+      },
+      
+      timestamp: new Date(),
     };
     
     console.log('[API /api/events] Inserting event:', event);
@@ -63,13 +89,12 @@ export async function POST(request) {
     console.error('[API /api/events] Error:', error);
     console.error('[API /api/events] Error stack:', error.stack);
     
-    // Return error response with more details
+    // Return error response
     return NextResponse.json(
       { 
         success: false, 
         error: 'Failed to store event',
         message: error.message,
-        // In production, you might want to remove this for security:
         details: process.env.NODE_ENV === 'development' ? error.stack : undefined
       },
       { status: 500 }
@@ -77,7 +102,7 @@ export async function POST(request) {
   }
 }
 
-// Optional: Test endpoint to verify MongoDB connection
+// Test endpoint to verify MongoDB connection and see geolocation
 export async function GET(request) {
   console.log('[API /api/events] GET request received');
   
@@ -87,18 +112,26 @@ export async function GET(request) {
     const client = await clientPromise;
     const db = client.db('analytics');
     
-    // Try to get recent events
+    // Get recent events
     const events = await db.collection('events')
       .find({})
       .sort({ timestamp: -1 })
-      .limit(5)
+      .limit(10)
       .toArray();
     
     console.log('[API /api/events] Found', events.length, 'recent events');
     
+    // Show requester's geolocation for testing
+    const geo = {
+      city: decodeURIComponent(request.headers.get('x-vercel-ip-city') || 'unknown'),
+      country: request.headers.get('x-vercel-ip-country') || 'unknown',
+      region: request.headers.get('x-vercel-ip-country-region') || 'unknown',
+    };
+    
     return NextResponse.json({
       success: true,
       message: 'MongoDB connection successful',
+      yourLocation: geo,
       eventCount: events.length,
       recentEvents: events
     });
@@ -115,9 +148,4 @@ export async function GET(request) {
       { status: 500 }
     );
   }
-}
-
-// Handle OPTIONS requests for CORS (if needed)
-export async function OPTIONS(request) {
-  return NextResponse.json({}, { status: 200 });
 }
