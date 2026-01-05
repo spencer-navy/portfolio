@@ -19,20 +19,25 @@ export async function POST(request) {
                       'unknown';
     const userAgent = request.headers.get('user-agent') || 'unknown';
     const referrer = request.headers.get('referer') || 'direct';
+
+    // Extract location using the Vercel helper
+    // This automatically handles the headers and decoding for you
+    const geo = geolocation(request);
+
+
+    // // Get geolocation data from Vercel headers
+    // const geo = {
+    //   city: request.headers.get('x-vercel-ip-city') || 'unknown',
+    //   country: request.headers.get('x-vercel-ip-country') || 'unknown',
+    //   region: request.headers.get('x-vercel-ip-country-region') || 'unknown',
+    //   latitude: request.headers.get('x-vercel-ip-latitude') || null,
+    //   longitude: request.headers.get('x-vercel-ip-longitude') || null,
+    // };
     
-    // Get geolocation data from Vercel headers
-    const geo = {
-      city: request.headers.get('x-vercel-ip-city') || 'unknown',
-      country: request.headers.get('x-vercel-ip-country') || 'unknown',
-      region: request.headers.get('x-vercel-ip-country-region') || 'unknown',
-      latitude: request.headers.get('x-vercel-ip-latitude') || null,
-      longitude: request.headers.get('x-vercel-ip-longitude') || null,
-    };
-    
-    // Decode city name (Vercel encodes it)
-    if (geo.city !== 'unknown') {
-      geo.city = decodeURIComponent(geo.city);
-    }
+    // // Decode city name (Vercel encodes it)
+    // if (geo.city !== 'unknown') {
+    //   geo.city = decodeURIComponent(geo.city);
+    // }
     
     console.log('[API /api/events] Geolocation:', geo);
     console.log('[API /api/events] Connecting to MongoDB...');
@@ -121,17 +126,27 @@ export async function GET(request) {
     
     console.log('[API /api/events] Found', events.length, 'recent events');
     
-    // Show requester's geolocation for testing
-    const geo = {
-      city: decodeURIComponent(request.headers.get('x-vercel-ip-city') || 'unknown'),
-      country: request.headers.get('x-vercel-ip-country') || 'unknown',
-      region: request.headers.get('x-vercel-ip-country-region') || 'unknown',
-    };
+    // Extract geolocation data using the Vercel helper
+    const geo = geolocation(request);
+
+    // // Show requester's geolocation for testing
+    // const geo = {
+    //   city: decodeURIComponent(request.headers.get('x-vercel-ip-city') || 'unknown'),
+    //   country: request.headers.get('x-vercel-ip-country') || 'unknown',
+    //   region: request.headers.get('x-vercel-ip-country-region') || 'unknown',
+    // };
     
     return NextResponse.json({
       success: true,
       message: 'MongoDB connection successful',
-      yourLocation: geo,
+      // We use || 'unknown' because geolocation() returns undefined if not found
+      yourLocation: {
+        city: geo.city || 'unknown',
+        country: geo.country || 'unknown',
+        region: geo.region || 'unknown',
+        latitude: geo.latitude || null,
+        longitude: geo.longitude || null,
+      },
       eventCount: events.length,
       recentEvents: events
     });
