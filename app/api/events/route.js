@@ -32,10 +32,27 @@ export async function POST(request) {
     }
     
     // Get IP address
-    const ipAddress = request.headers.get('x-forwarded-for') || 
-                      request.headers.get('x-real-ip') || 
+    const ipAddress = request.headers.get('x-forwarded-for') ||
+                      request.headers.get('x-real-ip') ||
                       'unknown';
     const userAgent = request.headers.get('user-agent') || 'unknown';
+
+    // Detect bots and automated tools
+    const botPatterns = [
+      'vercel-screenshot',
+      'bot',
+      'crawler',
+      'spider',
+      'scraper',
+      'lighthouse',
+      'pingdom',
+      'uptimerobot',
+      'headless'
+    ];
+
+    const isBot = botPatterns.some(pattern =>
+      userAgent.toLowerCase().includes(pattern)
+    );
 
     // Extract location using the Vercel helper
     const geo = geolocation(request);
@@ -63,6 +80,7 @@ export async function POST(request) {
       // Server-enriched data
       ipAddress: ipAddress,
       userAgent: userAgent,
+      isBot: isBot, // Flag to identify bot traffic
 
       // Geolocation data
       location: {
@@ -76,7 +94,7 @@ export async function POST(request) {
       timestamp: etTimestamp,
       timestampUTC: timestamp, // Keep UTC for reference
     };
-    
+
     // Insert the event into MongoDB
     const result = await collection.insertOne(event);
     
