@@ -45,6 +45,12 @@ export async function POST(request) {
     const db = client.db('analytics');
     const collection = db.collection('events');
     
+    // Get current time in Eastern Time (ET handles both EST and EDT automatically)
+    const timestamp = new Date();
+    const etTimestamp = new Date(timestamp.toLocaleString('en-US', {
+      timeZone: 'America/New_York'
+    }));
+
     // Construct the complete event document
     const event = {
       // Client-provided data
@@ -57,7 +63,7 @@ export async function POST(request) {
       // Server-enriched data
       ipAddress: ipAddress,
       userAgent: userAgent,
-      
+
       // Geolocation data
       location: {
         city: geo.city || 'unknown',
@@ -66,8 +72,9 @@ export async function POST(request) {
         latitude: geo.latitude || null,
         longitude: geo.longitude || null,
       },
-      
-      timestamp: new Date(),
+
+      timestamp: etTimestamp,
+      timestampUTC: timestamp, // Keep UTC for reference
     };
     
     // Insert the event into MongoDB
