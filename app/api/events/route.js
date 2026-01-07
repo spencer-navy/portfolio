@@ -11,15 +11,12 @@ export async function POST(request) {
   try {
     // Parse the incoming event data from the client
     const eventData = await request.json();
-    
-    // Get the referrer/host to check if it's localhost
-    const referrer = request.headers.get('referer') || '';
+
+    // Get the host to check if it's localhost
     const host = request.headers.get('host') || '';
-    
+
     // Skip storing events from localhost/development
-    const isLocalhost = referrer.includes('localhost') || 
-                       referrer.includes('127.0.0.1') ||
-                       host.includes('localhost') ||
+    const isLocalhost = host.includes('localhost') ||
                        host.includes('127.0.0.1');
     
     if (isLocalhost) {
@@ -55,11 +52,11 @@ export async function POST(request) {
       page: eventData.page,
       sessionId: eventData.sessionId,
       metadata: eventData.metadata || {},
-      
+      referrer: eventData.referrer || '',
+
       // Server-enriched data
       ipAddress: ipAddress,
       userAgent: userAgent,
-      referrer: referrer,
       
       // Geolocation data
       location: {
