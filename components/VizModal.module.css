@@ -1,0 +1,133 @@
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 2rem;
+    backdrop-filter: blur(4px);
+}
+
+.modalContent {
+    background: white;
+    border-radius: 16px;
+    max-width: 900px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.closeButton {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: #e5e7eb;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 2rem;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    color: #4a5568;
+    z-index: 10;
+}
+
+.closeButton:hover {
+    background: #879f85;
+    color: white;
+    transform: rotate(90deg);
+}
+
+.modalHeader {
+    padding: 2rem 2rem 1rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.modalTitle {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #1a202c;
+    margin: 0;
+    padding-right: 3rem;
+}
+
+.vizContainer {
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e8f0e7 100%);
+}
+
+.modalDescription {
+    padding: 2rem;
+    background: #f9fafb;
+    border-top: 1px solid #e5e7eb;
+}
+
+.descriptionTitle {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #2c352b;
+    margin: 0 0 1rem;
+}
+
+.descriptionText {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #4a5568;
+    margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .modalOverlay {
+        padding: 1rem;
+    }
+
+    .modalContent {
+        max-height: 95vh;
+    }
+
+    .modalHeader {
+        padding: 1.5rem 1.5rem 1rem;
+    }
+
+    .modalTitle {
+        font-size: 1.5rem;
+    }
+
+    .vizContainer {
+        padding: 1.5rem;
+        min-height: 300px;
+    }
+
+    .modalDescription {
+        padding: 1.5rem;
+    }
+}
