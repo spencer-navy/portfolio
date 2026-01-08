@@ -1,0 +1,543 @@
+/* ===== MAIN CONTAINER & BACKGROUND ===== */
+.main {
+    min-height: 100vh;
+    padding-top: 80px;
+    background: linear-gradient(135deg, #f5f7fa 0%, #879f85 100%);
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 3rem;
+}
+
+/* ===== HERO SECTION ===== */
+.hero {
+    padding: 3rem 0 2rem;
+    margin-bottom: 3rem;
+}
+
+.breadcrumb {
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+    color: #4a5568;
+}
+
+.breadcrumbLink {
+    color: #5a6b58;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.breadcrumbLink:hover {
+    color: #879f85;
+    text-decoration: underline;
+}
+
+.breadcrumbSeparator {
+    margin: 0 0.5rem;
+    color: #cbd5e0;
+}
+
+.breadcrumbCurrent {
+    color: #718096;
+}
+
+.title {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: #2c352b;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+}
+
+.subtitle {
+    font-size: 1.35rem;
+    color: #4a5568;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+    max-width: 1000px;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.tag {
+    background: white;
+    border: 1px solid #cbd5e0;
+    padding: 0.6rem 1.25rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    color: #5a6b58;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.tag:hover {
+    background: #e8f0e7;
+    border-color: #879f85;
+}
+
+/* ===== CONTENT SECTIONS ===== */
+.section {
+    margin-bottom: 4rem;
+}
+
+.sectionTitle {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-size: 2.25rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: #2c352b;
+    letter-spacing: -0.01em;
+}
+
+.subsectionTitle {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-top: 2.5rem;
+    margin-bottom: 1.25rem;
+    color: #2c352b;
+}
+
+.text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #2d3748;
+    margin-bottom: 1.5rem;
+    max-width: 1100px;
+}
+
+/* ===== EXECUTIVE SUMMARY KEY METRICS ===== */
+.keyMetrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 2.5rem 0;
+}
+
+.metricCard {
+    background: white;
+    border: 2px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 2.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.metricCard:hover {
+    border-color: #5a6b58;
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(90, 107, 88, 0.15);
+}
+
+.metricValue {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: #2d5016;
+    margin-bottom: 0.75rem;
+    font-family: 'Georgia', serif;
+}
+
+.metricLabel {
+    font-size: 1.1rem;
+    color: #2c352b;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.metricDetail {
+    font-size: 0.95rem;
+    color: #718096;
+    font-style: italic;
+}
+
+/* ===== METRIC HIGHLIGHT BOX ===== */
+.metricHighlight {
+    background: #e8f0e7;
+    border-left: 4px solid #2d5016;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    margin-top: 1.5rem;
+    color: #2d5016;
+    font-weight: 500;
+}
+
+/* ===== DATASET SPECIFICATIONS ===== */
+.datasetSpecs {
+    background: white;
+    border-radius: 12px;
+    padding: 3rem;
+    margin: 2rem 0;
+    border: 2px solid #e2e8f0;
+}
+
+.specGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.specItem {
+    padding: 1.25rem;
+    background: #f7fafc;
+    border-radius: 8px;
+    border-left: 4px solid #5a6b58;
+    color: #1a202c;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.specItem strong {
+    color: #2c352b;
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 700;
+}
+
+/* ===== CODE SECTIONS ===== */
+.codeBlock {
+    background: #1e293b;
+    color: #e2e8f0;
+    border-radius: 12px;
+    padding: 2.5rem;
+    overflow-x: auto;
+    font-family: 'Monaco', 'Courier New', monospace;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin: 2rem 0;
+    border: 1px solid #334155;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.codeBlock code {
+    background: transparent;
+    padding: 0;
+    border: none;
+    color: inherit;
+}
+
+/* ===== LISTS ===== */
+.list {
+    margin: 1.5rem 0;
+    padding-left: 2rem;
+    color: #2d3748;
+    max-width: 1300px;
+}
+
+.list li {
+    margin-bottom: 1rem;
+    line-height: 1.7;
+    font-size: 1.05rem;
+}
+
+.list li strong {
+    color: #1a202c;
+    font-weight: 600;
+}
+
+.list code {
+    background: #f7fafc;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    color: #5a6b58;
+    border: 1px solid #e2e8f0;
+    font-family: 'Courier New', monospace;
+}
+
+/* ===== METHODOLOGY GRID ===== */
+.methodGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin: 2.5rem 0;
+}
+
+.methodCard {
+    background: white;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 2.5rem;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.methodCard:hover {
+    border-color: #5a6b58;
+    box-shadow: 0 8px 20px rgba(90, 107, 88, 0.12);
+}
+
+.methodNumber {
+    position: absolute;
+    top: -20px;
+    left: 2rem;
+    width: 50px;
+    height: 50px;
+    background: #2d5016;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    box-shadow: 0 4px 12px rgba(45, 80, 22, 0.3);
+}
+
+.methodTitle {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #2c352b;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+
+.methodTech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+}
+
+.methodTech code {
+    background: #f7fafc;
+    padding: 0.4rem 0.9rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    color: #5a6b58;
+    border: 1px solid #e2e8f0;
+    font-family: 'Courier New', monospace;
+}
+
+/* ===== MMM STEPS ===== */
+.mmmSteps {
+    margin: 3rem 0;
+}
+
+.step {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    background: white;
+    border-radius: 12px;
+    padding: 2.5rem;
+    border: 2px solid #e2e8f0;
+    transition: all 0.3s ease;
+}
+
+.step:hover {
+    border-color: #5a6b58;
+    box-shadow: 0 6px 20px rgba(90, 107, 88, 0.1);
+}
+
+.stepNumber {
+    flex-shrink: 0;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #2d5016 0%, #3d6622 100%);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.75rem;
+    font-weight: 700;
+    box-shadow: 0 4px 12px rgba(45, 80, 22, 0.3);
+}
+
+.stepContent {
+    flex: 1;
+}
+
+.stepContent h4 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #2c352b;
+    margin-bottom: 1rem;
+}
+
+.stepContent .list {
+    background: transparent;
+    padding-left: 1.5rem;
+    border: none;
+}
+
+/* ===== INSIGHT BOX ===== */
+.insight {
+    background: linear-gradient(135deg, #e8f0e7 0%, #f0f7ef 100%);
+    border-left: 6px solid #2d5016;
+    border-radius: 12px;
+    padding: 2.5rem;
+    margin: 3rem 0;
+    box-shadow: 0 4px 12px rgba(45, 80, 22, 0.1);
+}
+
+.insightTitle {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #2d5016;
+    margin-bottom: 1rem;
+}
+
+/* ===== TECH STACK GRID ===== */
+.techStack {
+    background: white;
+    border-radius: 12px;
+    padding: 3rem;
+    margin: 2.5rem 0;
+    border: 2px solid #e2e8f0;
+}
+
+.techGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.techCategory h4 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #2c352b;
+    margin-bottom: 1rem;
+}
+
+.techCategory ul {
+    list-style: none;
+    padding: 0;
+}
+
+.techCategory li {
+    padding: 0.5rem 0;
+    color: #2d3748;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.techCategory li:last-child {
+    border-bottom: none;
+}
+
+/* ===== REPOSITORY STRUCTURE ===== */
+.repoStructure {
+    background: white;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 3rem;
+    margin: 2.5rem 0;
+}
+
+/* ===== BUTTONS ===== */
+.button {
+    display: inline-block;
+    background: #5a6b58;
+    color: white;
+    padding: 1.1rem 2.5rem;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.05rem;
+    transition: all 0.3s ease;
+    border: 2px solid #5a6b58;
+    box-shadow: 0 4px 12px rgba(90, 107, 88, 0.2);
+}
+
+.button:hover {
+    background: #4a5548;
+    border-color: #4a5548;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(90, 107, 88, 0.3);
+}
+
+.buttonSecondary {
+    display: inline-block;
+    background: white;
+    color: #5a6b58;
+    padding: 1.1rem 2.5rem;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.05rem;
+    transition: all 0.3s ease;
+    border: 2px solid #5a6b58;
+}
+
+.buttonSecondary:hover {
+    background: #e8f0e7;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(90, 107, 88, 0.2);
+}
+
+/* ===== CLOSING CTA ===== */
+.closingCTA {
+    background: white;
+    border-radius: 16px;
+    padding: 4rem 3rem;
+    border: 2px solid #e2e8f0;
+    text-align: center;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 968px) {
+    .container {
+        padding: 0 2rem;
+    }
+
+    .title {
+        font-size: 2.75rem;
+    }
+
+    .subtitle {
+        font-size: 1.15rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 0 1.5rem;
+    }
+
+    .title {
+        font-size: 2.25rem;
+    }
+
+    .subtitle {
+        font-size: 1.05rem;
+    }
+
+    .sectionTitle {
+        font-size: 1.75rem;
+    }
+
+    .text {
+        font-size: 1rem;
+    }
+    
+    .metricValue {
+        font-size: 2.5rem;
+    }
+    
+    .keyMetrics,
+    .methodGrid,
+    .techGrid {
+        grid-template-columns: 1fr;
+    }
+    
+    .step {
+        flex-direction: column;
+    }
+}
