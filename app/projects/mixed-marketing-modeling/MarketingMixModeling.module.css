@@ -161,85 +161,102 @@
     font-style: italic;
 }
 
-/* ===== PROBLEM STATEMENT BOX ===== */
-.problemBox {
-    background: white;
-    border-left: 6px solid #5a6b58;
-    border-radius: 12px;
-    padding: 3rem;
-    margin: 2rem 0;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-}
-
-.problemTitle {
-    font-size: 1.75rem;
-    font-weight: 700;
-    color: #2c352b;
-    margin-bottom: 1.5rem;
-}
-
-/* ===== CUSTOMER JOURNEY FLOW ===== */
-.journeyFlow {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 1rem;
-    margin: 2.5rem 0;
-    padding: 2.5rem;
-    background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
-    border-radius: 12px;
-    border: 1px solid #e2e8f0;
-}
-
-.touchpoint {
-    flex: 1;
-    min-width: 140px;
-    text-align: center;
-    padding: 1.5rem 1rem;
-    background: white;
-    border-radius: 10px;
-    border: 2px solid #e2e8f0;
-    transition: all 0.3s ease;
-}
-
-.touchpoint:hover {
-    border-color: #5a6b58;
-    transform: scale(1.05);
-}
-
-.touchpointNumber {
-    display: inline-block;
-    width: 36px;
-    height: 36px;
-    background: #5a6b58;
-    color: white;
-    border-radius: 50%;
-    line-height: 36px;
-    font-weight: 700;
-    margin-bottom: 0.75rem;
-}
-
-.touchpointLabel {
-    font-size: 0.95rem;
-    color: #2d3748;
-    margin-bottom: 0.5rem;
+/* ===== METRIC HIGHLIGHT BOX ===== */
+.metricHighlight {
+    background: #e8f0e7;
+    border-left: 4px solid #2d5016;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    margin-top: 1.5rem;
+    color: #2d5016;
     font-weight: 500;
 }
 
-.touchpointChannel {
-    font-size: 0.85rem;
-    color: #5a6b58;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+/* ===== DATASET SPECIFICATIONS ===== */
+.datasetSpecs {
+    background: white;
+    border-radius: 12px;
+    padding: 3rem;
+    margin: 2rem 0;
+    border: 2px solid #e2e8f0;
 }
 
-.arrow {
-    font-size: 2rem;
+.specGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.specItem {
+    padding: 1.25rem;
+    background: #f7fafc;
+    border-radius: 8px;
+    border-left: 4px solid #5a6b58;
+    color: #1a202c;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.specItem strong {
+    color: #2c352b;
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 700;
+}
+
+/* ===== CODE SECTIONS ===== */
+.codeBlock {
+    background: #1e293b;
+    color: #e2e8f0;
+    border-radius: 12px;
+    padding: 2.5rem;
+    overflow-x: auto;
+    font-family: 'Monaco', 'Courier New', monospace;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin: 2rem 0;
+    border: 1px solid #334155;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.codeBlock code {
+    background: transparent;
+    padding: 0;
+    border: none;
+    color: inherit;
+}
+
+/* ===== LISTS ===== */
+.list {
+    margin: 1.5rem 0;
+    padding-left: 2rem;
+    color: #2d3748;
+    max-width: 1300px;
+}
+
+.list li {
+    margin-bottom: 1rem;
+    line-height: 1.7;
+    font-size: 1.05rem;
+}
+
+.list li strong {
+    color: #1a202c;
+    font-weight: 600;
+}
+
+.list code {
+    background: #f7fafc;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
     color: #5a6b58;
-    flex-shrink: 0;
-    font-weight: 300;
+    border: 1px solid #e2e8f0;
+    font-family: 'Courier New', monospace;
 }
 
 /* ===== METHODOLOGY GRID ===== */
@@ -306,191 +323,6 @@
     font-family: 'Courier New', monospace;
 }
 
-/* ===== DATASET SPECIFICATIONS ===== */
-.datasetSpecs {
-    background: white;
-    border-radius: 12px;
-    padding: 3rem;
-    margin: 2rem 0;
-    border: 2px solid #e2e8f0;
-}
-
-.specGrid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1.5rem;
-    margin: 2rem 0;
-}
-
-.specItem {
-    padding: 1.25rem;
-    background: #f7fafc;
-    border-radius: 8px;
-    border-left: 4px solid #5a6b58;
-    color: #1a202c;
-    font-size: 1rem;
-    font-weight: 500;
-}
-
-.specItem strong {
-    color: #2c352b;
-    display: block;
-    margin-bottom: 0.5rem;
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    font-weight: 700;
-}
-
-/* ===== CODE SECTIONS ===== */
-.codeSection {
-    margin: 3rem 0;
-}
-
-.codeBlock {
-    background: #1e293b;
-    color: #e2e8f0;
-    border-radius: 12px;
-    padding: 2.5rem;
-    overflow-x: auto;
-    font-family: 'Monaco', 'Courier New', monospace;
-    font-size: 0.95rem;
-    line-height: 1.7;
-    margin: 2rem 0;
-    border: 1px solid #334155;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-}
-
-/* ===== LISTS ===== */
-.list {
-    margin: 1.5rem 0;
-    padding-left: 2rem;
-    color: #2d3748;
-    max-width: 1300px;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.35) 100%);
-    padding: 1.5rem 2rem 1.5rem 3rem;
-    border-radius: 8px;
-    border-left: 3px solid #5a6b58;
-}
-
-.list li {
-    margin-bottom: 1rem;
-    line-height: 1.7;
-    font-size: 1.05rem;
-}
-
-.list li strong {
-    color: #1a202c;
-    font-weight: 600;
-}
-
-/* ===== ATTRIBUTION COMPARISON ===== */
-.attributionComparison {
-    background: white;
-    border-radius: 12px;
-    padding: 3rem;
-    margin: 2.5rem 0;
-    border: 2px solid #e2e8f0;
-}
-
-.attributionGrid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-    margin-top: 2rem;
-}
-
-.attributionModel {
-    background: #f7fafc;
-    border: 2px solid #e2e8f0;
-    border-radius: 10px;
-    padding: 2rem;
-    transition: all 0.3s ease;
-}
-
-.attributionModel:hover {
-    border-color: #5a6b58;
-    transform: translateY(-2px);
-}
-
-.attributionModel h4 {
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: #2c352b;
-    margin-bottom: 0.75rem;
-}
-
-.attributionModel p {
-    color: #2d3748;
-    font-weight: 500;
-}
-
-.attributionResult {
-    background: white;
-    padding: 1rem;
-    border-radius: 6px;
-    margin: 1rem 0;
-    border: 1px solid #e2e8f0;
-    font-size: 1.05rem;
-    color: #1f3e79;
-    font-weight: 500;
-}
-
-.attributionResult strong {
-    color: #2d5016;
-    font-weight: 700;
-}
-
-.pros {
-    color: #2d5016;
-    font-size: 0.9rem;
-    margin-top: 1rem;
-}
-
-.cons {
-    color: #dc2626;
-    font-size: 0.9rem;
-    margin-top: 0.5rem;
-}
-
-/* ===== INSIGHT BOX ===== */
-.insight {
-    background: linear-gradient(135deg, #e8f0e7 0%, #f0f7ef 100%);
-    border-left: 6px solid #2d5016;
-    border-radius: 12px;
-    padding: 2.5rem;
-    margin: 3rem 0;
-    box-shadow: 0 4px 12px rgba(45, 80, 22, 0.1);
-}
-
-.insightTitle {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #2d5016;
-    margin-bottom: 1rem;
-}
-
-/* ===== EQUATION BOX ===== */
-.equation {
-    background: white;
-    border: 2px solid #e2e8f0;
-    border-radius: 12px;
-    padding: 2.5rem;
-    margin: 2.5rem 0;
-}
-
-.mathBlock {
-    background: #f7fafc;
-    padding: 1.5rem 2rem;
-    border-radius: 8px;
-    font-family: 'Georgia', serif;
-    font-size: 1.15rem;
-    color: #2c352b;
-    margin: 1.5rem 0;
-    text-align: center;
-    border: 1px solid #e2e8f0;
-}
-
 /* ===== MMM STEPS ===== */
 .mmmSteps {
     margin: 3rem 0;
@@ -538,277 +370,65 @@
     margin-bottom: 1rem;
 }
 
-.validationMetrics {
-    display: flex;
-    gap: 2rem;
-    flex-wrap: wrap;
-    margin-top: 1.5rem;
+.stepContent .list {
+    background: transparent;
+    padding-left: 1.5rem;
+    border: none;
 }
 
-.metric {
-    background: #e8f0e7;
-    padding: 1rem 1.5rem;
-    border-radius: 8px;
-    border-left: 4px solid #2d5016;
-}
-
-.metric strong {
-    color: #2d5016;
-}
-
-/* ===== FINDINGS GRID ===== */
-.findingsGrid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 2.5rem;
-    margin: 2.5rem 0;
-}
-
-.finding {
-    background: white;
-    border: 2px solid #e2e8f0;
+/* ===== INSIGHT BOX ===== */
+.insight {
+    background: linear-gradient(135deg, #e8f0e7 0%, #f0f7ef 100%);
+    border-left: 6px solid #2d5016;
     border-radius: 12px;
     padding: 2.5rem;
-    transition: all 0.3s ease;
+    margin: 3rem 0;
+    box-shadow: 0 4px 12px rgba(45, 80, 22, 0.1);
 }
 
-.finding:hover {
-    border-color: #5a6b58;
-    box-shadow: 0 8px 24px rgba(90, 107, 88, 0.12);
-}
-
-.findingTitle {
-    font-size: 1.3rem;
+.insightTitle {
+    font-size: 1.5rem;
     font-weight: 700;
-    color: #2c352b;
-    margin-bottom: 1.5rem;
-}
-
-/* ===== ROAS CHART ===== */
-.roasChart {
-    margin: 2rem 0;
-}
-
-.roasBar {
-    height: 50px;
+    color: #2d5016;
     margin-bottom: 1rem;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    padding-left: 1.5rem;
-    color: white;
-    font-weight: 600;
-    font-size: 1.05rem;
-    transition: all 0.3s ease;
 }
 
-.roasBar:hover {
-    transform: translateX(8px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-.saturationWarning {
-    background: #fef2f2;
-    border-left: 4px solid #dc2626;
-    padding: 1.25rem;
-    border-radius: 8px;
-    color: #991b1b;
-    margin-top: 1.5rem;
-    font-weight: 500;
-}
-
-.opportunityHighlight {
-    background: #f0fdf4;
-    border-left: 4px solid #16a34a;
-    padding: 1.25rem;
-    border-radius: 8px;
-    color: #166534;
-    margin-top: 1.5rem;
-    font-weight: 500;
-}
-
-/* ===== OPTIMIZATION FORMULATION ===== */
-.optimizationFormulation {
+/* ===== TECH STACK GRID ===== */
+.techStack {
     background: white;
-    border: 2px solid #e2e8f0;
     border-radius: 12px;
     padding: 3rem;
     margin: 2.5rem 0;
-}
-
-/* ===== ALLOCATION COMPARISON TABLE ===== */
-.allocationComparison {
-    background: white;
-    border-radius: 12px;
-    padding: 3rem;
-    margin: 3rem 0;
     border: 2px solid #e2e8f0;
 }
 
-.comparisonTable {
+.techGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
     margin-top: 2rem;
 }
 
-.tableHeader {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr 1fr 1fr 2fr;
-    gap: 1rem;
-    padding: 1.25rem;
-    background: #2d5016;
-    color: white;
-    font-weight: 600;
-    border-radius: 8px 8px 0 0;
-    font-size: 0.95rem;
-}
-
-.tableRow {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr 1fr 1fr 2fr;
-    gap: 1rem;
-    padding: 1.25rem;
-    background: white;
-    border-bottom: 1px solid #e2e8f0;
-    align-items: center;
-    transition: all 0.2s ease;
-    color: #1a202c;
-    font-size: 1rem;
-}
-
-.tableRow:hover {
-    background: #f7fafc;
-}
-
-.tableTotal {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr 1fr 1fr 2fr;
-    gap: 1rem;
-    padding: 1.25rem;
-    background: #e8f0e7;
-    border-radius: 0 0 8px 8px;
-    font-weight: 600;
-    margin-top: 0.5rem;
-}
-
-.increase {
-    color: #16a34a;
-    font-weight: 600;
-}
-
-.decrease {
-    color: #dc2626;
-    font-weight: 600;
-}
-
-.neutral {
-    color: #6b7280;
-    font-weight: 600;
-}
-
-.totalImpact {
-    color: #2d5016;
-    font-size: 1.05rem;
-}
-
-/* ===== ANNUAL IMPACT ===== */
-.annualImpact {
-    background: linear-gradient(135deg, #2d5016 0%, #3d6622 100%);
-    border-radius: 16px;
-    padding: 4rem 3rem;
-    text-align: center;
-    margin: 3rem 0;
-    color: white;
-    box-shadow: 0 8px 24px rgba(45, 80, 22, 0.3);
-}
-
-.impactNumber {
-    font-size: 5rem;
-    font-weight: 800;
-    margin-bottom: 1rem;
-    font-family: 'Georgia', serif;
-    color: white;
-}
-
-.impactLabel {
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: white;
-}
-
-/* ===== RECOMMENDATIONS ===== */
-.recommendations {
-    margin: 2.5rem 0;
-}
-
-.recommendation {
-    background: white;
-    border: 2px solid #e2e8f0;
-    border-radius: 12px;
-    padding: 2.5rem;
-    margin-bottom: 2rem;
-    transition: all 0.3s ease;
-}
-
-.recommendation:hover {
-    border-color: #5a6b58;
-    box-shadow: 0 6px 20px rgba(90, 107, 88, 0.1);
-}
-
-.recommendationHeader {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-}
-
-.priority {
-    background: #dc2626;
-    color: white;
-    padding: 0.4rem 1rem;
-    border-radius: 6px;
-    font-size: 0.8rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-}
-
-
-
-.recommendationHeader h3 {
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: #2c352b;
-    margin: 0;
-}
-
-/* ===== TECHNICAL NOTES ===== */
-.techNotes {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 2rem;
-    margin: 2.5rem 0;
-}
-
-.note {
-    background: white;
-    border: 2px solid #e2e8f0;
-    border-radius: 12px;
-    padding: 2.5rem;
-    transition: all 0.3s ease;
-}
-
-.note:hover {
-    border-color: #5a6b58;
-    box-shadow: 0 6px 18px rgba(90, 107, 88, 0.1);
-}
-
-.noteTitle {
+.techCategory h4 {
     font-size: 1.2rem;
-    font-weight: 700;
-    color: #2d5016;
+    font-weight: 600;
+    color: #2c352b;
     margin-bottom: 1rem;
+}
+
+.techCategory ul {
+    list-style: none;
+    padding: 0;
+}
+
+.techCategory li {
+    padding: 0.5rem 0;
+    color: #2d3748;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.techCategory li:last-child {
+    border-bottom: none;
 }
 
 /* ===== REPOSITORY STRUCTURE ===== */
@@ -872,24 +492,6 @@
 }
 
 /* ===== RESPONSIVE DESIGN ===== */
-@media (max-width: 1024px) {
-    .tableHeader,
-    .tableRow,
-    .tableTotal {
-        grid-template-columns: 1fr;
-        text-align: left;
-    }
-    
-    .tableHeader {
-        display: none;
-    }
-    
-    .tableRow > div,
-    .tableTotal > div {
-        padding: 0.5rem 0;
-    }
-}
-
 @media (max-width: 968px) {
     .container {
         padding: 0 2rem;
@@ -901,14 +503,6 @@
 
     .subtitle {
         font-size: 1.15rem;
-    }
-    
-    .journeyFlow {
-        flex-direction: column;
-    }
-    
-    .arrow {
-        transform: rotate(90deg);
     }
 }
 
@@ -939,17 +533,11 @@
     
     .keyMetrics,
     .methodGrid,
-    .attributionGrid,
-    .findingsGrid,
-    .techNotes {
+    .techGrid {
         grid-template-columns: 1fr;
     }
     
     .step {
         flex-direction: column;
-    }
-    
-    .impactNumber {
-        font-size: 3.5rem;
     }
 }

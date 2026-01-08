@@ -83,10 +83,10 @@ export default function Projects() {
             id: 'proj_001',
             title: 'Marketing Mix Modeling & Channel Attribution',
             description: 'Advanced statistical analysis of multi-channel DTC e-commerce campaigns using Marketing Mix Modeling (MMM) to quantify incremental impact, optimize budget allocation, and maximize return on ad spend across paid search, social media, display advertising, email, and affiliate channels',
-            techIds: ['r', 'statistical-modeling', 'python', 'sql'],
-            link: '/projects/mixed-marketing-modeling',
             techIds: ['python', 'sql', 'ml', 'statistical-modeling'],
-            progress: 80
+            link: '/projects/mixed-marketing-modeling',
+            progress: 60,
+            earlyRelease: true
         },
         {
             id: 'proj_003',
@@ -341,11 +341,18 @@ export default function Projects() {
                                         <div className={styles.projectContent}>
                                             <div className={styles.projectHeader}>
                                                 <h3 className={styles.projectTitle}>{project.title}</h3>
-                                                {project.progress !== undefined && (
-                                                    <span className={project.progress === 0 ? styles.plannedBadge : styles.inProgressBadge}>
-                                                        {project.progress === 0 ? 'PLANNED' : 'IN PROGRESS'}
-                                                    </span>
-                                                )}
+                                                <div className={styles.badgeContainer}>
+                                                    {project.earlyRelease && (
+                                                        <span className={styles.earlyReleaseBadge}>
+                                                            EARLY RELEASE
+                                                        </span>
+                                                    )}
+                                                    {project.progress !== undefined && (
+                                                        <span className={project.progress === 0 ? styles.plannedBadge : styles.inProgressBadge}>
+                                                            {project.progress === 0 ? 'PLANNED' : 'IN PROGRESS'}
+                                                        </span>
+                                                    )}
+                                                </div>
                                             </div>
                                             <p className={styles.projectDescription}>
                                                 {project.description}
