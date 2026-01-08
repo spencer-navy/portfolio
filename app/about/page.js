@@ -1,17 +1,39 @@
 'use client'
 
+import { useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import Navigation from '../../components/Navigation';
 import styles from './About.module.css';
-import { event } from '@/lib/gtag'; // Import the Google Analytics event tracking function
+import { event } from '@/lib/gtag';
+import { trackEvent } from '@/lib/trackEvent';
+
+export const dynamic = 'force-dynamic';
 
 export default function About() {
+    const pathname = usePathname();
+    
+    // Track page view when component mounts
+    useEffect(() => {
+        trackEvent('page_view', {
+            page: 'about'
+        });
+    }, [pathname]);
+
     // Track when user clicks on a book link
     const handleBookClick = (bookTitle, section) => {
+        // Google Analytics tracking
         event({
-            action: 'book_click',               // Action: book link clicked
-            category: 'About',                   // Category: About page interactions
-            label: `${section}: ${bookTitle}`,  // Label: section and book title
+            action: 'book_click',
+            category: 'About',
+            label: `${section}: ${bookTitle}`,
+        });
+        
+        // MongoDB tracking
+        trackEvent('book_click', {
+            bookTitle: bookTitle,
+            section: section,
+            page: 'about'
         });
     };
 
@@ -258,7 +280,7 @@ export default function About() {
         }
     ];
 
-    // Books I've Finished - add books here when ready
+    // Books I've Finished
     const finishedBooks = [
         {
             id: 5,
@@ -371,10 +393,10 @@ export default function About() {
         if (url.includes('amazon.com')) return 'Amazon';
         if (url.includes('barnesandnoble.com') || url.includes('bn.com')) return 'Barnes & Noble';
         if (url.includes('nostarch.com')) return 'No Starch Press';
-        return 'Retailer'; // fallback
+        return 'Retailer';
     };
 
-    // Render book grid with tracking - accepts section name for analytics
+    // Render book grid with tracking
     const renderBookGrid = (books, sectionName) => (
         <div className={styles.bookGrid}>
             {books.map((book, index) => (
@@ -385,7 +407,7 @@ export default function About() {
                     key={book.id} 
                     className={styles.bookCard}
                     style={{ animationDelay: `${index * 0.1}s` }}
-                    onClick={() => handleBookClick(book.title, sectionName)} // Tracks book click with section name
+                    onClick={() => handleBookClick(book.title, sectionName)}
                 >
                     <div className={styles.bookCover}>
                         {book.coverUrl ? (
@@ -418,12 +440,10 @@ export default function About() {
             
             <main className={styles.main}>
                 <div className={styles.container}>
-                    {/* Hero Section */}
                     <section className={styles.hero}>
                         <h1 className={styles.heroTitle}>About Me</h1>
                     </section>
 
-                    {/* Bio Section */}
                     <section className={styles.bioSection}>
                         <div className={styles.bioContent}>
                             <div className={styles.profileImageWrapper}>
@@ -478,28 +498,23 @@ export default function About() {
                         </div>
                     </section>
 
-                    {/* Reading Sections Container */}
                     <div className={styles.readingSectionsContainer}>
-                        {/* What I'm Reading */}
                         <section className={styles.readingSection}>
                             <h2 className={styles.sectionTitle}>What I'm Reading</h2>
                             {renderBookGrid(currentlyReading, 'Currently Reading')}
                         </section>
 
-                        {/* What's Up Next */}
                         <section className={styles.readingSection}>
                             <h2 className={styles.sectionTitle}>Up Next</h2>
                             {renderBookGrid(upNext, 'Up Next')}
                         </section>
 
-                        {/* 10 Year Reading */}
                         <section className={styles.readingSection}>
                             <h2 className={styles.sectionTitle}>Deeper Knowledge</h2>
                             {renderBookGrid(tenYearReading, 'Deeper Knowledge')}
                         </section>
                     </div>
 
-                    {/* Books I've Finished - Full Width Section */}
                     {finishedBooks.length > 0 && (
                         <section className={styles.finishedBooksSection}>
                             <h2 className={styles.finishedSectionTitle}>Recently Read</h2>
@@ -512,7 +527,7 @@ export default function About() {
                                         key={book.id} 
                                         className={styles.bookCard}
                                         style={{ animationDelay: `${index * 0.05}s` }}
-                                        onClick={() => handleBookClick(book.title, 'Recently Read')} // Tracks book click
+                                        onClick={() => handleBookClick(book.title, 'Recently Read')}
                                     >
                                         <div className={styles.bookCover}>
                                             {book.coverUrl ? (

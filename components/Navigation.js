@@ -3,14 +3,27 @@
 import Link from 'next/link';
 import styles from './Navigation.module.css';
 import { event } from '@/lib/gtag'; // Import the Google Analytics event tracking function
+import { trackEvent } from '@/lib/trackEvent'; // Import MongoDB tracking
 
 export default function Navigation() {
-  // Function to track navigation clicks - sends event to Google Analytics
-  const handleNavClick = (linkName) => {
+  // Function to track navigation clicks - sends event to both Google Analytics and MongoDB
+  const handleNavClick = (linkName, linkUrl) => {
+    // Google Analytics tracking (existing)
     event({
       action: 'navigation_click',    // The type of event (what happened)
       category: 'Navigation',         // The category this event belongs to
       label: linkName,                // Specific label identifying which link was clicked
+    });
+
+    // MongoDB tracking (new)
+    // This captures more context about the navigation:
+    // - Where they're navigating TO (linkUrl)
+    // - Where they're navigating FROM (current page)
+    // - What they clicked (linkName)
+    trackEvent('navigation_click', {
+      linkName: linkName,                    // Which link was clicked (e.g., "Home", "Projects")
+      linkUrl: linkUrl,                      // Where the link goes (e.g., "/", "/projects")
+      fromPage: window.location.pathname     // Where they are NOW (before clicking)
     });
   };
 
@@ -21,7 +34,7 @@ export default function Navigation() {
         <Link 
           href="/" 
           className={styles.logo}
-          onClick={() => handleNavClick('Logo - Home')} // Tracks when logo is clicked
+          onClick={() => handleNavClick('Logo - Home', '/')} // Tracks logo click
         >
           Abigail Spencer
         </Link>
@@ -33,7 +46,7 @@ export default function Navigation() {
             <Link 
               href="/" 
               className={styles.link}
-              onClick={() => handleNavClick('Home')} // Tracks when Home is clicked
+              onClick={() => handleNavClick('Home', '/')} // Tracks Home click
             >
               Home
             </Link>
@@ -43,7 +56,7 @@ export default function Navigation() {
             <Link 
               href="/projects" 
               className={styles.link}
-              onClick={() => handleNavClick('Projects')} // Tracks when Projects is clicked
+              onClick={() => handleNavClick('Projects', '/projects')} // Tracks Projects click
             >
               Projects
             </Link>
@@ -53,7 +66,7 @@ export default function Navigation() {
             <Link 
               href="/about" 
               className={styles.link}
-              onClick={() => handleNavClick('About')} // Tracks when About is clicked
+              onClick={() => handleNavClick('About', '/about')} // Tracks About click
             >
               About
             </Link>
@@ -63,7 +76,7 @@ export default function Navigation() {
             <Link 
               href="/contact" 
               className={styles.link}
-              onClick={() => handleNavClick('Contact')} // Tracks when Contact is clicked
+              onClick={() => handleNavClick('Contact', '/contact')} // Tracks Contact click
             >
               Contact
             </Link>

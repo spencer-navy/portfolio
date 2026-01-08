@@ -20,7 +20,7 @@
     font-family: 'Georgia', 'Times New Roman', serif;
     font-size: 4rem !important;
     font-weight: 600 !important;
-    letter-spacing: 0.05em;  /* Changed from -0.03em to add spacing */
+    letter-spacing: 0.05em;
     color: #2c352b !important;
     margin: 0 0 1rem !important;
     line-height: 1.1 !important;
@@ -39,7 +39,7 @@
     justify-content: center;
     flex-wrap: wrap;
     gap: 0.75rem;
-    padding: 1.5rem 0 1rem;
+    padding: 1.5rem 0 2rem;
 }
 
 .filterButton {
@@ -71,6 +71,136 @@
     border-color: #4a5548;
 }
 
+/* Featured Live Project Section */
+.featuredSection {
+    margin-bottom: 3rem;
+}
+
+.featuredCard {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    border: 2px solid #879f85;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+}
+
+.featuredCard:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+.featuredImage {
+    background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.featuredIcon {
+    font-size: 6rem;
+    margin-bottom: 1.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    width: 140px;
+    height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.featuredVizContainer {
+    width: 300px;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 1rem;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.liveBadgeLarge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #10b981;
+    color: white;
+    padding: 0.6rem 1.5rem;
+    border-radius: 25px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+}
+
+.featuredContent {
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.featuredTitle {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1a202c;
+    margin: 0 0 1rem;
+    line-height: 1.3;
+}
+
+.featuredDescription {
+    font-size: 1rem;
+    color: #4a5568;
+    line-height: 1.7;
+    margin: 0 0 1.5rem;
+}
+
+.viewProjectButton {
+    background: #10b981;
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    width: 100%;
+    justify-content: center;
+}
+
+.viewProjectButton:hover {
+    background: #059669;
+    transform: translateX(4px);
+}
+
+.arrow {
+    transition: transform 0.2s ease;
+    font-size: 1.2rem;
+}
+
+.viewProjectButton:hover .arrow {
+    transform: translateX(4px);
+}
+
 /* Projects Section */
 .projectsSection {
     padding: 1rem 0 1.5rem;
@@ -88,12 +218,14 @@
     padding: 2rem;
     transition: all 0.3s ease;
     border: 1px solid #e2e8f0;
+    opacity: 0.85;
 }
 
 .projectCard:hover {
     transform: translateY(-4px);
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
     border-color: #879f85;
+    opacity: 1;
 }
 
 .projectContent {
@@ -102,19 +234,90 @@
     flex-direction: column;
 }
 
+.projectHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
 .projectTitle {
     font-size: 1.25rem;
     font-weight: 600;
     color: #1a202c;
-    margin: 0 0 0.75rem;
+    margin: 0;
+    flex: 1;
+}
+
+.inProgressBadge {
+    display: inline-flex;
+    align-items: center;
+    background: #879f85;
+    color: white;
+    padding: 0.25rem 0.65rem;
+    border-radius: 12px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.plannedBadge {
+    display: inline-flex;
+    align-items: center;
+    background: #cbd5c9;
+    color: #4a5548;
+    padding: 0.25rem 0.65rem;
+    border-radius: 12px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .projectDescription {
     font-size: 0.95rem;
     color: #4a5568;
     line-height: 1.6;
-    margin: 0 0 1.5rem;
+    margin: 0 0 1rem;
     flex-grow: 1;
+}
+
+.projectStatusBar {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.projectStatusBarContainer {
+    flex: 1;
+    height: 8px;
+    background: #e5e7eb;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+.projectStatusBarFill {
+    height: 100%;
+    background: linear-gradient(90deg, #879f85 0%, #5a6b58 100%);
+    border-radius: 10px;
+    transition: width 0.3s ease;
+    animation: progressPulse 2s ease-in-out infinite;
+}
+
+.projectProgressText {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #6b7280;
+    min-width: 38px;
+    text-align: right;
 }
 
 .tags {
@@ -168,6 +371,15 @@
     border-color: #879f85;
 }
 
+.vizCardClickable {
+    cursor: pointer;
+}
+
+.vizCardClickable:hover {
+    border-color: #5a6b58;
+    box-shadow: 0 12px 30px rgba(135, 159, 133, 0.2);
+}
+
 .vizImagePlaceholder {
     width: 100%;
     height: 250px;
@@ -175,12 +387,126 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.vizPreview {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e8f0e7 100%);
+}
+
+.viewFullOverlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(44, 53, 43, 0.85);
+    backdrop-filter: blur(2px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.vizCardClickable:hover .viewFullOverlay {
+    opacity: 1;
+}
+
+.viewFullText {
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
+    padding: 1rem;
+    letter-spacing: 0.05em;
 }
 
 .placeholderText {
     color: #5a6b58;
     font-size: 1.25rem;
     font-weight: 500;
+}
+
+/* In Development Overlay */
+.inDevOverlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(2px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    opacity: 0.9;
+    transition: opacity 0.3s ease;
+}
+
+.vizCard:hover .inDevOverlay {
+    opacity: 1;
+}
+
+.inDevText {
+    color: #2c352b;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.statusBar {
+    width: 200px;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+.statusBarFill {
+    height: 100%;
+    width: 45%;
+    background: linear-gradient(90deg, #879f85 0%, #5a6b58 100%);
+    border-radius: 10px;
+    animation: progressPulse 2s ease-in-out infinite;
+}
+
+/* Planned Overlay - Clean state for future visualizations */
+.plannedOverlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+}
+
+.plannedIcon {
+    font-size: 3.5rem;
+    opacity: 0.3;
+    filter: grayscale(100%);
+}
+
+.plannedText {
+    color: #718096;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+@keyframes progressPulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
 }
 
 .vizInfo {
@@ -195,12 +521,80 @@
 }
 
 .vizDescription {
-    font-size: 0.875rem;
-    color: #718096;
+    font-size: 0.95rem;
+    color: #4a5568;
     margin: 0;
+    line-height: 1.5;
+}
+
+/* Live Badge for active projects (original style kept for backwards compatibility) */
+.liveBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.liveDot {
+    width: 8px;
+    height: 8px;
+    background: white;
+    border-radius: 50%;
+    animation: blink 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.03);
+    }
+}
+
+@keyframes blink {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.4;
+    }
 }
 
 /* Responsive Design */
+@media (max-width: 968px) {
+    .featuredCard {
+        grid-template-columns: 1fr;
+    }
+
+    .featuredImage {
+        padding: 2rem;
+    }
+
+    .featuredIcon {
+        font-size: 4rem;
+        width: 100px;
+        height: 100px;
+    }
+
+    .featuredContent {
+        padding: 2rem;
+    }
+
+    .featuredTitle {
+        font-size: 1.5rem;
+    }
+}
+
 @media (max-width: 768px) {
     .heroTitle {
         font-size: 2rem;
@@ -215,7 +609,7 @@
     }
 
     .filterContainer {
-        padding: 1rem 0 0.75rem;
+        padding: 1rem 0 1.5rem;
     }
 
     .projectGrid {
