@@ -81,10 +81,12 @@ export default function Projects() {
     const rawProjects = [
         {
             id: 'proj_001',
-            title: 'Optimizing Marketing Spend: An Attribution-Based Analysis',
-            description: 'Multi-channel marketing performance using advanced attribution modeling to identify budget reallocation opportunities and improve customer acquisition efficiency',
+            title: 'Marketing Mix Modeling & Channel Attribution',
+            description: 'Advanced statistical analysis of multi-channel DTC e-commerce campaigns using Marketing Mix Modeling (MMM) to quantify incremental impact, optimize budget allocation, and maximize return on ad spend across paid search, social media, display advertising, email, and affiliate channels',
+            techIds: ['r', 'statistical-modeling', 'python', 'sql'],
+            link: '/projects/mixed-marketing-modeling',
             techIds: ['python', 'sql', 'ml', 'statistical-modeling'],
-            progress: 20
+            progress: 80
         },
         {
             id: 'proj_003',

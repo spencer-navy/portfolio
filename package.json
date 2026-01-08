@@ -14,11 +14,13 @@
     "@vercel/analytics": "^1.6.1",
     "@vercel/functions": "^2.2.13",
     "d3": "^7.9.0",
+    "matplotlib": "^1.0.0",
     "mongo": "^0.1.0",
     "mongodb": "^7.0.0",
     "next": "16.1.1",
     "react": "19.2.3",
     "react-dom": "19.2.3",
+    "seaborn": "^0.0.1-security",
     "server-only": "^0.0.1"
   },
   "devDependencies": {
