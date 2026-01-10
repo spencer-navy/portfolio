@@ -29,6 +29,13 @@ Evaluate marketing effectiveness across 5 channels (paid search, social, display
 - Row-level security for safe public data access
 - Indexed queries optimized for performance
 
+## 🔧 Backend Infrastructure
+
+This website's analytics and ML features are powered by a separate data pipeline:
+- **Repository:** [portfolio-analytics-pipeline](https://github.com/spencer-navy/portfolio-analytics-pipeline)
+- **Features:** Automated ETL, user segmentation, recommendation engine
+- **Stack:** Python, Docker, MongoDB, Redis, scikit-learn
+
 **Data Analysis:**
 - Python (pandas, scipy) for statistical analysis
 - Marketing mix modeling and multi-touch attribution
