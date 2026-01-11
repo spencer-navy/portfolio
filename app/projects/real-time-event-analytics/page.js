@@ -19,13 +19,13 @@ export default function RealTimeEventAnalytics() {
     const viewedSections = useRef(new Set());
 
     // Track page view when component mounts
-useEffect(() => {
-    trackPageView({ 
-        page: 'project-detail',
-        projectId: 'proj_005',
-        projectTitle: 'Real-Time Event Analytics Pipeline'
-    });
-}, []);
+    useEffect(() => {
+        trackPageView({ 
+            page: 'project-detail',
+            projectId: 'proj_005',
+            projectTitle: 'Real-Time Event Analytics Pipeline'
+        });
+    }, []);
 
     // Track time on page when user leaves - FIXED VERSION
     useEffect(() => {

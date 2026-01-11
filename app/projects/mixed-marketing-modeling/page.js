@@ -3,7 +3,7 @@
 import { useEffect, useState, useRef } from 'react';
 import Navigation from '../../../components/Navigation';
 import styles from './MarketingMixModeling.module.css';
-import { trackEvent } from '@/lib/trackEvent';
+import { trackPageView, trackEvent } from '@/lib/trackEvent';
 
 export default function MarketingMixModeling() {
     // Track page entry time for "time on page" calculation
@@ -17,8 +17,8 @@ export default function MarketingMixModeling() {
 
     // Track page view when component mounts
     useEffect(() => {
-        trackEvent('page_view', {
-            projectId: 'proj_marketing_mmm',
+        trackPageView({ 
+            projectId: 'proj_marketing_01',
             projectTitle: 'Marketing Mix Modeling & Channel Attribution',
             page: 'project-detail'
         });
