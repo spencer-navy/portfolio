@@ -5,65 +5,29 @@ import { useEffect } from 'react';
 import Link from 'next/link';
 import Navigation from '../components/Navigation';
 import styles from './Home.module.css';
-import { event } from '@/lib/gtag'; // Keep Google Analytics
-import { trackEvent } from '@/lib/trackEvent'; // Add MongoDB tracking
+import { event } from '@/lib/gtag';
+import { trackPageView, trackEvent } from '@/lib/trackEvent';  // Import both
 
 export default function Home() {
   useEffect(() => {
-    // Only track on the client side, not during build
-    // The trackEvent function already handles client-side checks,
-    // but we add this additional guard for safety
-    if (typeof window !== 'undefined') {
-      trackEvent('page_view', {
-        page: 'homepage'
-      });
-    }
+    // ONLY ONE page view event needed
+    trackPageView({ page: 'home' });
   }, []);
   
-  // Track when user clicks "View Resume" button
+  // Keep your existing tracking handlers
   const handleViewResume = () => {
-    event({
-      action: 'view_resume',           // Action: viewing the resume
-      category: 'Resume',               // Category: Resume interactions
-      label: 'View Resume - Homepage',  // Label: identifies this is from homepage
-    });
-    
-    // MongoDB tracking
-    trackEvent('resume_view', {
-      source: 'homepage',
-      action: 'view'
-    });
+    event({ action: 'view_resume', category: 'Resume', label: 'View Resume - Homepage' });
+    trackEvent('resume_view', { source: 'homepage', action: 'view' });
   };
 
-  // Track when user clicks "Download Resume" button
   const handleDownloadResume = () => {
-    event({
-      action: 'download_resume',           // Action: downloading the resume
-      category: 'Resume',                   // Category: Resume interactions
-      label: 'Download Resume - Homepage',  // Label: identifies this is from homepage
-    });
-    
-    // MongoDB tracking
-    trackEvent('resume_download', {
-      source: 'homepage',
-      action: 'download'
-    });
+    event({ action: 'download_resume', category: 'Resume', label: 'Download Resume - Homepage' });
+    trackEvent('resume_download', { source: 'homepage', action: 'download' });
   };
 
-  // Track when user clicks "Contact Me" CTA button
   const handleContactCTA = () => {
-    event({
-      action: 'cta_click',              // Action: CTA button clicked
-      category: 'CTA',                  // Category: Call-to-Action interactions
-      label: 'Contact Me - Homepage',   // Label: identifies this is from homepage
-    });
-    
-    // MongoDB tracking
-    trackEvent('cta_click', {
-      ctaName: 'Contact Me',
-      ctaLocation: 'homepage',
-      ctaUrl: '/contact'
-    });
+    event({ action: 'cta_click', category: 'CTA', label: 'Contact Me - Homepage' });
+    trackEvent('cta_click', { ctaName: 'Contact Me', ctaLocation: 'homepage', ctaUrl: '/contact' });
   };
 
   return (

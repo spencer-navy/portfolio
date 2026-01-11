@@ -1,20 +1,17 @@
+// app/contact/page.js
+
 'use client'; // Required directive for components that use interactive features like onClick
 
 import { useEffect } from 'react';
 import Navigation from '../../components/Navigation';
 import styles from './Contact.module.css';
 import { event } from '@/lib/gtag'; // Import the Google Analytics event tracking function
-import { trackEvent } from '@/lib/trackEvent'; // Import MongoDB tracking
-
-// ADD THIS LINE - Forces dynamic rendering
-export const dynamic = 'force-dynamic';
+import { trackPageView, trackEvent } from '@/lib/trackEvent'; // Import MongoDB tracking
 
 export default function Contact() {
     // Track page view when component mounts
     useEffect(() => {
-        trackEvent('page_view', {
-            page: 'contact'
-        });
+        trackPageView({ page: 'contact' });
     }, []);
 
     // Track when user clicks on Email card

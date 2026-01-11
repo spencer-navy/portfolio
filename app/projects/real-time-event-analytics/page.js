@@ -1,12 +1,13 @@
+// app/projects/real-time-event-analytics/page.js
+
 'use client'
 
 import { useEffect, useState, useRef } from 'react';
 import Navigation from '../../../components/Navigation';
 import styles from './RealTimeAnalytics.module.css';
 import { trackEvent } from '@/lib/trackEvent';
+import { trackPageView } from '@/lib/trackEvent';
 
-// ADD THIS LINE - Forces dynamic rendering
-export const dynamic = 'force-dynamic';
 
 export default function RealTimeEventAnalytics() {
     // Track page entry time for "time on page" calculation
@@ -19,45 +20,13 @@ export default function RealTimeEventAnalytics() {
     const viewedSections = useRef(new Set());
 
     // Track page view when component mounts
-    useEffect(() => {
-        trackEvent('page_view', {
-            projectId: 'proj_005',
-            projectTitle: 'Real-Time Event Analytics Pipeline',
-            page: 'project-detail'
-        });
-    }, []);
-
-    // Track scroll depth and section visibility
-    useEffect(() => {
-        const handleScroll = () => {
-            // Calculate scroll depth as percentage (0-100)
-            const windowHeight = window.innerHeight;
-            const documentHeight = document.documentElement.scrollHeight;
-            const scrollTop = window.scrollY;
-            const scrollDepth = Math.round((scrollTop / (documentHeight - windowHeight)) * 100);
-            
-            // Update max scroll depth if user scrolled further than before
-            if (scrollDepth > maxScrollDepth) {
-                setMaxScrollDepth(scrollDepth);
-            }
-
-            // Track milestone scroll depths (25%, 50%, 75%, 100%)
-            const milestones = [25, 50, 75, 100];
-            milestones.forEach(milestone => {
-                if (scrollDepth >= milestone && !viewedSections.current.has(milestone)) {
-                    viewedSections.current.add(milestone);
-                    trackEvent('scroll_milestone', {
-                        projectId: 'proj_005',
-                        milestone: `${milestone}%`,
-                        scrollDepth: scrollDepth
-                    });
-                }
-            });
-        };
-
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, [maxScrollDepth]);
+useEffect(() => {
+    trackPageView({ 
+        page: 'project-detail',
+        projectId: 'proj_005',
+        projectTitle: 'Real-Time Event Analytics Pipeline'
+    });
+}, []);
 
     // Track time on page when user leaves - FIXED VERSION
     useEffect(() => {

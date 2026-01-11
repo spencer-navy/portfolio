@@ -1,3 +1,5 @@
+// app/about/page.js
+
 'use client'
 
 import { useEffect } from 'react';
@@ -7,6 +9,7 @@ import Navigation from '../../components/Navigation';
 import styles from './About.module.css';
 import { event } from '@/lib/gtag';
 import { trackEvent } from '@/lib/trackEvent';
+import { trackPageView } from '@/lib/trackEvent';
 
 export const dynamic = 'force-dynamic';
 
@@ -14,11 +17,9 @@ export default function About() {
     const pathname = usePathname();
     
     // Track page view when component mounts
-    useEffect(() => {
-        trackEvent('page_view', {
-            page: 'about'
-        });
-    }, [pathname]);
+  useEffect(() => {
+    trackPageView({ page: 'about' }); 
+  }, []);
 
     // Track when user clicks on a book link
     const handleBookClick = (bookTitle, section) => {

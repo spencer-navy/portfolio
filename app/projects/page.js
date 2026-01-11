@@ -1,3 +1,5 @@
+// app/projects/page.js
+
 'use client'
 
 import { useState, useEffect } from 'react';
@@ -7,13 +9,11 @@ import NetworkGraphViz from '../../components/NetworkGraphViz';
 import VizModal from '../../components/VizModal';
 import styles from './Projects.module.css';
 import { event } from '@/lib/gtag';
-import { trackEvent } from '@/lib/trackEvent';
+import { trackPageView, trackEvent } from '@/lib/trackEvent';
 
 export default function Projects() {
     useEffect(() => {
-        trackEvent('page_view', {
-            page: 'projects'
-        });
+        trackPageView({ page: 'projects' });
     }, []);
 
     const [activeFilter, setActiveFilter] = useState('all');
