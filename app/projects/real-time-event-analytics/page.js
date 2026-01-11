@@ -8,7 +8,6 @@ import styles from './RealTimeAnalytics.module.css';
 import { trackEvent } from '@/lib/trackEvent';
 import { trackPageView } from '@/lib/trackEvent';
 
-
 export default function RealTimeEventAnalytics() {
     // Track page entry time for "time on page" calculation
     const entryTime = useRef(Date.now());
